@@ -180,6 +180,9 @@ lsi: false
 excerpt_separator: "\n\n"
 incremental: false
 
+# Header image
+header:
+  image: /assets/images/avatar.png
 
 # Markdown Processing
 kramdown:
