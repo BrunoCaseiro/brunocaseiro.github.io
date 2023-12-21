@@ -1,10 +1,10 @@
 # main links
-main:
+main:    
   - title: "Home"
     url: /home.html
     
   - title: "Posts"
     url: /posts.html
-     
-  - title: "About me"
-     url: /about.html
+
+  - title: "About"
+    url: /about.html
