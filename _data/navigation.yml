@@ -2,12 +2,9 @@
 main:
   - title: "Blog"
     url: /blog.html
+    
   - title: "Work with me"
      url: /work.html
+     
   - title: "About me"
      url: /about.html
-
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
