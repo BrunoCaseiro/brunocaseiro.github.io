@@ -105,7 +105,7 @@ analytics:
 # Site Author
 author:
   name             : "Bruno Caseiro"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/images/avatar.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Wannabe hacker ever since I was 12."
   location         : "Portugal"
   email            : "brunocaseiro2008@gmail.com"
