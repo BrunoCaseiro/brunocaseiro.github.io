@@ -7,6 +7,8 @@ header:
   overlay_image: /assets/images/banner.jpg
 ---
 
+## Work with me
+
 I am always open to new work. If you want to get in touch with me for job offers, feel free to do it via [LinkedIn](https://linkedin.com/in/BrunoCaseiro) or email at brunocaseiro2008@gmail.com.
 
 As mentioned in my [about page](https://brunocaseiro.github.io/about.html), I am also available for freelance work (penetration tests, education sessions, application security services...).
