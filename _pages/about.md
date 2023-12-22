@@ -1,7 +1,7 @@
 ---
 layout: single
 author_profile: true
-title: About
+title: About me
 permalink: /about.html
 header:
   overlay_image: /assets/images/banner.jpg
