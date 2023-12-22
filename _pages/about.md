@@ -7,7 +7,7 @@ header:
   overlay_image: /assets/images/banner.jpg
 ---
 
-# whoami
+## whoami
 
 Hey there, my name is Bruno and I am an offensive security engineer. If you are unfamiliar with the term, I hack stuff, ~~most of the time~~ legally!
 
