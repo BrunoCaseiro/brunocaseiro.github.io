@@ -1,8 +1,5 @@
 # main links
-main:    
-  - title: "Home"
-    url: /home.html
-    
+main:       
   - title: "Posts"
     url: /posts.html
 
