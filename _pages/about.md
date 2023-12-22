@@ -11,6 +11,8 @@ header:
 
 Hey there, my name is Bruno and I am an offensive security engineer. If you are unfamiliar with the term, I hack stuff, ~~most of the time~~ legally!
 
+@FBI I'm just kidding. 
+
 
 ## This blog and my work
 
@@ -20,7 +22,7 @@ This blog will be made of posts about some of my experiences, interesting vulner
 
 An intelligent person isn't one who can bark the most technical terms talking about an extremely technical topic, but one who makes himself understood.
 
-Also, @FBI I'm just kidding with that first sentence. 
+Finally, what's with the avatar on the left? Well, many people compare pentesting to black magic, so I decided to let a cute, tiny, red teaming wizard lead the way on this website.
 
 
 ## Links
