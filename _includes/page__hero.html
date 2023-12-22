@@ -22,7 +22,7 @@
   style="{% if page.header.overlay_color %}background-color: {{ page.header.overlay_color | default: 'transparent' }};{% endif %} {% if overlay_img_path %}background-image: {% if overlay_filter %}{{ overlay_filter }}, {% endif %}url('{{ overlay_img_path }}');{% endif %}"
 >
   
- <!-- {% if page.header.overlay_color or page.header.overlay_image %} -->
+ {% if page.header.overlay_color or page.header.overlay_image %}
     <div class="wrapper">
       <h1 id="page-title" class="page__title" itemprop="headline">        
         {% if paginator and site.paginate_show_page_num %}
@@ -45,11 +45,10 @@
         {% for action in page.header.actions %}
           <a href="{{ action.url | relative_url }}" class="btn btn--light-outline btn--large">{{ action.label | default: site.data.ui-text[site.locale].more_label | default: "Learn More" }}</a>
         {% endfor %}
-      <!--{% endif %}
+      {% endif %}
     </div>
   {% else %}
  <img src="{{ page.header.image | relative_url }}" alt="{{ image_description }}" class="page__hero-image">
--->
   {% endif %}
   {% if page.header.caption %}
     <span class="page__hero-caption">{{ page.header.caption | markdownify | remove: "<p>" | remove: "</p>" }}</span>
