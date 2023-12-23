@@ -82,10 +82,21 @@ I refreshed the page and ``ACTIVE`` was set to 51! I did it! Later I refreshed t
 
 A race condition is so hard to exploit because there are a bunch of timing variables involved, and you have to be lucky enough to have each single line executed in a very specific order. Taken from James Kettle:
 
-<p align="center><img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/53e4fbb5-80ce-41d5-a39f-e1bbe70699d5"></p>
+<p align="center"><img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/53e4fbb5-80ce-41d5-a39f-e1bbe70699d5"></p>
 
 Even if you code your requests to be sent at the exact same time, there's your network latency, the jitter (time between transmission and reception of data) and the server's latency.
 
 After some iterations, James' final solution is to send several requests in a single TCP packet. Which means the jitter and latencies involved will all be the same. There's still some trial and error due to the processing times on the server, but the effectiveness of this attack goes up exponentially.
 
 <p align="center"><img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/aca316bd-9347-47ff-9f29-ad356c44fb47"></p>
+
+I just tried to summarize his entire research on a couple of sentences, so there is a lot of detail missing on this explanation. I once again recommend that you take a look at James Kettle's article, it really is great research!
+
+
+## Final thoughts
+
+That's it for my first blog post. Hopefully you enjoyed it, I'll try to keep an eye out for other possibly interesting stories to share. Feel free to read more [about me](https://brunocaseiro.github.io/about.html) or get in touch via [LinkedIn](https://linkedin.com/in/brunocaseiro).
+
+Thank you
+
+Bruno Caseiro
