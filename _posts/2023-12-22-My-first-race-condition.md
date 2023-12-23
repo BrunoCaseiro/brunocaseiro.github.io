@@ -75,13 +75,13 @@ Let's look at the diagram below, hopefully my handwriting isn't bad enough to ma
    
 This was the idea I had in mind. I do not know exactly how the code is written, but that last step made me itch. Calling ``wait_set()`` with a value equal to ``ACTIVE``? Maybe there are some pre-conditions in case weird things like these happen?
 
-I was using Burp Suite's repeater tab to send these requests. Simply put both tabs in a folder and select **Send group in parallel (single-packet attack**. The example below is sending the 3 requests in the _limit-overrun_ tab using the this technique.
+I was using Burp Suite's repeater tab to send these requests. Simply put both tabs in a folder and select **Send group in parallel (single-packet attack)**. The example below is sending the 3 requests in the _limit-overrun_ folder using the this technique.
 
 <p align="center"><img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/bad40add-60f1-4d16-8059-4b3674a9a36f"></p>
 
-It took several attempts of sending 2 requests in a single packet (one with a higher value than ``ACTIVE``, other with a lower value) to make this actually work. The server would act as if only one of the values was sent. No pattern or consistent behavior was noted, but one of the values would indeed be set. It would either overwrite ``ACTIVE`` (lower value) or set a new ``PENDING`` (higher value), depending on which one the server "choose". To not reuse the same values, I would increment the higher value and decrement the lower value after every attempt - for example, I'd send 51 and 49, then 52 and 48, 53 and 47 and so on.
+It took several attempts of sending 2 requests in a single packet (one with a higher value than ``ACTIVE``, other with a lower value) to make this actually work. The server would act as if only one of the values was sent. No pattern or consistent behavior was noted, but one of the values would indeed be set. It would either overwrite ``ACTIVE`` (lower value) or set a new ``PENDING`` (higher value), depending on which one the server "chose". To not reuse the same values, I would increment the higher value and decrement the lower value after every attempt - for example, I'd send 51 and 49, then 52 and 48, 53 and 47 and so on.
 
-After many, many attempts, I finally got a hit. But not something I was expecting. The reponse size suddenly shot up. I took a more careful look and I was amazed at what I was seeing. Two ``ACTIVE`` variables. One set the higher value and another one set to the lower one. For example:
+After many, many attempts, I finally got a hit. But not something I was expecting. The reponse size suddenly shot up. I took a more careful look and I was amazed at what I was seeing. Two ``ACTIVE`` variables. One set to the higher value and another one set to the lower one. Even if I sent a request that simply fetched the current values, the response would be something like this:
 
 ```
 ACTIVE = 51
