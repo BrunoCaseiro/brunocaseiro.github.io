@@ -54,7 +54,7 @@ Suppose we launch two threads of the program at the same time and the variables 
 
 Not quite, we will go over how James Kettle made this so much easier to exploit later. But first, let's go back to our little problem - what if we could fail the if statement (Y value lower than X) and then immediately change Y to a value higher than X mid execution, so when the line ``set(y)`` is ran, **a value higher than X will become active without a cooldown**?
 
-Let's look at the diagram below, hopefully my handwriting isn't bad enough to make you click away <sup>pls stay</sup>. On the left we have thread 1, on the right thread 2. The initial values are shown above the code, which is there for quick reference. The circled numbers are the order in which the operations happen. The race condition could also happen if the operations happen in a different (similar) order, this is just one possible example.
+Let's look at the diagram below, hopefully my handwriting isn't bad enough to make you click away <sup>pls stay</sup>. On the left we have thread 1, on the right thread 2. The initial values are shown above the code, which is there for quick reference. The circled numbers are the order in which the operations happen.
 
 <p align="center"> <img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/f2d34a21-86bb-4eb1-9f9e-b93cdff99a32"></p>
 
