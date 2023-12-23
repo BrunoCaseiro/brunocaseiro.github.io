@@ -73,7 +73,7 @@ Let's look at the diagram below, hopefully my handwriting isn't bad enough to ma
 🟢6) T2 ``calls wait_set(51)`` -->  ``ACTIVE = 51`` (same as the latest value) and ``PENDING = 51``
 
    
-This was the idea I had in mind. I do not know exactly how the code is written, but that last step made me itch. Calling ``wait_set()`` with a value equal to ``ACTIVE``? Maybe there are some pre-conditions in case weird things happen?
+This was the idea I had in mind. I do not know exactly how the code is written, but that last step made me itch. Calling ``wait_set()`` with a value equal to ``ACTIVE``? Maybe there are some pre-conditions in case weird things like these happen?
 
 I was using Burp Suite's repeater tab to send these requests. Simply put both tabs in a folder and select **Send group in parallel (single-packet attack**. The example below is sending the 3 requests in the _limit-overrun_ tab using the this technique.
 
