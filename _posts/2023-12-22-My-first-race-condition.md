@@ -15,7 +15,7 @@ Welcome to my first ever blog post. You are witnessing history. This is about th
 
 ## What is a race condition?
 
-This might seem like a hard concept to **understand**, but it's not **that** hard when it finally clicks. Yes, exploiting it is a whole other beast. I went on a tangent during one of my teaching sessions about introductory pentesting (the students pull it out of me!) and managed to successfully explain this to people with freshman-level computer science knowledge. This is best understood with a concrete example, so I'll explain as we go. Just so we have a starting point, a good definition would be something like the following.
+This might seem like a hard concept to **understand**, but it's not **that** hard when it finally clicks. Yes, exploiting it is a whole other beast. I went on a tangent during one of my teaching sessions about introductory pentesting (the students pulled it out of me!) and managed to successfully explain this to people with freshman-level computer science knowledge. This is best understood with a concrete example, so I'll explain as we go. Just so we have a starting point, a good definition would be something like the following.
 
 > _A race condition occurs when two or more threads can access shared data and they try to change it at the same time._
 
