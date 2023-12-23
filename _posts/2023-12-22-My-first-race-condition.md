@@ -50,7 +50,7 @@ Pretty simple, what can possibly go wrong?
 
 ## The problem
 
-Suppose we launch two threads of the program at the same time and the variables are shared. So if thread 1 sets a value for Y, it is also set for T2. Obviously the odds of this happening are basically null, it requires super precise timing, right? Right....?
+Suppose we launch two threads of the program at the same time and the variables are shared. So if thread 1 sets a value for Y, it is also set for thread 2. Obviously the odds of this happening are basically null, it requires super precise timing, right? Right....?
 
 Not quite, we will go over how James Kettle made this so much easier to exploit later. But first, let's go back to our little problem - what if we could fail the if statement (Y value lower than X) and then immediately change Y to a value higher than X mid execution, so when the line ``set(y)`` is ran, **a value higher than X will become active without a cooldown**?
 
@@ -66,7 +66,7 @@ Let's look at the diagram below, hopefully my handwriting isn't bad enough to ma
 
 🟢3) T2 sets ``y = 51``
 
-🔴4) T1 calls ``set(y)``, which translates to ``set(51)`` since T2 just changed it --> ``ACTIVE = 51`` and ``PENDING = null``
+🔴4) T1 calls ``set(y)``, which translates to ``set(51)`` since T2 just the Y variable --> ``ACTIVE = 51`` and ``PENDING = null``
 
 🟢5) T2 passes the if condition since ``51 > 50 ? True``
 
