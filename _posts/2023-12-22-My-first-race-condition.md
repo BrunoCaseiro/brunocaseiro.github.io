@@ -66,7 +66,7 @@ Let's look at the diagram below, hopefully my handwriting isn't bad enough to ma
 
 🟢3) T2 sets ``y = 51``
 
-🔴4) T1 calls ``set(y)``, which translates to ``set(51)`` since T2 just the Y variable --> ``ACTIVE = 51`` and ``PENDING = null``
+🔴4) T1 calls ``set(y)``, which translates to ``set(51)`` since T2 just set the Y variable to 51 --> ``ACTIVE = 51`` and ``PENDING = null``
 
 🟢5) T2 passes the if condition since ``51 > 50 ? True``
 
