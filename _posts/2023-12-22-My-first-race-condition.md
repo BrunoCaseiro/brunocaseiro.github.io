@@ -75,7 +75,27 @@ Let's look at the diagram below, hopefully my handwriting isn't bad enough to ma
    
 This was the idea I had in mind. I do not know exactly how the code is written, but that last step made me itch. Calling ``wait_set()`` with a value equal to ``ACTIVE``? Maybe there is some pre-condition in case that happens?
 
-I refreshed the page and ``ACTIVE`` was set to 51! I did it! Later I refreshed the page again. ``ACTIVE`` was set to 49. What? I refreshed a couple of more times and the page would just show one of the values, no pattern or consistent behaviour. I tried setting a new value legitimately and I got an error. I analyzed the requests with Burp Suite and noticed something extra weird. ``ACTIVE = 51``, ``ACTIVE = 49`` and ``PENDING = null``. I actually set **two** active values! I did try the attack a couple more times but this was very time consuming. When succesful, this would always be the result.
+I was using Burp Suite's repeater tab to send these requests. Simply put both tabs in a folder and select **Send group in parallel (single-packet attack**. The example below is sending the 3 requests in the _limit-overrun_ tab using the this technique.
+
+<p align="center"><img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/bad40add-60f1-4d16-8059-4b3674a9a36f"></p>
+
+It took several attempts of sending 2 requests in a single packet (one with a higher value than ``ACTIVE``, other with a lower value) to make this actually work. The server would act as if only one of the values was sent. No pattern or consistent behaviour was noted, but one of the values would indeed be set. It would either overwrite ``ACTIVE`` (lower value) or set a new ``PENDING`` (higher value), depending on which one the server "choose". To not reuse the same values, I would increment the higher value and decrement the lower value after every attempt - for example, I'd send 51 and 49, then 52 and 48, 53 and 47 and so on.
+
+After many, many attempts, I finally got a hit. But not something I was expecting. The reponse size suddenly shot up. I took a more careful look and I was amazed at what I was seeing. Two ``ACTIVE`` variables. One set the higher value and another one set to the lower one. For example:
+
+```
+ACTIVE = 51
+ACTIVE = 49
+PENDING = null
+```
+
+What just happened? I actually have two active values?
+
+I tried setting a new value but the server response was a **500 Internal Server Error**. I tried performing some operations that required these values and once again... **500 Internal Server Error**. I reset the whole process, repeated the attack (which was very time consuming) and ended up in the same place. 
+
+I would have loved to have some more time to explore this scenario. Perhaps I did not have enough luck during all these attempts and the order of the operations wasn't quite what I needed, but I feel like I got pretty close.
+
+If I had managed to go a bit further, the impact of this vulnerability would likely be high (due to the context of the application), but _unfortunately_ it didn't go past a "self denial of service".
 
 
 ## Timing is the key
