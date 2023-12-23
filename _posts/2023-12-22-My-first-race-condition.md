@@ -32,7 +32,7 @@ Picture an application that stores an integer value X. You can set a new value Y
   - If you chose to set a lower value Y, your value is immediately set
   - The application continuously tracks the **ACTIVE** value and the **PENDING** value (the latter can be _null_)
 
-After observing this behaviour, I assumed a simplified version of the code would be close to this:
+After observing this behavior, I assumed a simplified version of the code would be close to this:
 
 ```
 def function(int y):
@@ -79,7 +79,7 @@ I was using Burp Suite's repeater tab to send these requests. Simply put both ta
 
 <p align="center"><img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/bad40add-60f1-4d16-8059-4b3674a9a36f"></p>
 
-It took several attempts of sending 2 requests in a single packet (one with a higher value than ``ACTIVE``, other with a lower value) to make this actually work. The server would act as if only one of the values was sent. No pattern or consistent behaviour was noted, but one of the values would indeed be set. It would either overwrite ``ACTIVE`` (lower value) or set a new ``PENDING`` (higher value), depending on which one the server "choose". To not reuse the same values, I would increment the higher value and decrement the lower value after every attempt - for example, I'd send 51 and 49, then 52 and 48, 53 and 47 and so on.
+It took several attempts of sending 2 requests in a single packet (one with a higher value than ``ACTIVE``, other with a lower value) to make this actually work. The server would act as if only one of the values was sent. No pattern or consistent behavior was noted, but one of the values would indeed be set. It would either overwrite ``ACTIVE`` (lower value) or set a new ``PENDING`` (higher value), depending on which one the server "choose". To not reuse the same values, I would increment the higher value and decrement the lower value after every attempt - for example, I'd send 51 and 49, then 52 and 48, 53 and 47 and so on.
 
 After many, many attempts, I finally got a hit. But not something I was expecting. The reponse size suddenly shot up. I took a more careful look and I was amazed at what I was seeing. Two ``ACTIVE`` variables. One set the higher value and another one set to the lower one. For example:
 
