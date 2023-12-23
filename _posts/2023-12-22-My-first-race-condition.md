@@ -114,14 +114,15 @@ After some iterations, James' final solution is to send several requests in a si
 
 I did try the other techniques, such as using Burp Suite's intruder and last-byte sync, but the only time I got interesting results was when I sent the requests in a single TCP packet.
 
-This is just an extremely quick summary of the entire research on a couple of sentences, so there is a lot of detail missing here. I once again recommend that you take a look at James Kettle's article, it really is great research!
+This is an extremely quick summary of James' entire research, so there is a lot of details missing here. I once again recommend that you take a look at his article, it really is great research!
 
 
 ## Conclusion
 
-Hopefully you enjoyed my first blog post, I'll try to keep an eye out for other possibly interesting stories to share in order to keep this website remotely alive. We already have enough dead blogs on the internet 😅.
+Hopefully you enjoyed my first blog post, I'll try to keep an eye out for other possibly interesting stories to share in order to keep this website alive. We already have enough dead blogs on the internet 😅.
 
 Feel free to read more [about me](https://brunocaseiro.github.io/about.html) or get in touch via [LinkedIn](https://linkedin.com/in/brunocaseiro)!
 
 Thanks for reading
+
 Bruno Caseiro
