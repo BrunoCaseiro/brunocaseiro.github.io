@@ -95,7 +95,9 @@ I tried setting a new value but the server response was a **500 Internal Server 
 
 I would have loved to have some more time to explore this scenario. Perhaps I did not have enough luck during all these attempts and the order of the operations wasn't quite what I needed, but I feel like I got pretty close.
 
-If I had managed to go a bit further, the impact of this vulnerability would likely be high (due to the context of the application), but _unfortunately_ it didn't go past a "self denial of service".
+If I had managed to go a bit further, the impact of this vulnerability would likely be high (due to the context of the application), but *_unfortunately_ it didn't go past a "self denial of service".
+
+*Food for thought: If you are a penetration tester, are you happy you found a cool vulnereability or sad that the application is broken? 😄
 
 
 ## Timing is the key
