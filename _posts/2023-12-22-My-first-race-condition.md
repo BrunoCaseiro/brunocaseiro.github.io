@@ -44,7 +44,7 @@ def function(int y):
 
 We are still going over how this works when used **correctly**, so two things can happen here depending on the the conditional statement:
   - If Y is larger than X --> ``ACTIVE = x`` and ``PENDING = y``
-  - If Y is **not** larger than X --> ``ACTIVE = y`` and ``PENDING = null`` (this also applies if the variables are equal, but that won't matter)
+  - If Y is **not** larger than X --> ``ACTIVE = y`` and ``PENDING = null`` (this also applies if the variables are equal, but that won't matter too much)
 
 Pretty simple, what can possibly go wrong?
 
