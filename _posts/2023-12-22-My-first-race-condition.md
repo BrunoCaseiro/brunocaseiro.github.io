@@ -15,20 +15,20 @@ Welcome to my first ever blog post. You are witnessing history. This is about th
 
 ## What is a race condition?
 
-This might seem like a hard concept to **understand**, but it's not **that** hard when it finally clicks. Exploiting it is a whole other beast, but during one of my teaching sessions about introductory pentesting, I went on a tangent (the students pulled it out of me!) and managed to explain this to people with minimal computer science knowledge. This is best understood with a concrete example, so I'll explain as we go. A good definition however, would be something like the following.
+This might seem like a hard concept to **understand**, but it's not **that** hard when it finally clicks. Yes, exploiting it is a whole other beast. I went on a tangent during one of my teaching sessions about introductory pentesting (the students pull it out of me!) and managed to successfully explain this to people with freshman-level computer science knowledge. This is best understood with a concrete example, so I'll explain as we go. Just so we have a starting point, a good definition would be something like the following.
 
 > _A race condition occurs when two or more threads can access shared data and they try to change it at the same time._
 
 Think about two threads running the same program and working with the same variables - the order in which the operations happen will lead to very weird behaviors!
 
-Coincidentally, I found this race condition the day after I read [James Kettle's research article on race conditions](https://portswigger.net/research/smashing-the-state-machine). It's a great read, I cannot recommend it enough. A video to his Defcon talk on the same topic is included.
+Coincidentally, I found this race condition the day after I read [James Kettle's research article on race conditions](https://portswigger.net/research/smashing-the-state-machine). It's a great read, I cannot recommend it enough. A video to his Defcon talk on the same topic is included in his post.
 
 
 ## Application logic
 
-Picture an application that stores an integer value X. You can set a new value Y, but there are a few things to note:
+Picture an application that stores an integer value X. You can set a new value Y, but there are a few things to consider:
   - Let's assume there is a default starting value X, for simplicity's sake
-  - If you choose to set a higher value Y, then your value will be kept on hold during a time period before being set
+  - If you chose to set a higher value Y, then your value will be kept on hold during a time period before being set
   - If you chose to set a lower value Y, your value is immediately set
   - The application continuously tracks the **ACTIVE** value and the **PENDING** value (the latter can be _null_)
 
@@ -42,11 +42,11 @@ def function(int y):
     set(y)
 ```
 
-We are still going over how this works when used correctly. So two things can happen here, depending on the the conditional statement:
+We are still going over how this works when used **correctly**, so two things can happen here depending on the the conditional statement:
   - If Y is larger than X --> ``ACTIVE = x`` and ``PENDING = y``
   - If Y is **not** larger than X --> ``ACTIVE = y`` and ``PENDING = null`` (this also applies if the variables are equal, but that won't matter)
 
-Pretty simple, right? What can possibly go wrong?
+Pretty simple, what can possibly go wrong?
 
 ## The problem
 
