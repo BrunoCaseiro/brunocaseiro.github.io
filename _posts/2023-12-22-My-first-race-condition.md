@@ -96,7 +96,3 @@ I just tried to summarize his entire research on a couple of sentences, so there
 ## Final thoughts
 
 That's it for my first blog post. Hopefully you enjoyed it, I'll try to keep an eye out for other possibly interesting stories to share. Feel free to read more [about me](https://brunocaseiro.github.io/about.html) or get in touch via [LinkedIn](https://linkedin.com/in/brunocaseiro).
-
-Thank you
-
-Bruno Caseiro
