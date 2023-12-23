@@ -8,7 +8,7 @@ header:
 
 ## Introduction
 
-Welcome to my first ever blog post. You are witnessing history. This is about the time I found a race condition during a penetration test. Many details and specificities will have to be left out due to confidential nature of issues like these - and this will probably be a constant throughout my blog. With this being said... lights out and away we go! ~~<sup>Verstappen leads heading into the first corner</sup>~~
+Welcome to my first ever blog post. You are witnessing history. This is about the time I found a race condition during a penetration test. Many details and specificities will have to be left out due to the confidential nature of issues like these - and this will probably be a constant throughout my blog. With this being said... lights out and away we go! ~~<sup>Verstappen leads the way heading into the first corner</sup>~~
 
 <p align="center"> <img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/90450394-e1f0-41f7-b7bd-739ebf842860"> </p>
 
