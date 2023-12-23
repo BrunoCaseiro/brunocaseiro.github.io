@@ -28,8 +28,8 @@ Coincidentally, I found this race condition the day after I read [James Kettle's
 
 Picture an application that stores an integer value X. You can set a new value Y, but there are a few things to consider:
   - Let's assume there is a default starting value X, for simplicity's sake
-  - If you chose to set a higher value Y, then your value will be kept on hold during a time period before being set
-  - If you chose to set a lower value Y, your value is immediately set
+  - If you choose to set a higher value Y, then your value will be kept on hold during a time period before being set
+  - If you choose to set a lower value Y, your value is immediately set
   - The application continuously tracks the **ACTIVE** value and the **PENDING** value (the latter can be _null_)
 
 After observing this behavior, I assumed a simplified version of the code would be close to this:
