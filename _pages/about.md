@@ -51,19 +51,19 @@ I have many interests beside security, we are more than what we do for a living.
 
 I'm a native Portuguese speaker and have been exposed to English since I was a kid. Spanish runs in my (part latino) family, so I've dedicated some time to perfect it. I can more or less read and listen to German, my writing and speaking is still kind of bad, but I'm working on it! I'm also familiar with the very basics of French and it's next on my language pipeline.
 
-I currently have +1300 day Duolingo streak 🦉, but I feel like most of my progress comes from reading and listening native material as well as studying vocabulary with flashcards.
+I currently have a +1300 day Duolingo streak 🔥🦉, but I feel like most of my progress comes from reading and listening native material as well as studying vocabulary with flashcards.
 
 
 ### Sports, Fitness and Health
 
 I have played basketball ever since I was a kid. I also do calisthenics, which is basically strength training without equipment (think pull ups, dips, push ups and crazy variations of those).
 
-Besides that, I stick to a very healthy lifestyle. I do have a cheat day occasionally, but most of the time you'll see me drinking water and eating clean foods.
+Besides that, I stick to a very healthy and active lifestyle. I do have a cheat day ~~twice per hour~~ occasionally, but most of the time you'll see me drinking water and eating clean foods.
 
 
 ### Listening
 
-I'm sorry, I'm stuck in the 2000s. If you ask me to be the DJ, you'll have to listen to Blink-182, Sum 41, Avril Lavigne and the like.
+I'm sorry, I'm stuck in the 2000s. If you ask me to be the DJ, you'll have to listen to Blink-182, Sum 41, Avril Lavigne and the like. I enjoy other genres, but that's the main one.
 
 Besides music, I love podcasts. My favorite is Darknet Diaries, hands down! I also listen to podcasts in other languages about random topics - I get to explore things I'm genuinely interested in while working towards my language learning goals.
 
