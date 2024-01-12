@@ -46,9 +46,13 @@ Offensive Security Wireless Professional - Soon but not as soon as the above :)
 
 I have many interests beside security, we are more than what we do for a living. Next time someone asks "what do you do?", start with what's most interesting to you! I'm probably sticking to cybersecurity though, it's fun to tell people I'm a hacker 😄 But here are some of my other interests.
 
+
 ### Learning languages
 
-I'm a native Portuguese speaker and have been exposed to English since I was a kid. Spanish runs in my (part latino) family, so I've dedicated some time to perfect it. I can more or less read and listen to German, my writing and speaking is still kind of bad, but I'm working on it! I'm also familiar with the very basics of French and it's next on my language pipeline. I currently have +1300 day Duolingo streak 🦉, but I think most of my progress comes from reading and listening native material as well as studying vocabulary with flashcards.
+I'm a native Portuguese speaker and have been exposed to English since I was a kid. Spanish runs in my (part latino) family, so I've dedicated some time to perfect it. I can more or less read and listen to German, my writing and speaking is still kind of bad, but I'm working on it! I'm also familiar with the very basics of French and it's next on my language pipeline.
+
+I currently have +1300 day Duolingo streak 🦉, but I feel like most of my progress comes from reading and listening native material as well as studying vocabulary with flashcards.
+
 
 ### Sports, Fitness and Health
 
