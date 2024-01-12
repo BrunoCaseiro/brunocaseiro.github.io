@@ -11,7 +11,7 @@ header:
 
 Hey there, my name is Bruno and I am an offensive security engineer. If you are unfamiliar with the term, I hack stuff, ~~most of the time~~ legally!
 
-@FBI I'm just kidding. 
+@fbi just kidding 
 
 
 ## This blog and my work
