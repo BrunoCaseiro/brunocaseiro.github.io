@@ -75,7 +75,7 @@ Let's look at the diagram below, hopefully my handwriting isn't bad enough to ma
    
 This was the idea I had in mind. I do not know exactly how the code is written, but that last step made me itch. Calling ``wait_set()`` with a value equal to ``ACTIVE``? Maybe there are some pre-conditions in case weird things like these happen?
 
-I was using Burp Suite's repeater tab to send these requests. Simply put both tabs in a folder and select **Send group in parallel (single-packet attack)**. The example below is sending the 3 requests in the _limit-overrun_ folder using this technique.
+I was using Burp Suite's repeater tab to send these requests. Simply put both tabs in a folder and selecting **Send group in parallel (single-packet attack)**. The example below is sending the 3 requests in the _limit-overrun_ folder using this technique.
 
 <p align="center"><img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/bad40add-60f1-4d16-8059-4b3674a9a36f"></p>
 
