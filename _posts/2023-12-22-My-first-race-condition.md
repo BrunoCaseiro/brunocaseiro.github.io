@@ -56,7 +56,7 @@ Not quite, we will go over how James Kettle made this so much easier to exploit 
 
 Let's look at the diagram below, hopefully my handwriting isn't bad enough to make you click away <sup>pls stay</sup>. On the left we have thread 1, on the right thread 2. The initial values are shown above the code, which is there for quick reference. The circled numbers are the order in which the operations happen.
 
-<p align="center"> <img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/f2d34a21-86bb-4eb1-9f9e-b93cdff99a32"></p>
+<p align="center"> <img width=75% src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/66176572-f97c-48e2-a1d7-b1ddeddf0b28"></p>
 
 ⚪0) Starting with ``ACTIVE = 50`` and ``PENDING = null``
 
