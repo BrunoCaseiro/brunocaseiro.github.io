@@ -9,7 +9,7 @@ header:
 
 ## whoami
 
-Hey there, my name is Bruno and I am an offensive security engineer. If you are unfamiliar with the term, think about Defence Against the Dark Arts but for computers. I can hack stuff without getting in trouble ᵐᵒˢᵗ ᵒᶠ ᵗʰᵉ ᵗᶦᵐᵉ!
+Hey there, my name is Bruno and I am an offensive security engineer. If you are unfamiliar with the term, think about Defence Against the Dark Arts but for computers. I get to legally ⁽ᵐᵒˢᵗ ᵒᶠ ᵗʰᵉ ᵗᶦᵐᵉ⁾ hack things!
 
 @fbi just kidding 
 
