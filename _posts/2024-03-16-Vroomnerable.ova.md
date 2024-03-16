@@ -130,7 +130,7 @@ Here are the results of the experiment:
 | 200'000  | 1710594998488 | 1710595035416 | 36'928 | 1710594998488 | 1710595035422 | 36'934 |
 | 300'000  | 1710595954811 | 1710596010562 | 55'751 | 1710595954811 | 1710596010571 | 55'760 |
 
-For a very large number of files, the execution delta will eventually be closer and closer to the deletion delta, maybe even surpass it. I didn't try with more than 300k files as the copy takes a long time (I'm sure there are faster ways to do it) and also because at this point, my exploit was actually executed.
+My guess would be that for a very large number of files, the execution delta will eventually be closer and closer to the deletion delta, maybe even surpass it. I didn't try with more than 300k files as the copy takes a long time, and also because at this point, my exploit was actually executed.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/ec533daa-d23a-48fe-a51e-89b4ab38580e)
 
@@ -143,25 +143,30 @@ The main function simply starts two threads almost simultaneously - one deleting
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/6c0b1cb2-f8ad-4865-827b-6d20a6555435)
 
 
-The vulnerability is in the **delete_files()** function. I added a very short sleep, which after a bunch of loops will accumulate and create a considerable delay. 9 microseconds was the value that would delay the program just enough to be able to exploit it with at least a couple of hundred thousand files.
+The vulnerability is in the **delete_files()** function. I added a very short sleep, which after a bunch of loops this should accumulate and create a considerable delay. 9 microseconds was the value that would delay the program just enough to be able to exploit it with at least a couple of hundred thousand files.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/2fe80f35-4ec0-4dcf-a79c-9026d5275ce6)
 
-Still, my paint masterpiece above isn't 100% in line with the experiment results. My theory is that **execute_files()** finishes faster than **delete_files()**. What I mean is that all files are executed and immediately after, the timestamp is printed.
-
-This does not happen with **delete_files()**, which is a bit more robust - there are error checks and the call to **closedir(dir);** before printing the timestamp. Maybe that takes at least 9 microseconds, which would explain how the exploit worked for 300k files even though the deleting delta is shorter than the execution delta. All this math only works if the starting timestamps for both operations are the same, which is in fact the case.
+My paint masterpiece above isn't 100% in line with the experiment results. But I still managed to execute the exploit.
 
 ### I need answers
 
-I almost ended the post there, but I decided to give it another go. I booted a fresh **vroomnerable** and repeated the process with 1 million files. Maybe this number is large enough so that **closedir(dir);** will not affect our scientific results.
+I almost ended the post there, but I decided to give it another go since I'm not very confident on these results. Let's clear things up.
+
+I booted a fresh **vroomnerable** and rooted it again. I increased the **usleep(9)** to **usleep(10000)** in the source code, compiled it again and repeated the experiment. The deletion window should increase a lot along with the number of files. The exploit should be successful with less files too.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/25bb224a-0618-4304-b5e7-e10c00a224a8)
 
-Needless to say, this took... a very long time :) But here are the results:
+
 | **Files**  | **Started deleting files** | **Finished deleting files** | **Deletion Δ** | **Started Executing files** | **Finished executing files** | **Execution Δ** |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1'000'000  |  |  |  |  |  |  |
+| 10 | 1710610616066 | 1710610616297 | 231 | 1710610616066 | 1710610616087 | 21 |
+| 100  | 1710610721735 | 1710610722818 | 1'083 | 1710610721735 | 1710610721913 | 178 |
+| 1'000  | 1710610769770 | 1710610781409 | 11'639 | 1710610769770 | 1710610771492 | 1'722 |
 
+The exploit worked with just 10 files. And the deletion delta increases a lot more than the execution delta, doing exactly what I wanted initially.
+
+So everything is clear now, the sleep function had a very small value. I was just lucky enough that somewhen (what a cool word) during the execution, thread 2 made the overtake and executed one of the files that hadn't been deleted yet.
 
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/bdff30d8-a919-4e4e-9cd2-1c558f29c3fd)
