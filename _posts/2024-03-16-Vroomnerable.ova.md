@@ -45,7 +45,7 @@ If you're using VirtualBox, importing the machine should be pretty straight forw
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/3d4bacea-3c6a-4c1b-8b6a-0bedd0582ae1)
 
 
-You boot both machines (your Kali and vroomnerable) and if everything goes according to plan, they should be on the same network. Time to find out the victim's IP address.
+You boot both machines (your **Kali** and **vroomnerable**) and if everything goes according to plan, they should be on the same network. Time to find out the victim's IP address.
 The attacker's IP is **10.0.2.4/24**, so **vroomnerable** should be somewhere in the **10.0.2.0/24** range.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/74f0e7e5-61c3-4b54-9ad3-b2868b1632f7)
