@@ -113,7 +113,13 @@ In practice...
 
 Here are the experiment results:
 
-
+| **Files**  | **Started deleting files** | **Finished deleting files** | **Deletion 	Δ** | **Started Executing files** | **Finished executing files** | **Execution Δ** |
+| ------------- | ------------- |
+| 1  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| 10  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| 100  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| 1 000  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| 10 000  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
 
 
 Thanks for reading
