@@ -50,7 +50,7 @@ The attacker's IP is **10.0.2.4/24**, so **vroomnerable** should be somewhere in
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/74f0e7e5-61c3-4b54-9ad3-b2868b1632f7)
 
-To be sure which of the results is the target machine, you can compare the MAC addresses found to the VMs MAC address, which can be found in the network settings.
+To be sure which of the results is the target machine, you can compare the MAC addresses found to the VM's MAC address in the network settings.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/0e9319c2-4b3c-4be3-aa8f-bf3cf549af21)
 
@@ -77,7 +77,7 @@ These credentials work for SSH, so here is the user flag.
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/4ae6ba9d-d9f2-48f6-bf70-b38b9950de43)
 
 The source code is in the home folder. This is artificially vulnerable due to the **log_operation()** function. The larger the value in the for loop, the longer the thread will wait before setting a value. **wait_set()** sets a PENDING value, while **set()** sets an ACTIVE value.
-When sending a lower value, the **else** branch is taken and the artificial delay starts. That's the race condition window and when the second value (150) should change the y variable before first thread completes.
+When sending a lower value, the **else** branch is taken and the artificial delay starts. That's the race condition window and when the second value (150) should change the y variable before the first thread completes.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/49071ab0-bb56-4aa0-ad09-8646af1333d3)
 
@@ -93,7 +93,7 @@ Some files are being deleted and some files are being executed. The numbers are 
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/1a80a178-3771-4a27-8323-9bec6caa8d95)
 
-There's another race going on here. Deleting vs Executing. Let's start by building an exploit, throw it inside **/opt/race** and run **sudo /root/leclerc**. Hopefully the exploit (setting SUID bit for /bin/bash) wins the race and is executed.
+There's another race going on here. Deleting vs Executing. Let's start by building an exploit, throw it inside **/opt/race** and run **sudo /root/leclerc**. Hopefully the exploit (setting the SUID bit for /bin/bash) wins the race and is executed.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/dcab8cda-7907-42c0-b875-e6cb6e75eb70)
 
@@ -102,9 +102,13 @@ I guess we came in second. The goal here is to extend the deleting window enough
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/c0125e6e-1e4c-4174-bfc4-3e0608978cce)
 
 However, this can only happen if deleting files takes longer than executing files. Let's put on our scientific goggles and do an experiment. Here's what we're going to do:
+
 1) Copy the exploit 10 times to **/opt/race/**
+ 
 2) Run **sudo /root/leclerc**
+ 
 3) Collect the length of the executing and deleting windows
+ 
 4) Repeat steps 1-3 with more files each time
 
 In practice...
