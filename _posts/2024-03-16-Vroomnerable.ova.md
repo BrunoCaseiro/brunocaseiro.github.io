@@ -103,13 +103,13 @@ I guess we came in second. The goal here is to extend the deleting window just e
 
 However, this can only happen if deleting files takes longer than executing files. Let's put on our scientific goggles and do an experiment. Here's what we're going to do:
 
-1) Copy the exploit 10 times to **/opt/race/**
+1) Copy the exploit 10 times to **/opt/race/**;
  
-2) Run **sudo /root/leclerc**
+2) Run **sudo /root/leclerc**;
  
-3) Collect the length of the executing and deleting windows
+3) Collect the length of the execution and deletion windows;
  
-4) Repeat steps 1-3 with more files each time
+4) Repeat steps 1-3 with gradually more files.
 
 In practice...
 
