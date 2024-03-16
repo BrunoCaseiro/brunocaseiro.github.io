@@ -140,11 +140,13 @@ The main function simply starts two threads almost simultaneously - one deleting
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/6c0b1cb2-f8ad-4865-827b-6d20a6555435)
 
 
-The vulnerability is in the **delete_files()** function. I added a very short sleep, which after a bunch of loops this should accumulate and create a considerable delay. 9 microseconds was the value that would delay the program just enough to be able to exploit it with at least a couple of hundred thousand files.
+The vulnerability is in the **delete_files()** function. I added a very short sleep, which after a bunch of loops should accumulate and create a considerable delay. 9 microseconds was the value that would delay the program just enough to be able to exploit it with at least a couple of hundred thousand files.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/2fe80f35-4ec0-4dcf-a79c-9026d5275ce6)
 
 My paint masterpiece above isn't 100% in line with the experiment results. But I still managed to execute the exploit.
+
+
 
 ## I need answers
 
