@@ -76,8 +76,8 @@ These credentials work for SSH, so here is the user flag.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/4ae6ba9d-d9f2-48f6-bf70-b38b9950de43)
 
-The source code is in the home folder. This is artifically vulnerable due to the **log_operation()** function. The larger the value in the for loop, the longer the thread will wait before setting a value. **wait_set()** sets a PENDING value, while **set()** sets an ACTIVE value.
-When sending a lower value, the **else** branch is taken and the artifical delay starts. That's the race condition window and when the second value (150) should change the y variable before first thread completes.
+The source code is in the home folder. This is artificially vulnerable due to the **log_operation()** function. The larger the value in the for loop, the longer the thread will wait before setting a value. **wait_set()** sets a PENDING value, while **set()** sets an ACTIVE value.
+When sending a lower value, the **else** branch is taken and the artificial delay starts. That's the race condition window and when the second value (150) should change the y variable before first thread completes.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/49071ab0-bb56-4aa0-ad09-8646af1333d3)
 
@@ -97,7 +97,7 @@ There's another race going on here. Deleting vs Executing. Let's start by buildi
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/dcab8cda-7907-42c0-b875-e6cb6e75eb70)
 
-I guess we came in second. The goal here is to extend the deleting window enough so that all the exeuctions can happen inside it. Please allow my artistic (aka paint) skills to demonstrate that.
+I guess we came in second. The goal here is to extend the deleting window enough so that all the executions can happen inside it. Please allow my artistic (aka paint) skills to demonstrate that.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/c0125e6e-1e4c-4174-bfc4-3e0608978cce)
 
