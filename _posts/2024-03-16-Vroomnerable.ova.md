@@ -41,17 +41,41 @@ It's the first time I'm building a vulnerable VM, so I'm not expecting it to be 
 
 ### Setting up
 If you're using VirtualBox, importing the machine should be pretty straight forward after downloading the .ova file. Simple press **File --> Import appliance** and select the downloaded file. It should come pre-configured (I recommend setting your machine and the vulnerable machine to "NAT network", that never results in any network problems for me).
-
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/3d4bacea-3c6a-4c1b-8b6a-0bedd0582ae1)
 
 
 You boot both machines (your Kali and vroomnerable) and if everything goes according to plan, they should be on the same network. Time to find out the victim's IP address.
 The attacker's ip is **10.0.2.4/24**, so vroomnerable should be somewhere in the **10.0.2.0/24** network. The below command will scan every IP in that range.
-
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/74f0e7e5-61c3-4b54-9ad3-b2868b1632f7)
 
 To be sure which of the results is the target machine, you can compare the MAC addresses found to the VMs MAC address, which can be found in the network settings.
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/0e9319c2-4b3c-4be3-aa8f-bf3cf549af21)
+
+
+### Enumeration
+This is a pretty basic nmap scan, but we don't need more than this. There's an SSH server and a web app running on port 8000.
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/56ea8c7f-7f1a-42c5-a1ba-9c045199febd)
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/55f3ff13-0eb1-42e0-9202-2e4c05553169)
+
+This seems like an impossible challenge at first, since you cannot set a higher active value, only lower ones. After performing all your enumeration steps, you should find a hint. Yes, it's a shamless plug to my blog (again 🙄)
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/6776e0bc-e5e9-40b7-bc27-57e671460d60)
+
+
+### User flag
+The exploit for this first challenge is exactly what's in the initial blog post, so I won't go deep into that. This time, it only took me 6 tries - starting at the values 49/150, down to 46/150.
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/db53e99f-da69-45b5-8147-a333302ffce9)
+
+These credentials work for SSH, so here is the user flag.
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/4ae6ba9d-d9f2-48f6-bf70-b38b9950de43)
+
+The source code is in the home folder. This is artifically vulnerable due to the **log_operation** function.
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/49071ab0-bb56-4aa0-ad09-8646af1333d3)
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/de14ede0-5f9c-48e5-8d99-3b4ca2102bf8)
+
+
+### Root flag
+
 
 
 Thanks for reading
