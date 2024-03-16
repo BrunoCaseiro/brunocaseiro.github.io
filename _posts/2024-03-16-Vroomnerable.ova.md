@@ -97,7 +97,7 @@ There's another race going on here - deleting vs executing. Let's start by build
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/dcab8cda-7907-42c0-b875-e6cb6e75eb70)
 
-I guess we came in second. The goal here is to extend the deleting window enough so that all the executions can happen inside it. Please allow my artistic (aka paint) skills to demonstrate that.
+I guess we came in second. The goal here is to extend the deleting window just enough so that all the executions can happen inside it. Please allow my artistic (aka paint) skills to demonstrate that.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/c0125e6e-1e4c-4174-bfc4-3e0608978cce)
 
