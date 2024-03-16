@@ -28,7 +28,7 @@ Here is the link to download the .ova file. I promise it's not malware :)
 
 
 
-It's the first time I'm building a vulnerable VM, so I'm not expecting it to be perfect. But come on, give it a go! Write a walkthrough or give me your feedback. Don't forget to ping me!
+It's the first time I'm building a vulnerable VM, so I'm not expecting it to be perfect. But come on, give it a go! Write a walkthrough or give me your feedback. Don't forget to tag me!
 
 
 
