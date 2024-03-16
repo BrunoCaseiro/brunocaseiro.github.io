@@ -93,7 +93,7 @@ Some files are being deleted and some files are being executed. The numbers are 
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/1a80a178-3771-4a27-8323-9bec6caa8d95)
 
-There's another race going on here. Deleting vs Executing. Let's start by building an exploit, throw it inside **/opt/race** and run **sudo /root/leclerc**. Hopefully the exploit (setting the SUID bit for /bin/bash) wins the race and is executed.
+There's another race going on here - deleting vs executing. Let's start by building an exploit, throwing it inside **/opt/race** and running **sudo /root/leclerc**. Hopefully the exploit (setting the SUID bit for /bin/bash) wins the race and is executed.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/dcab8cda-7907-42c0-b875-e6cb6e75eb70)
 
