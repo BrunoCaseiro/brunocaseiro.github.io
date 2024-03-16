@@ -15,6 +15,6 @@ header:
     {% assign date = currentdate %} 
   {% endif %}
     <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-    {{ post.excerpt | markdownify | strip_html }}
+    
 {% endfor %}
 </ul>
