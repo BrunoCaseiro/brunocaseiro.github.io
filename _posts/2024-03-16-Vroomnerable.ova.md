@@ -18,7 +18,7 @@ I took the web app and turned it into a small challenge based on my initial find
 ## The challenge
 
 
-I'll try not to spoil it too much (**yet**, walkthrough below!), but it is a pretty simple system from an architectural point of view. There's a web application and an SSH server running. After hacking into the **vroomnerable** user, you get to escalate your privileges to root by exploiting another race condition - this second part is where it can get a bit tricky.
+I'll try not to spoil it too much (**yet**, walkthrough below!), but it is a pretty simple system from an architectural point of view. There's a web application and an SSH server running. After hacking into the **vroomnerable** user, you get to escalate your privileges to **root** by exploiting another race condition - this second part is where it can get a bit tricky.
 
 I confess the machine is a bit CTF-y, it's not supposed to simulate a real situation or environment. They are just challenges presented in a straight forward way, with no rabbit holes and no need to read between the lines.
 
