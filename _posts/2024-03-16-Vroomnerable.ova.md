@@ -39,6 +39,19 @@ It's the first time I'm building a vulnerable VM, so I'm not expecting it to be 
 
 ## Walkthrough
 
+### Setting up
+If you're using VirtualBox, importing the machine should be pretty straight forward after downloading the .ova file. Simple press **File --> Import appliance** and select the downloaded file. It should come pre-configured (I recommend setting your machine and the vulnerable machine to "NAT network", that never results in any network problems for me).
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/3d4bacea-3c6a-4c1b-8b6a-0bedd0582ae1)
+
+
+You boot both machines (your Kali and vroomnerable) and if everything goes according to plan, they should be on the same network. Time to find out the victim's IP address.
+The attacker's ip is **10.0.2.4/24**, so vroomnerable should be somewhere in the **10.0.2.0/24** network. The below command will scan every IP in that range.
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/74f0e7e5-61c3-4b54-9ad3-b2868b1632f7)
+
+To be sure which of the results is the target machine, you can compare the MAC addresses found to the VMs MAC address, which can be found in the network settings.
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/0e9319c2-4b3c-4be3-aa8f-bf3cf549af21)
 
 
 Thanks for reading
