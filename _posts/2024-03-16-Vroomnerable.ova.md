@@ -105,13 +105,13 @@ However, this can only happen if deleting files takes longer than executing file
 1) Copy the exploit 10 times to **/opt/race/**
 2) Run **sudo /root/leclerc**
 3) Collect the length of the executing and deleting windows
-4) Repeat steps 1-3 with more files
+4) Repeat steps 1-3 with more files each time
 
 In practice...
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/8c8cfc0f-6b00-4989-8a0b-7bc7b5a71f3d)
 
-Here are the experiment results. This will, of course, depend on the VMs resources:
+Here are the experiment results:
 
 | **Files**  | **Started deleting files** | **Finished deleting files** | **Deletion Δ** | **Started Executing files** | **Finished executing files** | **Execution Δ** |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -123,8 +123,29 @@ Here are the experiment results. This will, of course, depend on the VMs resourc
 | 30'000  | 1710592360610 | 1710592365380 | 4'770 | 1710592360610 | 1710592365814 | 5'204 |
 | 60'000  | 1710592621064 | 1710592631090 | 10'025 | 1710592621065 | 1710592631257 | 10'192 |
 | 90'000  | 1710592938159 | 1710592953692 | 15'533 | 1710592938159 | 1710592953983 | 15'824 |
-| 200'000  |  |  |  |  |  |  |
+| 200'000  | 1710594998488 | 1710595035416 | 36'928 | 1710594998488 | 1710595035422 | 36'934 |
+| 300'000  | 1710595954811 | 1710596010562 | 55'751 | 1710595954811 | 1710596010571 | 55'760 |
 
+For very large number of files, the execution delta will eventually be closer and closer to the deleting delta. I didn't try with more than 300k files as the copy takes a long time (I'm sure there are faster ways to do it) and also because that was the point when my exploit was executed.
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/ec533daa-d23a-48fe-a51e-89b4ab38580e)
+
+I left the source code in the **/root/** folder, inside the file called **lecler.c**
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/11b7655f-6553-48e2-96d9-cff075fba1c9)
+
+The main function simply starts two threads almost simultaneously - one deleting files and another one executing files, both in the **/opt/race/** directory.
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/6c0b1cb2-f8ad-4865-827b-6d20a6555435)
+
+
+The vulnerability is in the **delete_files()** function. I addedd a very short sleep, which after a bunch of loops will accumulate and create a considerable delay. 9 microseconds was the value that would delay the program just enough to be able to exploit it with at least 100k files (might take some tries).
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/2fe80f35-4ec0-4dcf-a79c-9026d5275ce6)
+
+Still, my masterpiece isn't 100% in line with the experiment results. My theory is that the **execute_files()** is generally faster than the **delete_files()**. What I mean is that all files are executed and immediately after the timestamp is printed. This does not happen with **delete_files()**, which is a bit more robust - there are error checks and the call to **closedir(dir);** before printing the timestamp. Maybe that takes at least 9 microseconds, which would explain how the exploit worked for 300k files even though the deleting delta is shorter than the execution delta. All this math only work if the starting timestamps for both operations are the same, which is the case.
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/bdff30d8-a919-4e4e-9cd2-1c558f29c3fd)
 
 
 Thanks for reading
