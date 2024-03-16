@@ -113,13 +113,13 @@ In practice...
 
 Here are the experiment results:
 
-| **Files**  | **Started deleting files** | **Finished deleting files** | **Deletion 	Δ** | **Started Executing files** | **Finished executing files** | **Execution Δ** |
+| **Files**  | **Started deleting files** | **Finished deleting files** | **Deletion Δ** | **Started Executing files** | **Finished executing files** | **Execution Δ** |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1  | 1710590071065  | 1710590071066  | 1  | 1710590071065  | 1710590071067  | 2  |
 | 10  | 1710591111140  | 1710591111142  | 2  | 1710591111140  | 1710591111148  | 8  |
 | 100  | 1710591215249  | 1710591215266  | 17  | 1710591215249  | 1710591215335  | 86 |
-| 1 000  | 1710591235234  | 1710591235399  | 165  | 1710591235234  | 1710591235851  | 617  |
-| <nobr>10 000</nobr>  | 1710591263709  | 1710591265325  | 1616  | 1710591263709  | 1710591265644  | 1935  |
+| 1'000  | 1710591235234  | 1710591235399  | 165  | 1710591235234  | 1710591235851  | 617  |
+| 10'000  | 1710591263709  | 1710591265325  | 1616  | 1710591263709  | 1710591265644  | 1935  |
 
 
 Thanks for reading
