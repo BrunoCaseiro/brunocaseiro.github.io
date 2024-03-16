@@ -130,7 +130,7 @@ Here are the results of the experiment:
 | 200'000  | 1710594998488 | 1710595035416 | 36'928 | 1710594998488 | 1710595035422 | 36'934 |
 | 300'000  | 1710595954811 | 1710596010562 | 55'751 | 1710595954811 | 1710596010571 | 55'760 |
 
-For a very large number of files, the execution delta will eventually be closer and closer to the deleting delta. I didn't try with more than 300k files as the copy takes a long time (I'm sure there are faster ways to do it) and also because at this point, my exploit was actually executed.
+For a very large number of files, the execution delta will eventually be closer and closer to the deletion delta, maybe even surpass it. I didn't try with more than 300k files as the copy takes a long time (I'm sure there are faster ways to do it) and also because at this point, my exploit was actually executed.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/ec533daa-d23a-48fe-a51e-89b4ab38580e)
 
@@ -143,7 +143,7 @@ The main function simply starts two threads almost simultaneously - one deleting
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/6c0b1cb2-f8ad-4865-827b-6d20a6555435)
 
 
-The vulnerability is in the **delete_files()** function. I addedd a very short sleep, which after a bunch of loops will accumulate and create a considerable delay. 9 microseconds was the value that would delay the program just enough to be able to exploit it with at least 100k files (might take some tries).
+The vulnerability is in the **delete_files()** function. I added a very short sleep, which after a bunch of loops will accumulate and create a considerable delay. 9 microseconds was the value that would delay the program just enough to be able to exploit it with at least a couple of hundred thousand files.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/2fe80f35-4ec0-4dcf-a79c-9026d5275ce6)
 
