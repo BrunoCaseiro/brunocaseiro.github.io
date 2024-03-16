@@ -166,7 +166,7 @@ Here are the results with a larger sleep value.
 
 The exploit worked with just 10 files. And the deletion delta increases a lot more than the execution delta, this is exactly what I was trying to achieve initially.
 
-So everything is clear now, the sleep function had a very small value. I was just lucky enough that somewhen (what a cool word) during the execution, thread 2 made the overtake and executed one of the files that hadn't been deleted yet. Or maybe 9 microseconds is such a small value that the timestamps are not accuracte enough.
+So everything is clear now, the sleep function had a very small value. I was just lucky enough that somewhen (what a cool word) during the execution, thread 2 made the overtake and executed one of the files that hadn't been deleted yet. Or maybe 9 microseconds is such a small value that the timestamps are not accurate enough.
 
 Who knows, the windows were too small and the results too inconsistent to draw any accurate conclusions... Actually, that's what made it extra fun.
 
