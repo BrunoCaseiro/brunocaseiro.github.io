@@ -151,4 +151,17 @@ Still, my paint masterpiece above isn't 100% in line with the experiment results
 
 This does not happen with **delete_files()**, which is a bit more robust - there are error checks and the call to **closedir(dir);** before printing the timestamp. Maybe that takes at least 9 microseconds, which would explain how the exploit worked for 300k files even though the deleting delta is shorter than the execution delta. All this math only works if the starting timestamps for both operations are the same, which is in fact the case.
 
+### I need answers
+
+I almost ended the post there, but I decided to give it another go. I booted a fresh **vroomnerable** and repeated the process with 1 million files. Maybe this number is large enough so that **closedir(dir);** will not affect our scientific results.
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/25bb224a-0618-4304-b5e7-e10c00a224a8)
+
+Needless to say, this took... a very long time :) But here are the results:
+| **Files**  | **Started deleting files** | **Finished deleting files** | **Deletion Δ** | **Started Executing files** | **Finished executing files** | **Execution Δ** |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1'000'000  |  |  |  |  |  |  |
+
+
+
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/bdff30d8-a919-4e4e-9cd2-1c558f29c3fd)
