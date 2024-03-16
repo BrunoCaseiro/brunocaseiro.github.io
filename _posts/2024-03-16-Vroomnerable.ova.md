@@ -130,7 +130,7 @@ Here are the experiment results:
 | 200'000  | 1710594998488 | 1710595035416 | 36'928 | 1710594998488 | 1710595035422 | 36'934 |
 | 300'000  | 1710595954811 | 1710596010562 | 55'751 | 1710595954811 | 1710596010571 | 55'760 |
 
-For very large number of files, the execution delta will eventually be closer and closer to the deleting delta. I didn't try with more than 300k files as the copy takes a long time (I'm sure there are faster ways to do it) and also because that was the point when my exploit was executed.
+For a very large number of files, the execution delta will eventually be closer and closer to the deleting delta. I didn't try with more than 300k files as the copy takes a long time (I'm sure there are faster ways to do it) and also because at this point, my exploit was actually executed.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/ec533daa-d23a-48fe-a51e-89b4ab38580e)
 
@@ -147,11 +147,8 @@ The vulnerability is in the **delete_files()** function. I addedd a very short s
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/2fe80f35-4ec0-4dcf-a79c-9026d5275ce6)
 
-Still, my masterpiece isn't 100% in line with the experiment results. My theory is that the **execute_files()** is generally faster than the **delete_files()**. What I mean is that all files are executed and immediately after the timestamp is printed. This does not happen with **delete_files()**, which is a bit more robust - there are error checks and the call to **closedir(dir);** before printing the timestamp. Maybe that takes at least 9 microseconds, which would explain how the exploit worked for 300k files even though the deleting delta is shorter than the execution delta. All this math only work if the starting timestamps for both operations are the same, which is the case.
+Still, my paint masterpiece above isn't 100% in line with the experiment results. My theory is that **execute_files()** finishes faster than **delete_files()**. What I mean is that all files are executed and immediately after, the timestamp is printed.
+
+This does not happen with **delete_files()**, which is a bit more robust - there are error checks and the call to **closedir(dir);** before printing the timestamp. Maybe that takes at least 9 microseconds, which would explain how the exploit worked for 300k files even though the deleting delta is shorter than the execution delta. All this math only works if the starting timestamps for both operations are the same, which is in fact the case.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/bdff30d8-a919-4e4e-9cd2-1c558f29c3fd)
-
-
-Thanks for reading
-
-Bruno Caseiro
