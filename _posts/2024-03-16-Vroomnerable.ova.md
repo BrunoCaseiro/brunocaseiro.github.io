@@ -115,7 +115,7 @@ In practice...
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/8c8cfc0f-6b00-4989-8a0b-7bc7b5a71f3d)
 
-Here are the experiment results:
+Here are the results of the experiment:
 
 | **Files**  | **Started deleting files** | **Finished deleting files** | **Deletion Δ** | **Started Executing files** | **Finished executing files** | **Execution Δ** |
 | --- | --- | --- | --- | --- | --- | --- |
