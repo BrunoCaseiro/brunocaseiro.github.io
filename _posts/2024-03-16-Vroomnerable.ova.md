@@ -23,7 +23,7 @@ I'll try not to spoil it too much (**yet**, walkthrough below!), but it is a pre
 I confess the machine is a bit CTF-y, it's not supposed to simulate a real situation or environment. They are just challenges presented in a straight forward way, with no rabbit holes and no need to read between the lines.
 
 Here is the link to download the .ova file. I promise it's not malware :)
-- <https://drive.google.com/file/d/1MOE3WM5P_lae8zgQ5kTqCXC2QeF_sNbM/view?usp=drive_link>
+- <https://drive.google.com/file/d/12diIlN_pxzt94d1ysCSYpj7AxJKGR8xf/view?usp=sharing>
 
 
 
@@ -76,7 +76,7 @@ These credentials work for SSH, so here is the user flag.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/4ae6ba9d-d9f2-48f6-bf70-b38b9950de43)
 
-The source code is in the home folder. This is artifically vulnerable due to the **log_operation()** function. **wait_set()** sets a PENDING value, while **set()** sets an ACTIVE value.
+The source code is in the home folder. This is artifically vulnerable due to the **log_operation()** function. The larger the value in the for loop, the longer the thread will wait before setting a value. **wait_set()** sets a PENDING value, while **set()** sets an ACTIVE value.
 When sending a lower value, the **else** branch is taken and the artifical delay starts. That's the race condition window and when the second value (150) should change the y variable before first thread completes.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/49071ab0-bb56-4aa0-ad09-8646af1333d3)
@@ -89,7 +89,7 @@ This is where it can get tricky. At first, this is the only thing we have to esc
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/6ab8d385-be0a-41bf-8447-01854371cb89)
 
-Some files are being deleted and some files are being executed. The numbers are timestamps. After some enumeration, you'll find an empty folder at **/opt/race/**
+Some files are being deleted and some files are being executed. The numbers are timestamps. After some enumeration, you'll find an empty folder at **/opt/race/** - this is where the deleting and executing is happening.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/1a80a178-3771-4a27-8323-9bec6caa8d95)
 
@@ -97,9 +97,23 @@ There's another race going on here. Deleting vs Executing. Let's start by buildi
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/dcab8cda-7907-42c0-b875-e6cb6e75eb70)
 
-I guess we came in second. The goal here is to extend the deleting window enough so that all the exeuctions can happen inside it. Please allow my artistic (aka paint) skills to demonstrate that. 
+I guess we came in second. The goal here is to extend the deleting window enough so that all the exeuctions can happen inside it. Please allow my artistic (aka paint) skills to demonstrate that.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/c0125e6e-1e4c-4174-bfc4-3e0608978cce)
+
+However, this can only happen if deleting files takes longer than executing files. Let's put on our scientific goggles and do an experiment. Here's what we're going to do:
+1) Copy the exploit 10 times to **/opt/race/**
+2) Run **sudo /root/leclerc**
+3) Collect the length of the executing and deleting windows
+4) Repeat steps 1-3 with more files
+
+In practice...
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/8c8cfc0f-6b00-4989-8a0b-7bc7b5a71f3d)
+
+Here are the experiment results:
+
+
 
 
 Thanks for reading
