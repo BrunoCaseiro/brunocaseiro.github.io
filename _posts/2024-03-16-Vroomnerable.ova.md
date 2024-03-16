@@ -85,7 +85,17 @@ When sending a lower value, the **else** branch is taken and the artifical delay
 
 
 ### Root flag
+This is where it can get tricky. At first, this is the only thing we have to escalate our privileges.
 
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/6ab8d385-be0a-41bf-8447-01854371cb89)
+
+Some files are being deleted and some files are being executed. The numbers are timestamps. After some enumeration, you'll find an empty folder at **/opt/race/**
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/1a80a178-3771-4a27-8323-9bec6caa8d95)
+
+There's another race going on here. Deleting vs Executing. Let's start by building an exploit, throw it inside **/opt/race** and run **sudo /root/leclerc**. Hopefully the exploit (setting SUID bit for /bin/bash) wins the race and is executed.
+
+![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/dcab8cda-7907-42c0-b875-e6cb6e75eb70)
 
 
 Thanks for reading
