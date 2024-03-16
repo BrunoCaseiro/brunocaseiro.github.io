@@ -149,7 +149,7 @@ The vulnerability is in the **delete_files()** function. I added a very short sl
 
 My paint masterpiece above isn't 100% in line with the experiment results. But I still managed to execute the exploit.
 
-### I need answers
+## I need answers
 
 I almost ended the post there, but I decided to give it another go since I'm not very confident on these results. Let's clear things up.
 
