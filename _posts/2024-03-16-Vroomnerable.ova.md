@@ -77,6 +77,7 @@ These credentials work for SSH, so here is the user flag.
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/4ae6ba9d-d9f2-48f6-bf70-b38b9950de43)
 
 The source code is in the home folder. This is artifically vulnerable due to the **log_operation()** function. **wait_set()** sets a PENDING value, while **set()** sets an ACTIVE value.
+When sending a lower value, the **else** branch is taken and the artifical delay starts. That's the race condition window and when the second value (150) should change the y variable before first thread completes.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/49071ab0-bb56-4aa0-ad09-8646af1333d3)
 
