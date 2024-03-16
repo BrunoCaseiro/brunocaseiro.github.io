@@ -157,6 +157,7 @@ I booted a fresh **vroomnerable** and rooted it again. I increased the **usleep(
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/25bb224a-0618-4304-b5e7-e10c00a224a8)
 
+Here are the results with a larger sleep value.
 
 | **Files**  | **Started deleting files** | **Finished deleting files** | **Deletion Δ** | **Started Executing files** | **Finished executing files** | **Execution Δ** |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -164,9 +165,8 @@ I booted a fresh **vroomnerable** and rooted it again. I increased the **usleep(
 | 100  | 1710610721735 | 1710610722818 | 1'083 | 1710610721735 | 1710610721913 | 178 |
 | 1'000  | 1710610769770 | 1710610781409 | 11'639 | 1710610769770 | 1710610771492 | 1'722 |
 
-The exploit worked with just 10 files. And the deletion delta increases a lot more than the execution delta, doing exactly what I wanted initially.
+The exploit worked with just 10 files. And the deletion delta increases a lot more than the execution delta, this is exactly what I was trying to achieve initially.
 
-So everything is clear now, the sleep function had a very small value. I was just lucky enough that somewhen (what a cool word) during the execution, thread 2 made the overtake and executed one of the files that hadn't been deleted yet.
-
+So everything is clear now, the sleep function had a very small value. I was just lucky enough that somewhen (what a cool word) during the execution, thread 2 made the overtake and executed one of the files that hadn't been deleted yet. Or maybe 9 microseconds is such a small value that the timestamps are not accuracte enough. Who knows, the windows were too small and the results too inconsistent to draw any accurate conclusions. Actually, that's what made it fun!
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/bdff30d8-a919-4e4e-9cd2-1c558f29c3fd)
