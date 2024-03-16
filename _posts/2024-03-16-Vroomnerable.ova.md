@@ -130,7 +130,7 @@ Here are the results of the experiment:
 | 200'000  | 1710594998488 | 1710595035416 | 36'928 | 1710594998488 | 1710595035422 | 36'934 |
 | 300'000  | 1710595954811 | 1710596010562 | 55'751 | 1710595954811 | 1710596010571 | 55'760 |
 
-My guess would be that for a very large number of files, the execution delta will eventually be closer and closer to the deletion delta, maybe even lower than it. I didn't try with more than 300k files as the copy takes a long time, and also because at this point, my exploit was actually executed.
+My guess would be that for a very large number of files, the execution delta will eventually be closer and closer to the deletion delta, and eventually be lower than it. I didn't try with more than 300k files as the copy takes a long time, and also because at this point, my exploit was actually executed.
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/ec533daa-d23a-48fe-a51e-89b4ab38580e)
 
