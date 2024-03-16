@@ -58,7 +58,8 @@ This is a pretty basic nmap scan, but we don't need more than this. There's an S
 
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/55f3ff13-0eb1-42e0-9202-2e4c05553169)
 
-This seems like an impossible challenge at first, since you cannot set a higher active value, only lower ones. After performing all your enumeration steps, you should find a hint. Yes, it's a shamless plug to my blog (again 🙄)
+This seems like an impossible challenge at first, since you cannot set a higher active value, only lower ones. After performing all your enumeration steps, you should find a hint. Yes, it's a shamless plug to my blog (again 🙄).
+
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/6776e0bc-e5e9-40b7-bc27-57e671460d60)
 
 
@@ -67,6 +68,7 @@ The exploit for this first challenge is exactly what's in the initial blog post,
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/db53e99f-da69-45b5-8147-a333302ffce9)
 
 These credentials work for SSH, so here is the user flag.
+
 ![image](https://github.com/BrunoCaseiro/brunocaseiro.github.io/assets/38294180/4ae6ba9d-d9f2-48f6-bf70-b38b9950de43)
 
 The source code is in the home folder. This is artifically vulnerable due to the **log_operation** function.
