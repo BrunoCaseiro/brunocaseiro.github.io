@@ -23,7 +23,7 @@ I'll try not to spoil it too much (**yet**, walkthrough below!), but it is a pre
 I confess the machine is a bit CTF-y, it's not supposed to simulate a real situation or environment. They are just challenges presented in a straight forward way, with no rabbit holes and no need to read between the lines.
 
 Here is the link to download the .ova file. I promise it's not malware :)
-- <https://drive.google.com/file/d/12diIlN_pxzt94d1ysCSYpj7AxJKGR8xf/view?usp=sharing>
+- [<https://drive.google.com/file/d/12diIlN_pxzt94d1ysCSYpj7AxJKGR8xf/view?usp=sharing>](https://drive.google.com/file/d/1SKZqv8-MRI-T51h98K1YslnHduI20DPJ/view?usp=drive_link)
 
 
 
