@@ -35,7 +35,7 @@ Finally, what's with the avatar on the left? Well, many people compare pentestin
 ### 2022
 - Speaker @ University of Aveiro, "Pentesting and Ethical Hacking"
 
-## Links
+## Other Links & Certifications
 
 [LinkedIn](https://www.linkedin.com/in/brunocaseiro/)
 
