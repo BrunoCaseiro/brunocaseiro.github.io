@@ -35,7 +35,7 @@ Finally, what's with the avatar on the left? Well, many people compare pentestin
 
 [LinkedIn](https://www.linkedin.com/in/brunocaseiro/) - [HackTheBox](https://app.hackthebox.com/profile/420159) - [GitHub](https://github.com/BrunoCaseiro/)
 
-[Offensive Security Certified Professional](https://www.credential.net/97c43b2b-f03b-4610-a8f4-c53ad8ced9cd#gs.2ihuzg) - [Burp Suite Certified Practitioner](https://portswigger.net/web-security/e/c/0116babe76dd45d3) - Offensive Security Web Expert (Hopefully soon!) - Offensive Security Wireless Professional (Soon but not as soon as the above) 
+[OSCP](https://www.credential.net/97c43b2b-f03b-4610-a8f4-c53ad8ced9cd#gs.2ihuzg) - [BSCP](https://portswigger.net/web-security/e/c/0116babe76dd45d3) - OSWE (Hopefully soon!) - OSWP (Soon but not as soon as the above) 
 
 
 ## Other interests
