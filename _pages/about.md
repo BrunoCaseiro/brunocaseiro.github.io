@@ -14,9 +14,9 @@ Hey there, my name is Bruno Caseiro and I am an offensive security engineer. If 
 
 ## About this blog
 
-This blog will be made of posts about some of my experiences, interesting vulnerabilities I find, topics I have a strong opinion on or anything in between. It's a laid back, informal space to talk a bit about what I am doing. I'm also aiming to make this understandable to anyone even remotely close to the cybersecurity world.
+Here I'll be posting about some of my experiences, interesting vulnerabilities I find, topics I have a strong opinion on or anything in between. It's a laid back, informal space to talk a bit about what I am doing. I'm also aiming to make this understandable to anyone even remotely close to the cybersecurity world.
 
-An intelligent person isn't one who can bark the most technical terms talking about an extremely technical topic, but one who makes himself understood.
+An intelligent person isn't one who can throw around a lot of extremely technical terms, but one who actually makes himself understood.
 
 Finally, what's with the avatar on the left? Well, many people compare pentesting to black magic, so I decided to let a cute, tiny, red teaming wizard lead the way on this website.
 
