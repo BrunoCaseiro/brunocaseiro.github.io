@@ -2,9 +2,6 @@
 main:       
   - title: "Posts"
     url: /posts.html
-
-  - title: "Work with me"
-    url: /work.html
   
   - title: "About"
     url: /about.html
