@@ -50,7 +50,7 @@ Offensive Security Web Expert - Hopefully soon!
 Offensive Security Wireless Professional - Soon but not as soon as the above :) 
 
 
-## My other interests
+## Other interests
 
 I have many interests beside security, we are more than what we do for a living. Next time someone asks "what do you do?", start with what's most interesting to you! I'm probably sticking to cybersecurity though, it's fun to tell people I'm a hacker 😄 But here are some of my other interests.
 
