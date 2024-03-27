@@ -35,31 +35,31 @@ Finally, what's with the avatar on the left? Well, many people compare pentestin
 
 [LinkedIn](https://www.linkedin.com/in/brunocaseiro/) - [HackTheBox](https://app.hackthebox.com/profile/420159) - [GitHub](https://github.com/BrunoCaseiro/)
 
-[OSCP](https://www.credential.net/97c43b2b-f03b-4610-a8f4-c53ad8ced9cd#gs.2ihuzg) - [BSCP](https://portswigger.net/web-security/e/c/0116babe76dd45d3) - OSWE (Hopefully soon!) - OSWP (Hopefully soon, but not as soon) 
+[OSCP](https://www.credential.net/97c43b2b-f03b-4610-a8f4-c53ad8ced9cd#gs.2ihuzg) - [BSCP](https://portswigger.net/web-security/e/c/0116babe76dd45d3) - OSWE (Hopefully soon) - OSWP (Hopefully soon, but not as soon) 
 
 
 ## Other interests
 
-I have many interests beside security, we are more than what we do for a living. Next time someone asks "what do you do?", start with what's most interesting to you! I'm probably sticking to cybersecurity though, it's fun to tell people I'm a hacker 😄 But here are some of my other interests.
+I have many interests beside security, we are more than what we do for a living. Next time someone asks "what do you do?", start with what's most interesting to you! I'm probably sticking to cybersecurity though, it's fun to tell people I'm a hacker 😄 Anyway, here are some of my other interests.
 
 
 ### Learning languages
 
 I'm a native Portuguese speaker and have been exposed to English since I was a kid. Spanish runs in my (part latino) family, so I've dedicated some time to perfect it. I can more or less read and listen to German, my writing and speaking is still kind of bad, but I'm working on it! I'm also familiar with the very basics of French and it's next on my language pipeline.
 
-I currently have a +1300 day Duolingo streak 🔥🦉, but I feel like most of my progress comes from reading and listening native material as well as studying vocabulary with flashcards.
+I currently have a +1300 day Duolingo streak 🔥🦉, but most of my progress comes from reading/listening to native material as well as studying vocabulary with flashcards.
 
 
 ### Sports, Fitness and Health
 
-I have played basketball ever since I was a kid. I also do calisthenics, which is basically strength training without equipment (think pull ups, dips, push ups and crazy variations of those).
+I have played basketball ever since I was a kid. I also do calisthenics, which is basically strength training without too much equipment. Think pull ups, dips, push ups and crazy variations of those, sometimes with weights attached to myself.
 
 Besides that, I stick to a very healthy and active lifestyle. I do have a cheat day ~~twice per hour~~ occasionally, but most of the time you'll see me drinking water and eating clean foods.
 
 
 ### Listening
 
-I'm sorry, I'm stuck in the 2000s. If you ask me to be the DJ, you'll have to listen to Blink-182, Sum 41, Avril Lavigne and the like. I enjoy other genres, but that's the main one.
+I'm sorry, I'm stuck in the 2000s. If you ask me to DJ, you'll have to listen to Blink-182, Sum 41, Avril Lavigne and the like. I enjoy other genres, but that's the main one.
 
 Besides music, I love podcasts. My favorite is Darknet Diaries, hands down! I also listen to podcasts in other languages about random topics - I get to explore things I'm genuinely interested in while working towards my language learning goals.
 
