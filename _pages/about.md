@@ -7,16 +7,14 @@ header:
   overlay_image: /assets/images/banner.jpg
 ---
 
-## whoami
+## :~$whoami
 
-Hey there, my name is Bruno and I am an offensive security engineer. If you are unfamiliar with the term, think about Defence Against the Dark Arts but for computers. I get to legally ⁽ᵐᵒˢᵗ ᵒᶠ ᵗʰᵉ ᵗᶦᵐᵉ⁾ hack things!
+Hey there, my name is Bruno Caseiro and I am an offensive security engineer. If you are unfamiliar with the term, think about Defence Against the Dark Arts but for computers. I get to legally ⁽ᵐᵒˢᵗ ᵒᶠ ᵗʰᵉ ᵗᶦᵐᵉ⁾ hack things!
 
 @fbi just kidding 
 
 
-## This blog and my work
-
-I've done a bit of many things related to offensive security - worked as a consultant, got paid for bug bounties, taught in college, given talks and workshops, worked for software developing companies, a bit of freelancing, and so on.
+## About this blog
 
 This blog will be made of posts about some of my experiences, interesting vulnerabilities I find, topics I have a strong opinion on or anything in between. It's a laid back, informal space to talk a bit about what I am doing. I'm also aiming to make this understandable to anyone even remotely close to the cybersecurity world.
 
@@ -24,7 +22,7 @@ An intelligent person isn't one who can bark the most technical terms talking ab
 
 Finally, what's with the avatar on the left? Well, many people compare pentesting to black magic, so I decided to let a cute, tiny, red teaming wizard lead the way on this website.
 
-### Other Events
+### Events
 #### 2024
 - Speaker @ ØxＯＰＯＳɆＣ, "The Challenges of Race Conditions in Security Testing"
 
@@ -35,7 +33,7 @@ Finally, what's with the avatar on the left? Well, many people compare pentestin
 #### 2022
 - Speaker @ University of Aveiro, "Pentesting and Ethical Hacking"
 
-## Other Links & Certifications
+## Links & Certifications
 
 [LinkedIn](https://www.linkedin.com/in/brunocaseiro/)
 
