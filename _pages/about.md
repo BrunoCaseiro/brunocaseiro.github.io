@@ -26,7 +26,7 @@ Finally, what's with the avatar on the left? Well, many people compare pentestin
 
 ### 2023
 - Instructor @ University of Aveiro, OWASP ASVS Training
-- Speaker @ University of Aveiro, "Guidelines for cybersecurity training in higher education" workshop
+- Speaker @ University of Aveiro, "Guidelines for cybersecurity training in higher education"
 
 ### 2022
 - Speaker @ University of Aveiro, "Pentesting and Ethical Hacking"
