@@ -24,15 +24,15 @@ An intelligent person isn't one who can bark the most technical terms talking ab
 
 Finally, what's with the avatar on the left? Well, many people compare pentesting to black magic, so I decided to let a cute, tiny, red teaming wizard lead the way on this website.
 
-#### Other Events
-##### 2024
+### Other Events
+#### 2024
 - Speaker @ ØxＯＰＯＳɆＣ, "The Challenges of Race Conditions in Security Testing"
 
-##### 2023
+#### 2023
 - Instructor @ University of Aveiro, OWASP ASVS Training
 - Speaker @ University of Aveiro, "Guidelines for cybersecurity training in higher education" workshop
 
-##### 2022
+#### 2022
 - Speaker @ University of Aveiro, "Pentesting and Ethical Hacking"
 
 ## Other Links & Certifications
