@@ -7,7 +7,7 @@ header:
   overlay_image: /assets/images/banner.jpg
 ---
 
-## :~$whoami
+## $whoami
 
 Hey there, my name is Bruno Caseiro and I am an offensive security engineer. If you are unfamiliar with the term, think about Defence Against the Dark Arts but for computers. I get to legally ⁽ᵐᵒˢᵗ ᵒᶠ ᵗʰᵉ ᵗᶦᵐᵉ⁾ hack things!
 
