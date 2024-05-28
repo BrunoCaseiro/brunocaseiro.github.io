@@ -35,7 +35,7 @@ Finally, what's with the avatar on the left? Well, many people compare pentestin
 
 [LinkedIn](https://www.linkedin.com/in/brunocaseiro/) - [HackTheBox](https://app.hackthebox.com/profile/420159) - [GitHub](https://github.com/BrunoCaseiro/)
 
-OSWE (Hopefully soon) - [OSCP](https://www.credential.net/97c43b2b-f03b-4610-a8f4-c53ad8ced9cd#gs.2ihuzg) - [OSWP]() - [BSCP](https://portswigger.net/web-security/e/c/0116babe76dd45d3) 
+OSWE (Hopefully soon) - [OSCP](https://www.credential.net/97c43b2b-f03b-4610-a8f4-c53ad8ced9cd#gs.2ihuzg) - [OSWP](https://www.credential.net/1262b384-9801-4ff6-8a75-1ff4866c0092) - [BSCP](https://portswigger.net/web-security/e/c/0116babe76dd45d3) 
 
 
 ## Other interests
