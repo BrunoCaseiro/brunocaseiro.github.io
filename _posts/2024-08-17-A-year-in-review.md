@@ -38,7 +38,7 @@ Anyway, here are some things I learned or that stood out over the last 12 months
 
 [10) Going forward](#Going-forward)
 
-[11) Conclusion](#Conclusion)
+[11) Conclusion](#conclusion)
 
 
 ## Mentality Shift
