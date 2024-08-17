@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "A year in review - lesson learned"
+title:  "A year in review - lessons learned"
 header:
   overlay_image: /assets/images/banner.jpg
   show_overlay_excerpt: false
