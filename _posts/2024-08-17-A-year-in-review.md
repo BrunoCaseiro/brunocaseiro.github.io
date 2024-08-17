@@ -73,7 +73,7 @@ One member of our team is always ready to provide support to other teams or to p
 
 Anyway, teams often reached out to our Slack channel or just pinged whoever they felt like in the security testing team asking who they should contact about X or Y. Or they'd contact the person providing support from the previous sprint, not realizing it had been rotated. There's room for improvement on our side here.
 
-I automated a Slack message through the Jira bot to announce when the support person changes. Each sprint the channel gets an alert like "Bruno Caseiro is available to provide support". Pretty simple at first sight, but it cut one extra step to any team trying to get in touch with us.
+I automated a Slack message through the Jira bot to announce when the support person changes. Each sprint the channel gets an alert like "Bruno Caseiro is available to provide support". Pretty simple at first sight, but it cut out one extra step to any team trying to get in touch with us.
 
 <p align="center"> <img src="https://imgs.xkcd.com/comics/the_general_problem.png"> </p>
 
