@@ -96,7 +96,7 @@ GitHub has a bug bounty program, that's not what I'm talking about here. The sam
 
 Instead of domains, trees and forests, I had enterprises, organizations and repositories configured in many different ways. Just like during a red team assessment you can set some arbitrary goals, this pentest had some rough guidelines and objectives. Some were completed, others weren't. For a few of them, I was halfway there.<sup>jon bon jovi would be proud</sup>
 
-I distinctly remember finding out about GitHub Enterprise's secrets. Organizations can set environment secrets available to "use" by everyone, like your OS's environmental variables. These might contain sensitive information so each accessible secret had to be analyzed on a case by case basis. You can read more about it on this [GitHub documentation page](https://docs.github.com/en/enterprise-cloud@latest/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) 
+I distinctly remember finding out about GitHub Enterprise's secrets. Organizations can set environment secrets available to "use" by everyone, like your OS's environmental variables. These might contain sensitive information so each accessible secret had to be analyzed on a case by case basis. You can read more about it on this [GitHub documentation page](https://docs.github.com/en/enterprise-cloud@latest/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions).
 
 
 ## PCI compliance
