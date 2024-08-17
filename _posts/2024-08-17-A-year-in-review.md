@@ -18,7 +18,7 @@ Anyway, here are some things I learned or that stood out over the last 12 months
 
 
 ## Index
-[1) Mentality Shift](#Mentality-Shift)
+[1) Mentality Shift](#mentality-shift)
 
 [2) Newcomer's guide](#Newcomer's-guide)
 
@@ -38,7 +38,7 @@ Anyway, here are some things I learned or that stood out over the last 12 months
 
 [10) Going forward](#Going-forward)
 
-[11) Conclusion](#conclusion)
+[11) The end](#the-end)
 
 
 ## Mentality Shift
