@@ -69,7 +69,7 @@ Needless to say, this was reviewed by more experienced people to make sure I did
 
 ## Automating Jira-Slack alerts
 
-One member of our team is always ready to provide support to other teams or to put out any fires that might arise. This role rotates every sprint, which is brilliant - it means not everyone has to be paying immediate attention to emails or Slack messages. Some of our task are extremely technical and require bursts of deep concentration, so these types of interruptions can get pretty annoying.
+One member of our team is always ready to provide support to other teams or to put out any fires that might arise. This role rotates every sprint, which is brilliant - it means not everyone has to be paying immediate attention to emails or Slack messages. Some of our tasks are extremely technical and require bursts of deep concentration, so these types of interruptions can get pretty annoying.
 
 Anyway, teams often reached out to our Slack channel or just pinged whoever they felt like in the security testing team asking who they should contact about X or Y. Or they'd contact the person providing support from the previous sprint, not realizing it had been rotated. There's room for improvement on our side here.
 
