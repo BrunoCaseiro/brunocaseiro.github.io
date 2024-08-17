@@ -75,6 +75,8 @@ Anyway, teams often reached out to our Slack channel or just pinged whoever they
 
 I automated a Slack message through the Jira bot to announce when the support person changes. Each sprint the channel gets an alert like "Bruno Caseiro is available to provide support". Pretty simple at first sight, but it cut one extra step to any team trying to get in touch with us.
 
+<p align="center"> <img src="https://imgs.xkcd.com/comics/the_general_problem.png"> </p>
+
 
 ## Updating Active Directory documentation
 
@@ -84,6 +86,8 @@ I've been trying to learn a bit more about Active Directory, even running some a
 ## Race condition and  the birth of this blog
 
 <sup>"oh no, he's' gonna brag about that again!"</sup> No I'm not 😄 Buuuuuuut 🙄 Feel free to read about it [here](https://brunocaseiro.github.io/My-first-race-condition/). 
+
+<p align="center"> <img src="https://qph.cf2.quoracdn.net/main-qimg-7d77f6f06368ff0d2ab29cf598ba5843"> </p>
 
 
 ## Version control system "pentest"
@@ -126,6 +130,8 @@ The attacks taught are extremely complex and digging through the code to find th
 
 The exam was tough, but nothing beats the satisfaction of running a script and seeing that shell pop on its own a few seconds later. The best part is how useful the skills I've gained have been. My code reviewing and scripting skills have improved drastically. I used to feel extremely limited when trying to exploit vulnerabilities that required a bit more complex scripting or automation, but not anymore! 
 
+<p align="center"> <img src="https://imgs.xkcd.com/comics/11th_grade.png"> </p>
+
 
 ## Starting an incident
 
@@ -138,6 +144,8 @@ Anyway, recently I found a vulnerability that required raising an incident. The 
 If you're in pentesting or AppSec, this is a lesson me and you can take advantage of. When writing reports always make sure to start a bit less technical and gradually go deeper into the details. Even the most experienced engineers can struggle understanding a vulnerability report if it jumps straight to the fun stuff without any context about the application or feature.
 
 Bottom line: incidents aren't as stressful if you're breaking things rather than fixing them.
+
+<p align="center"> <img src="https://languagelog.ldc.upenn.edu/myl/software_testing_day_2x.png"> </p>
 
 
 ## Going forward
