@@ -57,7 +57,7 @@ Worried about looking stupid? Trust me, you're not alone. Be the one to ask the 
 
 I felt that this attempt to be more proactive did not go unnoticed and eventually more opportunities and projects started coming my way. I do enjoy working on a wide variety of projects. I don't mean a high number of projects, but projects that are very different from one another. It creates plenty of learning opportunities and not just for purely technical knowledge. Sometimes you even get the chance to meet new people and teams inside the organization. Some of these were my own suggestions, but many came from others, especially my manager. If you're curious and eager to learn, things should start to come your way 🙂 
 
-[^1]:Always try to solve the problem on your own! If you can't and really have to ask: be specific, provide context, explain what you've tried and the respective outcomes. Seniors have bigger responsibilities, so appreciate the time they're taking to help you! Also: https://nohello.net/ 😄)
+[^1]:Always try to solve the problem on your own! If you can't and really have to ask: be specific, provide context, explain what you've tried and the respective outcomes. Seniors have bigger responsibilities, so appreciate the time they're taking to help you! Also, read [no hello](https://nohello.net/). This is NOT an excuse to be rude. You can be polite and direct at the same time 😄)
 
 
 ## Newcomers' guide
