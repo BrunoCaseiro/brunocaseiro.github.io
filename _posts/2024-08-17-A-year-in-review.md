@@ -83,7 +83,7 @@ I automated a Slack message through the Jira bot to announce when the support pe
 I've been trying to learn a bit more about Active Directory, even running some assessments on our domains. I knew some basic concepts from the OSCP and CTFs, but never had the chance to actually conduct a real pentest. I got some pointers and notes from our Red Team and other more senior people and eventually put together a simple and easy to follow guide on assessing our domains. It includes specific tips to our organization, useful links, common commands, tool installation tips and so on. I've still got plenty to learn about AD, but I'm getting there!
 
 
-## Race condition and  the birth of this blog
+## Race condition and the birth of this blog
 
 <sup>"oh no, he's' gonna brag about that again!"</sup> No I'm not 😄 Buuuuuuut 🙄 Feel free to read about it [here](https://brunocaseiro.github.io/My-first-race-condition/). 
 
