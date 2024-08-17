@@ -110,7 +110,7 @@ Not everyone can do these tests, so many times it has to be outsourced. If the c
 
 ## Certifications
 
-Speaking of the OSCP, one of the highlights of this year was the two certifications I obtained - the OSWP and the OSWE. Before diving into the specifics of each one, let me speak in a general sense first. The goal shouldn't be to obtain the certs themselves, but to master the contents taught in the courses. What's the point of having an alphabet soup on your CV if you don't use the skills? Sure, it might you a few extra interviews because... well, ATS see alphabet soup ATS think good[^2]... but you're not getting past the initial rounds if you can't demonstrate that you're comfortable with the topics.
+Speaking of the OSCP, one of the highlights of this year was the two certifications I obtained - the OSWP and the OSWE. Before diving into the specifics of each one, let me speak in a general sense first. The goal shouldn't be to obtain the certs themselves, but to master the contents taught in the courses. What's the point of having an alphabet soup on your CV if you don't use the skills? Sure, it might get you a few extra interviews because... well, ATS see alphabet soup ATS think good[^2]... but you're not getting past the initial rounds if you can't demonstrate that you're comfortable with the topics.
 
 [^2]: Many companies use automation to filter candidates quickly in the early stages. Put yourself in the shoes of a hiring manager of a big company - sorting through thousands of applicants is tough, so don't take it personally.
 
