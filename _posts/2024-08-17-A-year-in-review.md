@@ -117,7 +117,7 @@ Speaking of the OSCP, one of the highlights of this year was the two certificati
 
 ### OSWP - OffSec Wireless Professional
 
-I took this one first after studying for just a few weeks. There is a lot of theory in the materials, it's all pretty interesting but you can argue it's not very relevant in practical terms. It wasn't a hard certification, but it was definitely a lot of fun. One problem many people face is the lack of practicing material. OffSec suggest you set up your own homelab which can get messy. No worries, I got you! (WiFi Challenge Lab)[https://wifichallengelab.com/] - not every challenge is relevant for the OSWP, so look at the course materials and take an educated guess on what challenges from that website you should focus more 🙂
+I took this one first after studying for just a few weeks. There is a lot of theory in the materials, it's all pretty interesting but you can argue it's not very relevant in practical terms. It wasn't a hard certification, but it was definitely a lot of fun. One problem many people face is the lack of practice material. OffSec suggest you set up your own homelab which can get messy. No worries, I got you! [WiFi Challenge Lab](https://wifichallengelab.com/) - not every challenge is relevant for the OSWP, so look at the course materials and take an educated guess on what challenges from that website you should focus more 🙂
 
 Lastly, and this goes for every certification or test you're going for, TAKE NOTES. Seriously, you see this piece of advice everywhere beCAUSE IT ACTUALLY WORKS. Take detailed notes on commands, payloads, and the workflow to exploit each type of WiFi security protocol. Trust me, you got this. It is not a hard certification.
 
