@@ -62,7 +62,7 @@ I felt that this attempt to be more proactive did not go unnoticed and eventuall
 
 ## Newcomers' guide
 
-One of the very first things I did when I joined the company was to start documenting my days from a high-level perspective, eventually this ended up as a full documentation page for new Security Testing Engineers. And it's funny how this works, many questions I had are now super obvious to me and it only makes me think - "why did I even care about that?". This is similar to what happens in school. Sometimes teachers explains thing in a super confusing way because they (unconsciously) assume already know some stuff. Sometimes asking a colleague or a friend for a second explanation makes things so much clearer since you're both in the same "stage of learning".
+One of the very first things I did when I joined the company was to start documenting my days from a high-level perspective, eventually this ended up as a full documentation page for new Security Testing Engineers. And it's funny how this works, many questions I had are now super obvious to me and it only makes me think - "why did I even care about that?". This is similar to what happens in school. Sometimes teachers explain thing in a super confusing way because they (unconsciously) assume already know some stuff. Sometimes asking a colleague or a friend for a second explanation makes things so much clearer since you're both in the same "stage of learning".
 
 Needless to say, this was reviewed by more experienced people to make sure I did not write anything stupid (ha! I now have a stupid blog and you can't stop me!). It's a good idea to share this document with newcomers, get their feedback and let them tweak it after a few weeks.
 
