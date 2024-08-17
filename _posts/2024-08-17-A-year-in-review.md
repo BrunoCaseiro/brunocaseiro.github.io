@@ -20,23 +20,23 @@ Anyway, here are some things I learned or that stood out over the last 12 months
 ## Index
 [1) Mentality Shift](#mentality-shift)
 
-[2) Newcomer's guide](#Newcomer's-guide)
+[2) Newcomer's guide](#newcomers-guide)
 
-[3) Automating Jira-Slack alerts](#Automating-Jira\-Slack-alerts)
+[3) Automating Jira-Slack alerts](#automating-jira-slack-alerts)
 
-[4) Updating Active Directory documentation](#Updating-Active-Directory-documentation)
+[4) Updating Active Directory documentation](#updating-active-directory-documentation)
 
-[5) Race condition and the birth of this blog](#Race-condition-and-the-birth-of-this-blog)
+[5) Race condition and the birth of this blog](#race-condition-and-the-birth-of-this-blog)
 
-[6) Version control system "pentest"](#Version-control-system-"pentest")
+[6) Version control system "pentest"](#version-control-system-pentest)
 
-[7) PCI Compliance](#PCI-Compliance)
+[7) PCI Compliance](#pci-compliance)
 
-[8) Certifications](#Certifications)
+[8) Certifications](#certifications)
 
-[9) Starting an incident](#Starting-an-incident)
+[9) Starting an incident](#starting-an-incident)
 
-[10) Going forward](#Going-forward)
+[10) Going forward](#going-forward)
 
 [11) The end](#the-end)
 
