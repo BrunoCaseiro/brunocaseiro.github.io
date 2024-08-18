@@ -25,6 +25,7 @@
       {% endif %}
     </h2>
     {% include page__meta.html type=include.type %}
+    {{ post.date | date: "%B %d, %Y" }}
   
   </article>
 </div>
