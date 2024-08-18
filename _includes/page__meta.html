@@ -25,7 +25,7 @@
         {% else %}
           {{ words | divided_by: words_per_minute }} {{ site.data.ui-text[site.locale].minute_read | default: "minute read" }}
         {% endif %}
-          <p>{% document.date %}</p>
+          <p>{% date %}</p>
       </span>
     {% endif %}
   </p>
