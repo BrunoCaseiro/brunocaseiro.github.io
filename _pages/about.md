@@ -47,7 +47,7 @@ I have many interests beside security, we are more than what we do for a living.
 
 I'm a native Portuguese speaker and have been exposed to English since I was a kid. Spanish runs in my (part latino) family, so I've dedicated some time to perfect it. I can more or less read and listen to German, my writing and speaking is still kind of bad, but I'm working on it! I'm also familiar with the very basics of French and it's next on my language pipeline.
 
-I currently have a +1500 day Duolingo streak 🔥🦉, but most of my progress comes from reading/listening to native material as well as studying vocabulary with flashcards.
+I currently have a +1600 day Duolingo streak 🔥🦉, but most of my progress comes from reading/listening to native material as well as studying vocabulary with flashcards.
 
 
 ### Sports, Fitness and Health
