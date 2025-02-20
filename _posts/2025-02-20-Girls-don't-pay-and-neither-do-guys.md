@@ -62,7 +62,7 @@ This would work. Now let's say the checks are performed in the inverse order. It
 
 I got over the wallet not displaying problem, and I noticed another request being sent... Again, the "qtd" parameter is being set with the value -1.
 
-<p align="center"> <img src="https://github.com/user-attachments/assets/54c99f83-e5be-4dde-bafc-c9501dd53f53"> </p>
+<p align="center"> <img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/raw/refs/heads/master/_posts/poc.mp4"> </p>
 
 Let's leave it like that for now... The application displays a message - "Ticket bought successfully". But... I still have no tickets. My guess is that the application is trying to give me -1 tickets.
 
@@ -95,4 +95,6 @@ As I mentioned, I'm not a party guy, but I did want to make sure this worked. Le
 Jokes aside, this was reported and fixed pretty quickly. The quantity parameters are now validated on server side and will throw an error if you try to get cute with them, so don't bother trying to smuggle yourself into college parties.
 
 Here's me trying to explain this in video format. I did mix things up a little bit with the logic of the payments so there's a little note halfway through the video. In my defense, that was in one take!
+
+<p align="center">![](poc.mp4)</p>
 
