@@ -58,7 +58,7 @@ What I think is happening here is that the application allows paying with the wa
 
 For example, let's say you check for the following things: 1) Is the wallet's balance > 0€? If not, you can't buy; 2) Is the wallet's balance greater than the cart's cost? If not, you can't buy. If yes, proceed.
 
-This would work. Now let's say the checks are performed in reverse order. It first checks if my wallet's balance (0€) is greater than the cart's balance (-4€). It is, so I proceed without ever checking if my wallet has more than 0€. This probably isn't the logic behind the application, but the problem is that they never check for negative values.
+This would work. Now let's say the checks are performed in reverse order. It first checks if my wallet's balance (0€) is greater than the cart's balance (-4€). It is, so I proceed without ever checking if my wallet has more than 0€. This probably isn't the logic behind the application, but my point is that they never check for negative values.
 
 I got over the problem of the wallet not being displayed, then I noticed another request being sent... Here the "qtd" parameter carries over and is set with the value -1. I did not edit it. 
 
