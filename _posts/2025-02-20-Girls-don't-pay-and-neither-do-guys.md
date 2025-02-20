@@ -95,7 +95,7 @@ As I mentioned, I'm not a party guy, but I did want to make sure this worked. Le
 
 Jokes aside, this was reported and fixed pretty quickly. The quantity parameters are now validated on server side and will throw an error if you try to get cute with them, so don't bother trying to smuggle yourself into college parties.
 
-Here's me trying to explain this in video format. I did mix things up a little bit with the logic of the payments so there's a little note halfway through the video. In my defense, that was in one take!
+Here's me on 1.25x speed trying to explain this in video format. I did mix things up a bit with the logic of the payments so there's a little note halfway through the video. In my defense, that was in one take!
 
 <p align="center"> <video width="50%" controls> <source src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/raw/refs/heads/master/_posts/poc.mp4" type="video/mp4"></video></p>
 
