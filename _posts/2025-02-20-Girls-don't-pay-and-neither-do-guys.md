@@ -97,5 +97,5 @@ Jokes aside, this was reported and fixed pretty quickly. The quantity parameters
 
 Here's me trying to explain this in video format. I did mix things up a little bit with the logic of the payments so there's a little note halfway through the video. In my defense, that was in one take!
 
-<p align="center"> <video width=100% controls> <source src="/_posts/poc.mp4" type="video/mp4"></video></p>
+<p align="center"> <video width="100%" controls> <source src="/_posts/poc.mp4" type="video/mp4"></video></p>
 
