@@ -31,7 +31,7 @@ And the active events list. At the time I took the screenshots, tickets were bei
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/a64c1228-2c62-4bb1-9f5c-3c2201f617dc"> </p>
 
-One more introduction before we just into the fun stuff. If we try to buy a ticket, the "Wallet" option is unavailable since we have 0€. The complete flow isn't shown but there's nothing interesting, just a standard add-to-cart flow.
+One more introduction before we get into the fun stuff. If we try to buy a ticket, the "wallet" option is unavailable since we have 0€. The complete flow isn't shown but there's nothing interesting, just a standard add to cart flow.
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/688ce004-ff75-4ded-b33c-e41e7aade4eb"> </p>
 
@@ -42,25 +42,25 @@ I started messing around with the buying flow and looking at the requests. Initi
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/ac16e4a6-b1ed-4bb6-945f-ae9196b78eef"> </p>
 
-It turns out the price did change, I'm not sure if the number of tickets did too, but either way this is a dead end. I cannot use my Wallet. And I won't touch the other two methods since they're external components, developed by third parties.
+It turns out the price did change, I'm not sure if the number of tickets did too, but either way this is a dead end. I cannot use my wallet. And I won't touch the other two methods since they're external components, developed by third parties.
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/687484dd-5a00-4f3c-a313-0af8928f08c0"> </p>
 
-Okay, let's go for a second attempt. What if I change the "qtd" parameter to a negative number? Surely the application will be ready for this...
+Okay, let's go for round two. What if I change the "qtd" parameter to a negative number? Surely the application will be ready for this...
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/0de9efa7-e3c8-49b0-b20d-a55b607192eb"> </p>
 
-This is where everything gets weird. I can now use my wallet. The total price is -4.00€ (one ticket was priced at 4€). It actually accepted the negative value. And notice how I can pay with the wallet again.
+This is where everything gets weird. The total price is -4.00€ (one ticket was priced at 4€). It actually accepted the negative value. And notice how I can pay with the wallet again.
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/bd06af9f-32be-47d0-bcda-9f13eec69d99"> </p>
 
-What I think is happening here is that the application allows paying with the wallet since WalletBalance > CartPrice. This is probably one of the first few checks because earlier we tried to buy 0 tickets, and the wallet didn't show. This is likely a combination of weak and unordered security checks.
+What I think is happening here is that the application allows paying with the wallet since WalletBalance > CartPrice. The flaw here is likely due to weak and/or bad logic in the security checks.
 
-For example, let's say you check the following things: 1) Is the wallet's balance > 0€? If not, you can't buy; 2) Is the wallet's balance greater than the cart's balance? If not, you can't buy. If yes, proceed.
+For example, let's say you check for the following things: 1) Is the wallet's balance > 0€? If not, you can't buy; 2) Is the wallet's balance greater than the cart's cost? If not, you can't buy. If yes, proceed.
 
-This would work. Now let's say the checks are performed in the inverse order. It first checks if my wallet's balance (0€) is greater than the cart's balance (-4€). It is, so I proceed without ever checking if my wallet has more than 0€. I can't say for sure this is the logic behind the application, but it must be something like this.
+This would work. Now let's say the checks are performed in reverse order. It first checks if my wallet's balance (0€) is greater than the cart's balance (-4€). It is, so I proceed without ever checking if my wallet has more than 0€. This probably isn't the logic behind the application, but the problem is that they never check for negative values.
 
-I got over the wallet not displaying problem, and I noticed another request being sent... Again, the "qtd" parameter is being set with the value -1.
+I got over the problem of the wallet not being displayed, then I noticed another request being sent... Here the "qtd" parameter carries over and is set with the value -1. I did not edit it. 
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/154702aa-7190-4e59-ad85-ab80918c0a81"> </p>
 
@@ -74,9 +74,9 @@ Okay, cool. We haven't really exploited anything, but we're figuring how things 
 
 ## Okay sorry, time for the actual _fun stuff_
 
-Let's do the exact same flow - try to buy a ticket, change the "qtd" parameter on that first request so the wallet is available to us (0€ > -4€ so it let's us use the wallet) and intercept that second request.
+Let's do the exact same flow - try to buy a ticket, change the "qtd" parameter on that first request so the wallet is available to us (0€ > -4€ so it lets us use the wallet) and intercept that second request.
 
-It turns out this request control the number of tickets we will be getting. So we can just change it to 1.
+It turns out this request controls the number of tickets we will be getting. So we can just change it to 1.
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/8f7d86ab-7ce1-4ee2-bad0-46aa5c29ed40"> </p>
 
@@ -84,7 +84,7 @@ In sum, we paid the price of -1 tickets for 1 ticket. Here it is, in our tickets
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/badd63ae-39c9-4a9b-91aa-044ffe1aede0"> </p>
 
-If I press the ticket, it shows me the QR code scanned at the entrance.
+If I press the ticket, it shows me the QR code that will be scanned at the entrance.
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/2d36d4ff-76e9-4f56-bd3a-34e938e2f58f"> </p>
 
@@ -95,7 +95,7 @@ As I mentioned, I'm not a party guy, but I did want to make sure this worked. Le
 
 Jokes aside, this was reported and fixed pretty quickly. The quantity parameters are now validated on server side and will throw an error if you try to get cute with them, so don't bother trying to smuggle yourself into college parties.
 
-Here's me on 1.25x speed trying to explain this in video format. I did mix things up a bit with the logic of the payments so there's a little note halfway through the video. In my defense, that was in one take!
+Here's me on 1.25x speed trying to explain this in video format. I did mix things up a bit with the logic of the payments so there's a little correction halfway through the video. In my defense, that was take #1!
 
 <p align="center"> <video width="50%" controls> <source src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/raw/refs/heads/master/_posts/poc.mp4" type="video/mp4"></video></p>
 
