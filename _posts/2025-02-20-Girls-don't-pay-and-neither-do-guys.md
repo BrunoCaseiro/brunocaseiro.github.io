@@ -60,7 +60,7 @@ For example, let's say you check for the following things: 1) Is the wallet's ba
 
 This would work. Now let's say the checks are performed in reverse order. It first checks if my wallet's balance (0€) is greater than the cart's balance (-4€). It is, so I proceed without ever checking if my wallet has more than 0€. This probably isn't the logic behind the application, but my point is that they never check for negative values.
 
-I got over the problem of the wallet not being displayed, then I noticed another request being sent... Here the "qtd" parameter carries over and is set with the value -1. I did not edit it. 
+After getting over the problem of the wallet not being displayed, I noticed another request being sent... On this request the "qtd" parameter is carried over and set with the value -1. I did not edit it. 
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/154702aa-7190-4e59-ad85-ab80918c0a81"> </p>
 
