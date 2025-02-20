@@ -62,7 +62,8 @@ This would work. Now let's say the checks are performed in the inverse order. It
 
 I got over the wallet not displaying problem, and I noticed another request being sent... Again, the "qtd" parameter is being set with the value -1.
 
-<p align="center"> <img src="https://github.com/BrunoCaseiro/brunocaseiro.github.io/raw/refs/heads/master/_posts/poc.mp4"> </p>
+<p align="center"> <img src="https://github.com/user-attachments/assets/154702aa-7190-4e59-ad85-ab80918c0a81"> </p>
+
 
 Let's leave it like that for now... The application displays a message - "Ticket bought successfully". But... I still have no tickets. My guess is that the application is trying to give me -1 tickets.
 
@@ -96,5 +97,5 @@ Jokes aside, this was reported and fixed pretty quickly. The quantity parameters
 
 Here's me trying to explain this in video format. I did mix things up a little bit with the logic of the payments so there's a little note halfway through the video. In my defense, that was in one take!
 
-<p align="center"> <video width=100% controls> <source src="poc.mp4" type="video/mp4"></video></p>
+<p align="center"> <video width=100% controls> <source src="/_posts/poc.mp4" type="video/mp4"></video></p>
 
