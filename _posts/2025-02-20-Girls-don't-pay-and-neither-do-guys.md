@@ -10,9 +10,9 @@ header:
 
 I'm not a party guy, but I think we've all wondered what's up with girls paying less than guys... but that's a conversation for another day, because that won't be a problem anymore.
 
-Everyone pays the same now. Nothing!
+Now, everyone pays the same: nothing!
 
-This will be a short post about a pretty cool vulnerability I found on a web application that sells tickets for college parties in Aveiro. Before you ask, there is no vulnerability disclosure program but I'm a professor there, so tehnically I already work for the University. 
+This will be a short post about a pretty cool vulnerability I found on a web application that sells tickets for college parties in Aveiro. Before you ask, there is no vulnerability disclosure program but I'm a professor there, so technically I already work for the University. 
 
 It's not an extremely technical vulnerability, but it was one of those simple but exciting "a-ha!" moments. It's perfect to show to students and newbies in cybersecurity since I don't think it's very hard to understand, you just have to be extra creative. That comes with practice and experience.
 
@@ -56,9 +56,9 @@ This is where everything gets weird. I can now use my wallet. The total price is
 
 What I think is happening here is that the application allows paying with the wallet since WalletBalance > CartPrice. This is probably one of the first few checks because earlier we tried to buy 0 tickets, and the wallet didn't show. This is likely a combination of weak and unordered security checks.
 
-For example, let's say you check the following things: 1) Is the wallet's balance > 0€? If not, you can't buy; 2) Is the wallet's balance greated than the cart's balance? If not, you can't buy. If yes, proceed.
+For example, let's say you check the following things: 1) Is the wallet's balance > 0€? If not, you can't buy; 2) Is the wallet's balance greater than the cart's balance? If not, you can't buy. If yes, proceed.
 
-This would work. Now let's say the checks are performed in the inverse order. It first checks if my wallet's balance (0€) is greater than the cart's balance (-4€). It is, so I proceed without ever checking if my wallet has more than 0€. I can say for sure this is the logic behind the application, but it must be something like this.
+This would work. Now let's say the checks are performed in the inverse order. It first checks if my wallet's balance (0€) is greater than the cart's balance (-4€). It is, so I proceed without ever checking if my wallet has more than 0€. I can't say for sure this is the logic behind the application, but it must be something like this.
 
 I got over the wallet not displaying problem, and I noticed another request being sent... Again, the "qtd" parameter is being set with the value -1.
 
