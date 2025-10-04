@@ -9,7 +9,7 @@ header:
 
 ## $whoami
 
-Hey there, my name is Bruno Caseiro and I am an offensive security engineer. If you are unfamiliar with the term, think about Defence Against the Dark Arts but for computers. I get to legally ⁽ᵐᵒˢᵗ ᵒᶠ ᵗʰᵉ ᵗᶦᵐᵉ⁾ hack things! @fbi just kidding 
+Hey there, my name is Bruno Caseiro and I am a security engineer. If you are unfamiliar with the term, think about Defence Against the Dark Arts but for computers. I get to legally ⁽ᵐᵒˢᵗ ᵒᶠ ᵗʰᵉ ᵗᶦᵐᵉ⁾ hack things! @fbi just kidding 
 
 
 ## About this blog
@@ -45,14 +45,14 @@ I have many interests beside security, we are more than what we do for a living.
 
 ### Learning languages
 
-I'm a native Portuguese speaker and have been exposed to English since I was a kid. Spanish runs in my (part latino) family, so I've dedicated some time to perfect it. I can more or less read and listen to German, my writing and speaking is still kind of bad, but I'm working on it! I'm also familiar with the very basics of French and it's next on my language pipeline.
+I'm a native Portuguese speaker and have been exposed to English since I was a kid. Spanish runs in my (part latino) family, so I've dedicated some time to perfect it. I can understand German, my writing and speaking is still kind of bad, but I'm working on it! I'm also familiar with the very basics of French and Italian and they're next on my language pipeline.
 
-I currently have a +1600 day Duolingo streak 🔥🦉, but most of my progress comes from reading/listening to native material as well as studying vocabulary with flashcards.
+I currently have a +1800 day Duolingo streak 🔥🦉, but most of my progress comes from reading/listening to native material as well as studying vocabulary with flashcards.
 
 
 ### Sports, Fitness and Health
 
-I have played basketball ever since I was a kid. I also do calisthenics, which is basically strength training without too much equipment. Think pull ups, dips, push ups and crazy variations of those, sometimes with weights attached to myself.
+I played basketball for many years, so naturally I love sports even though I don't do a good job of following them. I go to the gym a lot but I used to do calisthenics only. I still do, but to a lesser degree. It's like strength training without too much equipment, think pull ups and dips, usually with heavy weights attached to myself.
 
 Besides that, I stick to a very healthy and active lifestyle. I do have a cheat day ~~twice per hour~~ occasionally, but most of the time you'll see me drinking water and eating clean foods.
 
@@ -66,4 +66,4 @@ Besides music, I love podcasts. My favorite is Darknet Diaries, hands down! I al
 
 ### Other boring stuff
 
-You will find this sentence in every blog in the world. I like cars and F1, going out, watching TV shows, going to the movies, reading (I like my Kindle more than my Google Pixel 🤓), traveling, etc... But I might want to add a different twist: traveling alone. It's super liberating and it feels like bringing out the true personality that's inside of you. You should try it!
+You will find this sentence in every blog in the world. I like cars and F1, going out, watching TV shows, going to the movies, reading (I like my Kindle more than my Google Pixel 🤓), traveling, etc... But allow me to add a different twist: traveling alone. It's super liberating and it feels like bringing out the true personality that's inside of you. Go ahead and try it!
