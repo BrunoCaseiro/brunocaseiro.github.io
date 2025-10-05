@@ -10,13 +10,13 @@ header:
 
 
 
-## Pentesting cloud environments
+# Pentesting cloud environments
 
 It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, as well as any notes I take on theoretical material. This is more or less the process I take when learning a new topic, but this time I'll be making it public. I'll be focusing on the cloud provider AWS.
 
 I'll update this page continuously and share it when I'm satisfied with it so it can be useful to someone out there. At the moment this post is still in development and I have not gone through all of this material, I may add or remove stuff in the future and cannot vouch for their quality yet.
 
-### The plan
+## The plan
 
 * Introductory material
   * <a href="https://www.hackthebox.com/blog/intro-cloud-pentesting">Introduction to Cloud Pentesting</a>
@@ -46,6 +46,7 @@ I'll update this page continuously and share it when I'm satisfied with it so it
 
 <br>
 
+# Introductory material
 ## Introduction to Cloud Pentesting
 * The most common cloud security problems are excessive permissions and several kinds of misconfigurations such as ignoring default settings, exposing sensitive data or simply misunderstanding how things work
 * A major problem is publicly exposing S3 buckets, there are "search engines" for publicly accessible data in the cloud such as <a href="https://buckets.grayhatwarfare.com/">GrayHat Warfare</a>
@@ -113,18 +114,18 @@ Also **enumerate** and **fingerprint** the cloud infrastructure for used compone
 
 
 
+# CTFs and Hands-on material
+## flaws.cloud
 
-## CTFs and hands-on material
+## flaws2.cloud
 
-### flaws.cloud
+## pwnedlabs.io
 
-### pwnedlabs.io
+## HTB Fortress: AWS
 
-### HTB Fortress: AWS
+## CloudGoat 2.0
 
-### CloudGoat 2.0
-
-### AWSGoat
+## AWSGoat
   
 
 
