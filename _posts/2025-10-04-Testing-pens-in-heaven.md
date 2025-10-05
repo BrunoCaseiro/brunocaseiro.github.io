@@ -22,16 +22,17 @@ I'll update this page continuously and share it when I'm satisfied with it so it
   * <a href="https://www.hackthebox.com/blog/intro-cloud-pentesting">Introduction to Cloud Pentesting</a>
   * <a href="https://www.hackthebox.com/blog/aws-pentesting-guide">AWS penetration testing</a>
 
-* Usefull cheatsheets:
-  * <a href="https://github.com/kh4sh3i/cloud-penetration-testing">kh4sh3i's Cloud pentesting cheatsheet</a>
-  * <a href="https://cloud.hacktricks.wiki/en/index.html">HackTricks Cloud</a>
-
 * CTFs and hands-on material
   * <a href="http://flaws.cloud/">flaws.cloud</a>
   * <a href="https://pwnedlabs.io/">pwnedlabs.io</a>
   * <a href="https://app.hackthebox.com/fortresses/7">HTB Fortress: AWS</a>
   * <a href="https://github.com/RhinoSecurityLabs/cloudgoat"> CloudGoat 2.0</a>
   * <a href="https://github.com/ine-labs/AWSGoat"> AWSGoat </a>
+
+* Useful cheatsheets:
+  * <a href="https://github.com/kh4sh3i/cloud-penetration-testing">kh4sh3i's Cloud pentesting cheatsheet</a>
+  * <a href="https://cloud.hacktricks.wiki/en/index.html">HackTricks Cloud</a>
+
 
   ## Introductory material
 
