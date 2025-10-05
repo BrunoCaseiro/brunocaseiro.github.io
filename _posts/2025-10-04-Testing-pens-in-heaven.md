@@ -60,7 +60,7 @@ I'll update this page continuously and share it when I'm satisfied with it so it
 <br>
 
 * **Compute Instance Metadata** is a cloud service which provides administrative endpoints, it's usually bound to the internal IP `169.254.169.254`
-* **IMDSv2** will require token authentication to call these endpoints, but not the default IMDSv1
+* **IMDSv2** will require token authentication to call these endpoints, but not the default **IMDSv1**
 * Especially useful when exploiting an SSRF vulnerability, such as `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/`, this will reveal metadata values
 
 <p align="center">
