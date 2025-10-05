@@ -63,7 +63,7 @@ I'll update this page continuously and share it when I'm satisfied with it so it
   <img src="https://github.com/user-attachments/assets/7c4bee36-fbac-4cf5-88c6-a3c9843dab56" />
 </p>
 
-* This reveals the IAM role attached to the EC2 instance is `security-credentials`. Fetch them with `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/iam/security-credentials/support`, which reveals the `AccessKeyId`, `SecretAccessKey` and an AWS STS token.
+* Fetch the credentials attached to the EC2 instance with `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/iam/security-credentials/support`, which reveals the `AccessKeyId`, `SecretAccessKey` and an AWS STS token.
 <p align="center">
   <img src="https://github.com/user-attachments/assets/c0baf073-60af-44e6-b13c-a4b05f469e3d" />
 </p>
@@ -78,6 +78,7 @@ I'll update this page continuously and share it when I'm satisfied with it so it
 * Privilege escalation within a cloud service can be useful, not just in the cloud environment as a whole
 
 ### AWS penetration testing
+
 
 
 ## CTFs and hands-on material
