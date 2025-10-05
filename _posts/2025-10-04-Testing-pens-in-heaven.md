@@ -33,6 +33,7 @@ I'll update this page continuously and share it when I'm satisfied with it so it
   * <a href="https://github.com/kh4sh3i/cloud-penetration-testing">kh4sh3i's Cloud pentesting cheatsheet</a>
   * <a href="https://cloud.hacktricks.wiki/en/index.html">HackTricks Cloud</a>
 
+<br>
 
 ## Introductory material
 
