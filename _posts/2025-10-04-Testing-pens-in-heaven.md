@@ -46,9 +46,7 @@ I'll update this page continuously and share it when I'm satisfied with it so it
 
 <br>
 
-## Introductory material
-
-### Introduction to Cloud Pentesting
+## Introduction to Cloud Pentesting
 * The most common cloud security problems are excessive permissions and several kinds of misconfigurations such as ignoring default settings, exposing sensitive data or simply misunderstanding how things work
 * A major problem is publicly exposing S3 buckets, there are "search engines" for publicly accessible data in the cloud such as <a href="https://buckets.grayhatwarfare.com/">GrayHat Warfare</a>
 
@@ -88,7 +86,7 @@ I'll update this page continuously and share it when I'm satisfied with it so it
 * **S3 buckets** and **Azure/GCP storage buckets** are low hanging fruit but can contain SSH keys, passwords or other sensitive information that might help infiltrate the target (similar to an FTP server if you will)
 * Privilege escalation within a cloud service can be useful, not just in the cloud environment as a whole
 
-### AWS penetration testing
+## AWS penetration testing
 Similar to other types of penetration testing, the scoping process should include questions such as
 * How many non-standard AWS IAM policies exist?
 * Which services are used?
