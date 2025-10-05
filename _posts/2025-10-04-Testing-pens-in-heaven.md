@@ -88,13 +88,11 @@ I'll update this page continuously and share it when I'm satisfied with it so it
 * Privilege escalation within a cloud service can be useful, not just in the cloud environment as a whole
 
 ## AWS penetration testing
-Similar to other types of penetration testing, the scoping process should include questions such as
+Similar to other types of penetration testing, the scoping process should include questions such as:
 * How many non-standard AWS IAM policies exist?
 * Which services are used?
 * How many IAM policies are assigned?
 * How many accounts exist?
-
-<br>
 
 Keep the **Shared Responsibility Model** in mind: security of the cloud is AWS's responsiblity, security in the cloud is the customer's responsibility
 
@@ -113,6 +111,7 @@ Also **enumerate** and **fingerprint** the cloud infrastructure for used compone
 
 
 
+<br>
 
 # CTFs and Hands-on material
 ## flaws.cloud
