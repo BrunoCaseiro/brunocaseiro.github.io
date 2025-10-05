@@ -70,9 +70,7 @@ I'll update this page continuously and share it when I'm satisfied with it so it
 
 * Use `aws configure` to use these credentials, which will save them to `~/.aws/credentials`
 * For the session token, use `aws configure set aws_session_token <token>`
-* Check current identity and privileges with, respectively
-  * `aws sts get-caller-identity`  
-  * `aws iam list-attached-user-policies --user-name support`
+* Check current identity and privileges, respectively, with `aws sts get-caller-identity` and `aws iam list-attached-user-policies --user-name support`
 
 <br>
 
