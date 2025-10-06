@@ -32,6 +32,7 @@ I'll update this page continuously and share it when I'm satisfied with it so it
 
 * Cheatsheets and references
   * <a href="https://docs.aws.amazon.com/cli/latest/reference/#cli-aws">AWS CLI Documentation</a>
+  * <a href="https://hackingthe.cloud/">Hacking The Cloud</a>
   * <a href="https://cloud.hacktricks.wiki/en/index.html">HackTricks Cloud</a>
   * <a href="https://github.com/kh4sh3i/cloud-penetration-testing">kh4sh3i's Cloud pentesting cheatsheet</a>
   * <a href="https://github.com/carnal0wnage/weirdAAL">WeirdAAAL: AWS Attack Library</a>
