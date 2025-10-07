@@ -31,6 +31,8 @@ This is more or less the usual process I take whenever I learn a new topic from 
   * <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a>
   * <a href="https://github.com/ine-labs/AWSGoat"> AWSGoat</a>
 
+## Other links
+
 * Cheatsheets and references
   * <a href="https://docs.aws.amazon.com/cli/latest/reference/#cli-aws">AWS CLI Documentation</a>
   * <a href="https://hackingthe.cloud/">Hacking The Cloud</a>
