@@ -272,7 +272,7 @@ Note the **`VolumeID`** to create a snapshot of it later
 When creating a new instance in the same region, the snapshot can be found by searching by the **`OwnerID`**
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/ac941322-2ecb-4fe4-a21f-5597ad412f59" width="60%">
+  <img src="https://github.com/user-attachments/assets/ac941322-2ecb-4fe4-a21f-5597ad412f59" width="40%">
 </p>
 
 
