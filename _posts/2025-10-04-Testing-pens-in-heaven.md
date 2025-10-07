@@ -51,7 +51,7 @@ This is more or less the usual process I take whenever I learn a new topic from 
 <br>
 
 # Introductory material
-## Introduction to Cloud Pentesting
+## Introduction to cloud pentesting
 * The most common cloud security problems are excessive permissions and several kinds of misconfigurations such as ignoring default settings, exposing sensitive data or simply misunderstanding how things work
 * A major problem is publicly exposing S3 buckets, there are "search engines" for publicly accessible data in the cloud such as <a href="https://buckets.grayhatwarfare.com/">GrayHat Warfare</a>
 
@@ -313,7 +313,7 @@ WjGvoMRN0a/mxpqX1WyPDEuwNoT547VnXNo2fKsZjsvqmjMGg5wFh4ERhFczb6gg
 -----END RSA PRIVATE KEY-----
 ```
 
-# CTFs and Hands-on material
+# CTFs and hands-on material
 ## flaws.cloud
 
 ## flaws2.cloud
