@@ -404,7 +404,7 @@ Address: 52.92.164.11
 11.164.92.52.in-addr.arpa       name = s3-website-us-west-2.amazonaws.com.
 ```
 
-But anonymous access no longer works. This will require setting up an AWS account
+But anonymous access doesn't work like before. This will require setting up an AWS account
 
 <TBC>
 
