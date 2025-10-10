@@ -639,19 +639,49 @@ I can now create a volume in my own account from the public snapshot. Note how I
 
 I won't add the screenshots here, but the next step is to create an EC2 instance and attach this volume to it. You can create an instance by browsing to EC2 > Launch Instance
 
+And you can attach the volume by browsing to EC2 > Volumes > Actions > Attach Volume
 
+NOTE: I'm using a shared account and don't have permissions on us-west-2a, so I had to copy the public snapshot to the region I can work on (us-east-1), create the volume again, and  proceed from there
 
----- next step is to attach the volume to the new instance in my own account, mount it, launch the instance an enumerate it from there ---------
+SSH into your EC2 instance, check available blocks and mount the target volume
+```
+[bruno@ip-172-31-47-188 ~]$ lsblk
+NAME          MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
+nvme0n1       259:0    0   8G  0 disk 
+├─nvme0n1p1   259:1    0   8G  0 part /
+├─nvme0n1p127 259:2    0   1M  0 part 
+└─nvme0n1p128 259:3    0  10M  0 part /boot/efi
+nvme1n1       259:4    0   8G  0 disk 
+└─nvme1n1p1   259:5    0   8G  0 part 
+[bruno@ip-172-31-47-188 ~]$ sudo mount /dev/nvme1n1p1 /mnt
+[sudo] password for bruno:
+[bruno@ip-172-31-47-188 ~]$
+```
 
+After some digging around, just like during local privilege escalation, credentials were found
+```
+[bruno@ip-172-31-47-188 ubuntu]$ pwd
+/mnt/home/ubuntu
+[bruno@ip-172-31-47-188 ubuntu]$ cat setupNginx.sh 
+htpasswd -b /etc/nginx/.htpasswd flaws nCP8xigdjpjyiXgJ7nJu7rw5Ro68iE8M
+```
 
+The initial link redirected to a login page, so these credentials will work there!
 
-
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/63c9c9ba-cba0-4710-89c9-988b9d2e3f82" />
+</p>
 
 <br>
 
 ### Level 5
-
+```
+This EC2 has a simple HTTP only proxy on it. Here are some examples of it's usage:
+http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/flaws.cloud/
+http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/summitroute.com/blog/feed.xml
+http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/neverssl.com/
+See if you can use this proxy to figure out how to list the contents of the level6 bucket at level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud that has a hidden directory in it.
+```
 
 
 <br>
