@@ -446,6 +446,7 @@ Level 3 is at <a href="http://level3-9afd3927f195e10225021a578e6f78df.flaws.clou
 <br>
 
 ### Level 3
+
 ```
 The next level is fairly similar, with a slight twist. Time to find your first AWS key! I bet you'll find something that will let you list what other buckets are.
 ```
@@ -557,6 +558,7 @@ Obviously hacker-me immediately tried browsing to levels 5 and 6, but that won't
 <br>
 
 ### Level 4
+
 ```
 For the next level, you need to get access to the web page running on an EC2 at 4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud
 It'll be useful to know that a snapshot was made of that EC2 shortly after nginx was setup on it.
