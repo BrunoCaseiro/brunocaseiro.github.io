@@ -6,7 +6,7 @@ header:
   show_overlay_excerpt: false
 ---
 
-<b><i>bruno from the future, don't forget to add an index here when you're done</i></b>
+<b><i>bruno from the future, don't forget to add an index, spellcheck and proof read, and maybe rearrange the section order</i></b>
 
 
 
@@ -27,8 +27,8 @@ For a slightly more readable version, check this post out here
 
 * CTFs and hands-on material
   * <a href="http://flaws.cloud/">flaws.cloud</a>
-  * <a href="http://flaws2.cloud/">flaws2.cloud</a>(attacker path)
-  * <a href="https://pwnedlabs.io/">pwnedlabs.io</a>
+  * <a href="http://flaws2.cloud/">flaws2.cloud</a> (attacker path)
+  * <a href="https://pwnedlabs.io/">pwnedlabs.io</a> (paid, skipped)
   * <a href="https://app.hackthebox.com/fortresses/7">HTB Fortress: AWS</a>
   * <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a>
   * <a href="https://github.com/ine-labs/AWSGoat"> AWSGoat</a>
@@ -695,6 +695,8 @@ See if you can use this proxy to figure out how to list the contents of the leve
 ## flaws2.cloud (attacker path)
 
 ## pwnedlabs.io
+
+A lot of people recommended this one to me, but it is not a free resource. I decided to keep it anyway since it seems to have a really good reputation.
 
 ## HTB Fortress: AWS
 
