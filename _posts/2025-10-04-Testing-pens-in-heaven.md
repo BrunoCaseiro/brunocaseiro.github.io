@@ -441,8 +441,6 @@ Anyway, after setting up the credentials, the same command will work since it au
 Level 3 is at <a href="http://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud">http://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud</a>
 ```
 
-<TBC>
-
 <br>
 
 ### Level 3
