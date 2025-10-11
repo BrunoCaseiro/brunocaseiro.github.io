@@ -709,7 +709,7 @@ Add these credentials to `~/.aws/credentials` and confirm they work!
     "Arn": "arn:aws:sts::975426262029:assumed-role/flaws/i-05bef8a081f307783"
 }
 ```
-And this must be the hidden directory
+And this must be the hidden directory we have to browse to
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws --profile flaws s3 ls s3://level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud/ 
@@ -739,7 +739,7 @@ Secret: S2IpymMBlViDlqcAnFuZfkVjXrYxZYhP+dZ4ps+u
 
 ## pwnedlabs.io
 
-A lot of people recommended this one to me, but it is not a free resource. I decided to keep it anyway since it seems to have a really good reputation.
+A lot of people recommended this one to me, but it is not a free resource, at least beyond the very basics. I decided to keep it anyway since it seems to have a really good reputation.
 
 ## HTB Fortress: AWS
 
