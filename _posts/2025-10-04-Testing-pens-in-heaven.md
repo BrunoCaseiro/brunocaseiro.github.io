@@ -699,22 +699,38 @@ flaws
   "Expiration" : "2025-10-11T02:23:14Z"
 }   
 ```
-Using these credentials to create a new profile... 
+Add these credentials to `~/.aws/credentials` and confirm they work!
 ```
-┌──(kali㉿kali)-[~]
-└─$ aws configure --profile flaws                                                                                
-AWS Access Key ID [None]: ASIA6GG7PSQGRWLZRMOX
-AWS Secret Access Key [None]: fxPUS3him5NGOskB7dvv8QfeKQGIAarcG6+k2MER
-Default region name [None]: 
-Default output format [None]: 
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws --profile flaws sts get-caller-identity
+{
+    "UserId": "AROAI3DXO3QJ4JAWIIQ5S:i-05bef8a081f307783",
+    "Account": "975426262029",
+    "Arn": "arn:aws:sts::975426262029:assumed-role/flaws/i-05bef8a081f307783"
+}
 ```
---- next step is to enumerate buckets on the level 6 s3 url ----
-
+And this must be the hidden directory
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws --profile flaws s3 ls s3://level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud/ 
+                           PRE ddcc78ff/
+2017-02-26 21:11:07        871 index.html
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws --profile flaws s3 ls s3://level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud/ddcc78ff/
+2017-03-02 23:36:23       2463 hint1.html
+2017-03-02 23:36:23       2080 hint2.html
+2020-05-22 14:42:20       2924 index.html
+```
 
 <br>
 
 ### Level 6
-
+```
+For this final challenge, you're getting a user access key that has the SecurityAudit policy attached to it. See what else it can do and what else you might find in this AWS account.
+Access key ID: AKIAJFQ6E7BY57Q3OBGA
+Secret: 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
+```
 
 
 <br>
