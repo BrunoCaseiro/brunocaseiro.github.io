@@ -35,7 +35,7 @@ Finally, what's with the avatar on the left? Well, many people compare pentestin
 
 [LinkedIn](https://www.linkedin.com/in/brunocaseiro/) - [HackTheBox](https://app.hackthebox.com/profile/420159) - [GitHub](https://github.com/BrunoCaseiro/)
 
-[OSWE](https://www.credential.net/e02f57dd-fdcd-447b-9b81-469ea8986a31) - [OSCP](https://www.credential.net/97c43b2b-f03b-4610-a8f4-c53ad8ced9cd#gs.2ihuzg) - [OSWP](https://www.credential.net/1262b384-9801-4ff6-8a75-1ff4866c0092) - [BSCP](https://portswigger.net/web-security/e/c/0116babe76dd45d3) 
+[OSWE](https://www.credential.net/e02f57dd-fdcd-447b-9b81-469ea8986a31) - [OSEP](https://credentials.offsec.com/c69afa77-96ec-4148-9fa5-4bbceb2e2d48#acc.0BTHa8MX) - [OSCP](https://www.credential.net/97c43b2b-f03b-4610-a8f4-c53ad8ced9cd#gs.2ihuzg) - [OSWP](https://www.credential.net/1262b384-9801-4ff6-8a75-1ff4866c0092) - [BSCP](https://portswigger.net/web-security/e/c/0116babe76dd45d3) - AWS Certified Security - Specialty 👀
 
 
 ## Other interests
