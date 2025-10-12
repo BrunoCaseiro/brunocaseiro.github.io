@@ -828,8 +828,12 @@ tbd
 
 Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in-depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! I'll still leave some notes for myself in this section.
 
+tbd
+
 <br>
 
 ## HTB Fortress: AWS
 
-Due to Hack The Box's policy I cannot give you a walkthrough for this, ... tbd
+Due to Hack The Box's policy I cannot give you a walkthrough for this, ...
+
+tbd
