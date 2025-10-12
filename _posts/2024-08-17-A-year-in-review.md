@@ -124,7 +124,7 @@ Lastly, and this goes for every certification or test you're going for, TAKE NOT
 
 ### OSWE - OffSec Web Expert
 
-The same cannot be said about the OSWE 🙃. It's an advanced, white-box pentesting certification, and you can clearly tell if you're going through the material. My approach was to read the PDF twice and also watch the videos twice. Take advantage of the practice machines provided by OffSec, they are there for a reason. AND TAKE LOST OF NOTES.
+The same cannot be said about the OSWE 🙃. It's an advanced, white-box pentesting certification, and you can clearly tell if you're going through the material. My approach was to read the PDF twice and also watch the videos twice. Take advantage of the practice machines provided by OffSec, they are there for a reason. AND TAKE LOTS OF NOTES.
 
 The attacks taught are extremely complex and digging through the code to find the needle in the haystack can be a real pain. In the end, you'll need to automate the whole exploitation process - from the initial foothold in the web application to a fully interactive reverse shell. During the exam you might feel stuck for hours because you don't make evident progress. Unlike the OSCP, where you're constantly taking small steps towards the flag, in the OSWE you might take hours just familiarizing yourself with the code. This definitely will not feel like progress, but it is.
 
