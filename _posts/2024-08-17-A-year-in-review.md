@@ -155,7 +155,7 @@ This one is easy, I want continue in the Application Security field, broadly spe
 
 ## The end
 
-"So it took you 12 months to do 9 things?" - Yes. Kidding, this isn't' a diary, there's a ton of daily AppSec work in between. There's another thing that's kinda missing from this list. Another "unusual" project is cooking and I'm excited about it! 
+"So it took you 12 months to do 9 things?" - Yes. Kidding, this isn't a diary, there's a ton of daily AppSec work in between. There's another thing that's kinda missing from this list. Another "unusual" project is cooking and I'm excited about it! 
 
 And the blog lives on! This one's a bit less technical than the first two posts and feels more like burying a time capsule. Either way I'm hoping you can find a few knowledge nuggets in here. If you have any comments or disagree with anything I've said, feel free to let me know!
  
