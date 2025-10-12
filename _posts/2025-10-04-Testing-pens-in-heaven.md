@@ -28,7 +28,7 @@ For a slightly more readable version, check this post out here
 * CTFs and hands-on material
   * <a href="http://flaws.cloud/">flaws.cloud</a>
   * <a href="http://flaws2.cloud/">flaws2.cloud</a> (attacker path)
-  * <a href="https://pwnedlabs.io/">pwnedlabs.io</a> (paid, skipped)
+  * <a href="https://pwnedlabs.io/">pwnedlabs.io</a>
   * <a href="https://app.hackthebox.com/fortresses/7">HTB Fortress: AWS</a>
   * <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a>
   * <a href="https://github.com/ine-labs/AWSGoat"> AWSGoat</a>
