@@ -812,7 +812,7 @@ So the full URL is going to be `https://s33ppypa75.execute-api.us-west-2.amazona
 ```
 
 <p align="center">
-  <img width="70%" src="https://github.com/user-attachments/assets/5114b201-b2d8-46b7-a90c-380cc9508e90"/>
+  <img width="50%" src="https://github.com/user-attachments/assets/5114b201-b2d8-46b7-a90c-380cc9508e90" >
 </p>
 
 
