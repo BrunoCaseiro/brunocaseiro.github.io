@@ -16,7 +16,7 @@ It seems there aren't many resources on cloud pentesting, so I decided to take m
 
 This is more or less the usual process I take whenever I learn a new topic from online resources, only this time I'll be making it public. I'll be focusing on the cloud provider AWS.
 
-For a slightly more readable version, check this post out here
+For a slightly more readable version, check this post out <a href="https://github.com/BrunoCaseiro/brunocaseiro.github.io/blob/master/_posts/2025-10-04-Testing-pens-in-heaven.md">here</a>
 
 
 ## The plan
@@ -31,7 +31,6 @@ For a slightly more readable version, check this post out here
   * <a href="https://pwnedlabs.io/">pwnedlabs.io</a>
   * <a href="https://app.hackthebox.com/fortresses/7">HTB Fortress: AWS</a>
   * <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a>
-  * <a href="https://github.com/ine-labs/AWSGoat"> AWSGoat</a>
 
 ## Other links
 
@@ -831,8 +830,6 @@ This was pretty fun, barely any setup needed and great for someone starting out.
 ## HTB Fortress: AWS
 
 ## CloudGoat 2.0
-
-## AWSGoat
   
 
 
