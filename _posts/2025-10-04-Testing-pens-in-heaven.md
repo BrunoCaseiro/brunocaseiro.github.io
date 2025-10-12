@@ -12,7 +12,7 @@ header:
 
 # Pentesting cloud environments
 
-It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, as well as any notes I take on theoretical material.
+It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, as well as any notes I take on theoretical material. I skipped some labs that required a bit more setting up such as <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a> and <a href="https://github.com/ine-labs/AWSGoat">AWSGoat</a>, I cannot vouch for them but they seem like good training too. Hopefully it overlaps with the other resources and I don't miss out on much.
 
 This is more or less the usual process I take whenever I learn a new topic from online resources, only this time I'll be making it public. I'll be focusing on the cloud provider AWS.
 
@@ -30,7 +30,6 @@ For a slightly more readable version, check this post out <a href="https://githu
   * <a href="http://flaws2.cloud/">flaws2.cloud</a> (attacker path)
   * <a href="https://pwnedlabs.io/">pwnedlabs.io</a>
   * <a href="https://app.hackthebox.com/fortresses/7">HTB Fortress: AWS</a>
-  * <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a>
 
 ## Other links
 
@@ -821,15 +820,16 @@ This was pretty fun, barely any setup needed and great for someone starting out.
 
 ## flaws2.cloud (attacker path)
 
+tbd
 
 <br>
 
 ## pwnedlabs.io
 
+Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in-depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! I'll still leave some notes for myself in this section.
+
+<br>
 
 ## HTB Fortress: AWS
 
-## CloudGoat 2.0
-  
-
-
+Due to Hack The Box's policy I cannot give you a walkthrough for this, ... tbd
