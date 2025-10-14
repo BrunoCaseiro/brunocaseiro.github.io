@@ -89,7 +89,7 @@ For a slightly more readable version, read this post <a href="https://github.com
 <br>
 
 * **S3 buckets** and **Azure/GCP storage buckets** are low hanging fruit but can contain SSH keys, passwords or other sensitive information that might help infiltrate the target (similar to an FTP server if you will)
-* Privilege escalation within a cloud service can be useful, not just in the cloud environment as a whole
+* Privilege escalation within a cloud service can be useful. It can help move laterally to other services or even escalate privileges even further
 
 ## AWS penetration testing
 Similar to other types of penetration testing, the scoping process should include questions such as:
