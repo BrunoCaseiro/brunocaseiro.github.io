@@ -997,7 +997,7 @@ And we get the final flag/URL at http://the-end-962b72bjahfm5b4wcktm8t9z4sapemjb
 
 Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! Each lab has a thorough walkthrough so I won't bother with that, but I'll still leave some notes for myself in this section.
 
-With the ARN of the role under our control and the S3 bucket name, account ID of the S3 bucket owner can be bruted forced with
+With the ARN of the role under our control and the S3 bucket name, account ID of the S3 bucket owner can be bruted forced. The account ID can be useful to later identity public EBS and RDS snapshots that it owns
 `s3-account-search arn:aws:iam::427648302155:role/LeakyBucket mega-big-tech`
 
 Find the bucket region with
