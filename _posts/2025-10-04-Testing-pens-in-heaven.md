@@ -1000,7 +1000,15 @@ Most stuff here is paid, but the free labs are pretty good, I'd definitely recom
 <br>
 
 With the ARN of the role under our control and the S3 bucket name, the account ID of the S3 bucket owner can be bruted forced. This can be useful to later enumerate IAM roles and users tied to that account, as well as any public EBS and RDS snapshots
-`s3-account-search arn:aws:iam::427648302155:role/LeakyBucket mega-big-tech`
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ s3-account-search arn:aws:iam::427648302155:role/LeakyBucket mega-big-tech
+Starting search (this can take a while)
+<snip>
+found: 1075135037
+found: 10751350379
+found: 107513503799
+```
 
 Find the bucket region with
 ```
@@ -1016,6 +1024,15 @@ Content-Type: application/xml
 Transfer-Encoding: chunked
 Server: AmazonS3
 ```
+
+To copy S3 files to the local system without using a browser
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws s3 cp s3://dev.huge-logistics.com/shared/hl_migration_project.zip . --no-sign-request
+download: s3://dev.huge-logistics.com/shared/hl_migration_project.zip to ./hl_migration_project.zip
+
+```
+
 
 
 <br>
