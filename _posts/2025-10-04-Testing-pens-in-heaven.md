@@ -6,7 +6,7 @@ header:
   show_overlay_excerpt: false
 ---
 
-<b><i>bruno from the future, don't forget to add an index, spellcheck, proof read, and maybe reorder the sections</i></b>
+<b><i>bruno from the future: add an index, proofread and spellcheck</i></b>
 
 
 
