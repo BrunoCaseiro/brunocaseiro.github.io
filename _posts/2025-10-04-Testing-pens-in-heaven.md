@@ -1172,7 +1172,7 @@ And finally, to read the policy document, which requires its version
 }
 ```
 
-Examining a role, note how to requires passing an External ID if the action sts:AssumeRole is called
+Examining a role, note how it requires passing an External ID if the action sts:AssumeRole is called
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws iam get-role --role-name ExternalCostOpimizeAccess
