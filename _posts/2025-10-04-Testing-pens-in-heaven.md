@@ -992,7 +992,7 @@ And we get the final flag/URL at http://the-end-962b72bjahfm5b4wcktm8t9z4sapemjb
 
 ## pwnedlabs.io
 
-Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! They claim to be "Beginner" and "Foundational" level, but they aren't super obvious if you're just starting to learn cloud pentesting. Each lab has a thorough walkthrough so I won't bother with that, but I'll still leave some scattered notes in this section whenever I come across something new 
+Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! Sometimes you even get to combine cloud with web or infrastructure pentesting. They claim to be "Beginner" and "Foundational" level, but some of them aren't super obvious if you're just starting your journey. Each lab has a thorough walkthrough so I won't bother with that, but I'll still leave some scattered notes in this section whenever I come across something new 
 
 <br>
 
