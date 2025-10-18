@@ -1325,16 +1325,110 @@ Enter Password:
 *Evil-WinRM* PS The term 'Invoke-Expression' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.\n    + CategoryInfo          : ObjectNotFound: (Invoke-Expression:String) [], CommandNotFoundException\n    + 
 ```
 
-After lots of troubleshooting and attempting to escape a restricted shell, I just decided to use crackmapexec. Combine Windows post-exploitation skills to loot for credentials and exploit the local machine further.
+After lots of troubleshooting and attempting to escape a restricted shell, I just decided to use crackmapexec. Combine Windows post-exploitation skills to loot for credentials and exploit the local machine further
 
 --- 
 
+Example of fuzzing S3 buckets
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ ffuf -u "https://hlogistics-ENVIRONMENT.s3.REGION.amazonaws.com" -w "regions.txt:REGION" -w "/usr/share/wordlists/seclists/s3-bucket-name-list.txt:ENVIRONMENT" --mc=200,403
+<snip>
+[Status: 200, Size: 8959, Words: 4, Lines: 2, Duration: 80ms]
+    * ENVIRONMENT: images
+    * REGION: eu-west-2
 
+[Status: 200, Size: 535, Words: 4, Lines: 2, Duration: 70ms]
+    * ENVIRONMENT: web
+    * REGION: eu-west-2
 
+```
 
+---
 
+Another way of enumerating IAM permissions
+```
+┌──(kali㉿kali)-[/usr/share/wordlists/seclists]
+└─$ aws iam list-user-policies --user-name ecollins
+{
+    "PolicyNames": [
+        "SSM_Parameter"
+    ]
+}
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[/usr/share/wordlists/seclists]
+└─$ aws iam get-user-policy --user-name ecollins --policy-name SSM_Parameter
+{
+    "UserName": "ecollins",
+    "PolicyName": "SSM_Parameter",
+    "PolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:GetParameter",
+                    "ssm:DescribeParameters"
+                ],
+                "Resource": "arn:aws:ssm:eu-west-2:243687662613:parameter/lharris"
+            }
+        ]
+    }
+}
+```
 
+---
 
+Enumerating EC2 launch templates. One interesting parameter is the user data script in base64
+```
+──(kali㉿kali)-[~/Desktop]
+└─$ aws ec2 describe-launch-templates                                                     
+{
+    "LaunchTemplates": [
+        {
+            "LaunchTemplateId": "lt-05c3bbb6108e76f9b",
+            "LaunchTemplateName": "SCHEDULER",
+            "CreateTime": "2025-03-04T20:35:50.000Z",
+            "CreatedBy": "arn:aws:iam::243687662613:root",
+            "DefaultVersionNumber": 1,
+            "LatestVersionNumber": 1,
+            "Operator": {
+                "Managed": false
+            }
+        }
+    ]
+}
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws ec2 describe-launch-template-versions --launch-template-name SCHEDULER
+{
+    "LaunchTemplateVersions": [
+        {
+            "LaunchTemplateId": "lt-05c3bbb6108e76f9b",
+            "LaunchTemplateName": "SCHEDULER",
+            "VersionNumber": 1,
+            "VersionDescription": "Production logistics scheduling application",
+            "CreateTime": "2025-03-04T20:35:50.000Z",
+            "CreatedBy": "arn:aws:iam::243687662613:root",
+            "DefaultVersion": true,
+            "LaunchTemplateData": {
+                "ImageId": "ami-091f18e98bc129c4e",
+                "InstanceType": "t2.medium",
+                "UserData": "IyEvYmluL2Jhc2gKCmFwdCBpbnN0YWxsIC15IGF3cy1jbGkgZG9ja2VyIGdpdCBjdXJsIHVuemlwIGh0dHBkIG15c3FsCgpzeXN0ZW1jdGwgZW5hYmxlIGRvY2tlcgpzeXN0ZW1jdGwgc3RhcnQgZG9ja2VyCnVzZXJtb2QgLWFHIGRvY2tlciBlYzItdXNlcgpjaG1vZCA3NzcgL3Zhci9ydW4vZG9ja2VyLnNvY2sKCm1rZGlyIC1wIC9vcHQvaHVnZS1sb2dpc3RpY3MKY2QgL29wdC9odWdlLWxvZ2lzdGljcwoKYXdzIHMzIGNwIHMzOi8vaHVnZS1sb2dpc3RpY3MtcHJpdmF0ZS9jb25maWcuc2ggLgpjaG1vZCAreCBjb25maWcuc2gKLi9jb25maWcuc2gKCmF3cyBjb25maWd1cmUgc2V0IHJlZ2lvbiB1cy1lYXN0LTEKCmRvY2tlciBwdWxsIGltYWdlcy5odWdlLWxvZ2lzdGljLmxvY2FsL3dvcmtlcjpsYXRlc3QKZG9ja2VyIHJ1biAtZCAtLW5hbWUgbG9naXN0aWNzLXdvcmtlciAtcCA4MDgwOjgwODAgaW1hZ2VzLmh1Z2UtbG9naXN0aWMubG9jYWwvd29ya2VyOmxhdGVzdAoKZWNobyAiUGVybWl0Um9vdExvZ2luIHllcyIgPj4gL2V0Yy9zc2gvc3NoZF9jb25maWcKZWNobyAiUGFzc3dvcmRBdXRoZW50aWNhdGlvbiB5ZXMiID4+IC9ldGMvc3NoL3NzaGRfY29uZmlnCmVjaG8gIkFsbG93VXNlcnMgZWMyLXVzZXIgcm9vdCIgPj4gL2V0Yy9zc2gvc3NoZF9jb25maWcKc3lzdGVtY3RsIHJlc3RhcnQgc3NoZAoKY2htb2QgLVIgNzc3IC9ldGMKCmZsYWc6IDc5N2Y5ZWRmZjVjYmRhY2E1ZDA5MDIwMzBiN2JjZmU4",
+                "MetadataOptions": {
+                    "HttpTokens": "optional",
+                    "HttpPutResponseHopLimit": 2,
+                    "HttpEndpoint": "enabled"
+                }
+            },
+            "Operator": {
+                "Managed": false
+            }
+        }
+    ]
+}
+```
+---
 
 
 
@@ -1343,6 +1437,6 @@ After lots of troubleshooting and attempting to escape a restricted shell, I jus
 
 ## HTB Fortress: AWS
 
-I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Due to Hack The Box's policy I cannot give you a walkthrough, but I'll still add any notes if I face something new.
+I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Due to Hack The Box's policy I cannot give you a walkthrough, but I'll still add any notes if I face something new
 
 tbd
