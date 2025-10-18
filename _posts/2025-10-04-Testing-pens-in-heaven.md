@@ -1428,6 +1428,7 @@ Enumerating EC2 launch templates. One interesting parameter is the user data scr
     ]
 }
 ```
+
 ---
 
 
