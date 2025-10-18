@@ -1437,6 +1437,6 @@ Enumerating EC2 launch templates. One interesting parameter is the user data scr
 
 ## HTB Fortress: AWS
 
-I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Due to Hack The Box's policy I cannot give you a walkthrough, but I'll still add any notes if I face something new
+I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Due to Hack The Box's policy I cannot give you a walkthrough, but I'll still add notes if I face something new
 
 tbd
