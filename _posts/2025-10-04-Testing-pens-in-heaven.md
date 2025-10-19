@@ -12,7 +12,9 @@ header:
 
 # Pentesting cloud environments
 
-It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I won't create any new learning material, instead I'll aggregate the best free resources I can find. Any CTFs or practical exercises I complete will be documented, along with any notes I take on theoretical material. They are not very organized, but this is meant to be a I-know-I-did-this-before-let-me-just-CTRL-F-my-notes type of resource. I skipped some labs that required a bit more setup such as <a href="https://github.com/RhinoSecurityLabs/cloudgoat">CloudGoat 2.0</a> and <a href="https://github.com/ine-labs/AWSGoat">AWSGoat</a>. I cannot vouch for them but they seem like good training too. Hopefully they overlap with the other resources and I don't miss out on much. I'll be focusing on AWS.
+It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I aggregated the best free resources I could find. Any CTFs or practical exercises I complete will be documented, along with any notes I take on theoretical material. They are not very organized, but this is meant to be a I-know-I-did-this-before-let-me-just-CTRL-F-my-notes type of resource. I'll be focusing on AWS.
+
+It's funny how I went through the beginner stages all over again, stressing out about not understanding the logic of things, having those a-ha! moments, wondering how I'll be able to remember all of this, and much more. If you're feeling the same way with anything in your life, it means your pushing yourself out of your comfort zone. Keep going!
 
 For a slightly more readable version, read this post <a href="https://github.com/BrunoCaseiro/brunocaseiro.github.io/blob/master/_posts/2025-10-04-Testing-pens-in-heaven.md">here</a>
 
