@@ -1600,6 +1600,16 @@ function test_login(){
 
 ---
 
+You can get an Account ID from an access key ID with
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws sts get-access-key-info --access-key-id AKIAWHEOTHRFVXYV44WP
+{
+    "Account": "427648302155"
+}
+```
+
+---
 
 
 
