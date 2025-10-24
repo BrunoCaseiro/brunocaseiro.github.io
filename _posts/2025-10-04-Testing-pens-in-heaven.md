@@ -1611,6 +1611,24 @@ You can get an Account ID from an access key ID with
 
 ---
 
+Look for public snapshots of single RDS databases (no hits) or RDS database cluster instances and grep for the target account ID
+```
+┌──(kali㉿kali)-[~]
+└─$ aws rds describe-db-snapshots --snapshot-type public --include-public --region us-east-1 | grep 104506445608
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~]
+└─$ aws rds describe-db-cluster-snapshots --snapshot-type public --include-public --region us-east-1 | grep 104506445608
+            "DBClusterSnapshotIdentifier": "arn:aws:rds:us-east-1:104506445608:cluster-snapshot:orders-private",
+            "DBClusterSnapshotArn": "arn:aws:rds:us-east-1:104506445608:cluster-snapshot:orders-private",
+```
+
+There's an `orders-private` database cluster. In the AWS Console select the appropriate region and browse to Aurora and RDS > Snapshots > Public to restore it. The UI should be intuitive enough. Select the new database and set up an EC2 connection
+
+If you don't know the database password after spinning up the EC2 instance, it's possible to modify it from the Databases menu. Install postgresql-client on it and access the database snapshot
+
+---
+
+
 
 
 <br>
