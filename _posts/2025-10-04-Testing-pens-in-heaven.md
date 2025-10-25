@@ -51,7 +51,7 @@ For a slightly more readable version, read this post <a href="https://github.com
   * <a href="http://flaws.cloud/">flaws.cloud</a>
   * <a href="http://flaws2.cloud/">flaws2.cloud</a> (attacker path)
   * <a href="https://pwnedlabs.io/">pwnedlabs.io</a> (AWS, red, free)
-  * <a href="https://app.hackthebox.com/fortresses/7">HTB Fortress: AWS</a>
+  * <a href="https://app.hackthebox.com/fortresses/7">Hack The Box Fortress: AWS</a>
 
 ## Other links
 
@@ -2186,7 +2186,7 @@ VELUS CORP.:e46fbfe64cf7e50be097005f2de8b227:3558615975963377
 
 <br>
 
-## HTB Fortress: AWS
+## Hack The Box Fortress: AWS
 
 I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Due to Hack The Box's policy I cannot give you a walkthrough, but I'll still add notes if I face something new
 
