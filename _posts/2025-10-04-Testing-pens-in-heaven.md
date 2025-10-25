@@ -1775,8 +1775,9 @@ This functions is vulnerable to an SSRF vulnerability. Exploit it with an LFI to
 You can use <a href="https://hub.docker.com/">Docker Hub</a> to search for docker images related to the target
 
 <p align="center">
-  <p><img width="60%" src="https://github.com/user-attachments/assets/00e60925-8cff-474c-893d-6059df86f98f"/>
+  <img width="60%" src="https://github.com/user-attachments/assets/00e60925-8cff-474c-893d-6059df86f98f"/>
 </p>
+
 
 Use the `Docker Scout` plugin for quick CVE analysis of the Docker image
 ```
