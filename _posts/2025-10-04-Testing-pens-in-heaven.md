@@ -6,32 +6,6 @@ header:
   show_overlay_excerpt: false
 ---
 
-
-## Index
-
-1. [Pentesting cloud environments](#pentesting-cloud-environments)
-   - [The plan](#the-plan)
-   - [Other links](#other-links)
-2. [Introductory material](#introductory-material)
-   - [Introduction to cloud pentesting](#introduction-to-cloud-pentesting)
-   - [AWS penetration testing](#aws-penetration-testing)
-3. [CTFs and hands-on material](#ctfs-and-hands-on-material)
-   - [flaws.cloud](#flawscloud)
-     - [Level 1](#level-1)
-     - [Level 2](#level-2)
-     - [Level 3](#level-3)
-     - [Level 4](#level-4)
-     - [Level 5](#level-5)
-     - [Level 6](#level-6)
-   - [flaws2.cloud (attacker path)](#flaws2cloud-attacker-path)
-     - [Level 1](#level-1-1)
-     - [Level 2](#level-2-1)
-     - [Level 3](#level-3-1)
-   - [pwnedlabs.io](#pwnedlabsio)
-   - [Hack The Box Fortress: AWS](#hack-the-box-fortress-aws)
-
-   
-
 # Pentesting cloud environments
 
 It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I aggregated the best free resources I could find. Any CTFs or practical exercises I complete will be documented, along with any notes I take on theoretical material. They are not very organized, but this is meant to be a I-know-I-did-this-before-let-me-just-CTRL-F-my-notes type of resource. I'll be focusing on AWS.
@@ -68,6 +42,30 @@ For a slightly more readable version, read this post <a href="https://github.com
   * <a href="https://github.com/andresriancho/enumerate-iam">Enumerate IAM: Enumerate permissions associated with a credential set</a>
   * <a href="https://github.com/prowler-cloud/prowler">Prowler: Perform automatic security assessment</a>
   * <a href="https://github.com/nccgroup/ScoutSuite">Scout Suite: Highlights risk areas from gathered configuration data</a>
+
+
+## Index
+
+1. [Pentesting cloud environments](#pentesting-cloud-environments)
+   - [The plan](#the-plan)
+   - [Other links](#other-links)
+2. [Introductory material](#introductory-material)
+   - [Introduction to cloud pentesting](#introduction-to-cloud-pentesting)
+   - [AWS penetration testing](#aws-penetration-testing)
+3. [CTFs and hands-on material](#ctfs-and-hands-on-material)
+   - [flaws.cloud](#flawscloud)
+     - [Level 1](#level-1)
+     - [Level 2](#level-2)
+     - [Level 3](#level-3)
+     - [Level 4](#level-4)
+     - [Level 5](#level-5)
+     - [Level 6](#level-6)
+   - [flaws2.cloud (attacker path)](#flaws2cloud-attacker-path)
+     - [Level 1](#level-1-1)
+     - [Level 2](#level-2-1)
+     - [Level 3](#level-3-1)
+   - [pwnedlabs.io](#pwnedlabsio)
+   - [Hack The Box Fortress: AWS](#hack-the-box-fortress-aws)
 
 
 <br>
