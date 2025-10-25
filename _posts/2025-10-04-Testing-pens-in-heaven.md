@@ -41,6 +41,7 @@ For a slightly more readable version, read this post <a href="https://github.com
 
 * Tools
   * <a href="https://github.com/NetSPI/aws_consoler">AWS Consoler: Convert CLI credentials into console access</a>
+  * <a href="https://github.com/shabarkin/aws-enumerator">aws-enumerator: Service enumeration</a>
   * <a href="https://github.com/zer1t0/awsenum">awsenum: Enumerate AWS permissions and resources</a>
   * <a href="https://github.com/andresriancho/enumerate-iam">Enumerate IAM: Enumerate permissions associated with a credential set</a>
   * <a href="https://github.com/prowler-cloud/prowler">Prowler: Perform automatic security assessment</a>
