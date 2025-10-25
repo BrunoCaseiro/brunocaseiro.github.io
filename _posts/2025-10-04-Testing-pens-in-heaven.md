@@ -28,7 +28,7 @@ header:
      - [Level 2](#level-2-1)
      - [Level 3](#level-3-1)
    - [pwnedlabs.io](#pwnedlabsio)
-   - [Hack The Box Fortress: AWS](#hack-the-box-fortress:-aws)
+   - [Hack The Box Fortress: AWS](#hack-the-box-fortress-aws)
 
    
 
