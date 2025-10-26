@@ -2186,6 +2186,8 @@ VELUS CORP.:e46fbfe64cf7e50be097005f2de8b227:3558615975963377
 
 ## Hack The Box Fortress: AWS
 
-I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Due to Hack The Box's policy I cannot give you a walkthrough, but I'll still add notes if I face something new
+I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Unfortunately I didn't love this fortress, it felt a bit too CTFy at times. It combines several pentesting niches in one big challenge which is cool and interesting, but I wouldn't recommend it if you're looking to practice cloud pentesting in specific
+
+Due to Hack The Box's policy I cannot give you a walkthrough, but I still left some notes here
 
 tbd
