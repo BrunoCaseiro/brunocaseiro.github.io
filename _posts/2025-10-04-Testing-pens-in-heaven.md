@@ -2186,8 +2186,23 @@ VELUS CORP.:e46fbfe64cf7e50be097005f2de8b227:3558615975963377
 
 ## Hack The Box Fortress: AWS
 
-I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Unfortunately I didn't love this fortress, it felt a bit too CTFy at times. It combines several pentesting niches in one big challenge which is cool and interesting, but I wouldn't recommend it if you're looking to practice cloud pentesting in specific
+I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Unfortunately I didn't love this fortress, it felt a bit too CTFy at times and not very cloud focused. It's mostly web pentesting so I wouldn't recommend it if you're looking to practice cloud pentesting in specific. Don't get me wrong, Hack The Box is absolutely amazing, but my expectations were different for this fortress. I decided to keep it in this post anyway.
 
-Due to Hack The Box's policy I cannot give you a walkthrough, but I still left some notes here
+Due to Hack The Box's policy I cannot give you a walkthrough, but I still left a couple of cloud related notes here
 
-tbd
+You can set pass the endpoint URL programatically with the `--endpoint-url` flag
+```
+┌──(kali㉿kali)-[~/Desktop/awsFortress]
+└─$ aws --endpoint-url http://<redacted>.<redacted>.local sts get-caller-identity                                         
+{
+    "UserId": "<redacted>",
+    "Account": "<redacted>",
+    "Arn": "<redacted>"
+}
+```
+
+If you are allowed to run `CreateFunction`, do it like this. Make sure the zip file has a .py file inside, for example script.py, and the handler looks something like script.lambda_handler
+```
+┌──(kali㉿kali)-[~/Desktop/awsFortress]
+└─$  aws --endpoint-url http://<redacted>.local lambda create-function --function-name <name> --runtime python3.8 --role <IAM_Role_ARN> --handler <module.function> --zip-file <zipToUpload> --timeout 5 --description "cool function"
+```
