@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Testing pens in heaven"
+title:  "Testing Pens in Heaven"
 header:
   overlay_image: /assets/images/banner.jpg
   show_overlay_excerpt: false
@@ -8,9 +8,9 @@ header:
 
 # Pentesting cloud environments
 
-It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I aggregated the best free resources I could find. Any CTFs or practical exercises I complete will be documented, along with any notes I take on theoretical material. They are not very organized, but this is meant to be a I-know-I-did-this-before-let-me-just-CTRL-F-my-notes type of resource. I'll be focusing on AWS.
+It seems there aren't many resources on cloud pentesting, so I decided to take matters into my own hands. I've aggregated the best free resources I could find. Any CTFs or practical exercises I complete will be documented, along with my notes on theoretical material. They are not very organized, but this is meant to be an I-know-I-did-this-before-let-me-just-CTRL-F-my-notes type of resource. I'll be focusing on AWS.
 
-It's funny how I went through the beginner stages all over again, stressing out about not understanding the logic of things, having those a-ha! moments, wondering how I'll be able to remember all of this, and much more. If you're feeling the same way with anything in your life, it means your pushing yourself out of your comfort zone. Keep going!
+It's funny how I went through the beginner stages all over again, stressing out about not understanding the logic of things, having those a-ha! moments, wondering how I'll remember all of this, and much more. If you're feeling the same way with anything in your life, it means your pushing yourself out of your comfort zone. Keep going!
 
 For a slightly more readable version, read this post <a href="https://github.com/BrunoCaseiro/brunocaseiro.github.io/blob/master/_posts/2025-10-04-Testing-pens-in-heaven.md">here</a>
 
@@ -72,8 +72,8 @@ For a slightly more readable version, read this post <a href="https://github.com
 
 # Introductory material
 ## Introduction to cloud pentesting
-* The most common cloud security problems are excessive permissions and several kinds of misconfigurations such as ignoring default settings, exposing sensitive data or simply misunderstanding how things work
-* A major problem is publicly exposing S3 buckets, there are "search engines" for publicly accessible data in the cloud such as <a href="https://buckets.grayhatwarfare.com/">GrayHat Warfare</a>
+* The most common cloud security problems are excessive permissions and various misconfigurations, such as ignoring default settings, exposing sensitive data or simply misunderstanding how things work
+* A major problem is publicly exposing S3 buckets, there are "search engines" for publicly accessible cloud data such as <a href="https://buckets.grayhatwarfare.com/">GrayHat Warfare</a>
 
 <br>
 
@@ -83,9 +83,9 @@ For a slightly more readable version, read this post <a href="https://github.com
 
 <br>
 
-* **Compute Instance Metadata** is a cloud service which provides administrative endpoints, it's usually bound to the internal IP `169.254.169.254`
-* **IMDSv2** will require token authentication to call these endpoints, but not the default **IMDSv1**
-* Especially useful when exploiting an SSRF vulnerability, such as `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/`, this will reveal metadata values
+* **Compute Instance Metadata** is a cloud service that provides administrative endpoints, usually bound to the internal IP `169.254.169.254`
+* **IMDSv2** requires token authentication to call these endpoints, unlike the default **IMDSv1**
+* Particularly useful when exploiting an SSRF vulnerability, such as `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/`, which will reveal metadata values
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/264b0f02-be76-413b-9eaa-850347dd32d3" />
@@ -97,14 +97,14 @@ For a slightly more readable version, read this post <a href="https://github.com
   <img src="https://github.com/user-attachments/assets/7c4bee36-fbac-4cf5-88c6-a3c9843dab56" />
 </p>
 
-* Fetch the credentials attached to the EC2 instance with `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/iam/security-credentials/support`, which reveals the `AccessKeyId`, `SecretAccessKey` and an AWS STS token.
+* Retrieve the credentials attached to the EC2 instance using `http://megalogistic.htb/status.php?name=169.254.169.254/latest/meta-data/iam/security-credentials/support`, which reveals the `AccessKeyId`, `SecretAccessKey` and an AWS STS token.
 <p align="center">
   <img src="https://github.com/user-attachments/assets/c0baf073-60af-44e6-b13c-a4b05f469e3d" />
 </p>
 
-* Use `aws configure` to use these credentials, which will save them to `~/.aws/credentials`
+* Use `aws configure` to set these credentials, which will save them to `~/.aws/credentials`
 * For the session token, use `aws configure set aws_session_token <token>`
-* Check current identity and privileges, respectively, with `aws sts get-caller-identity` and `aws iam list-attached-user-policies --user-name support`
+* Check your current identity and privileges using `aws sts get-caller-identity` and `aws iam list-attached-user-policies --user-name support`
 
 <br>
 
