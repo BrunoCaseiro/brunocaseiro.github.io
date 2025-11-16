@@ -1,5 +1,8 @@
 # main links
-main:       
+main:     
+  - title: "Freelancing"
+    url: /freelancing.html
+    
   - title: "Posts"
     url: /posts.html
   
