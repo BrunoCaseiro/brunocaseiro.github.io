@@ -23,15 +23,14 @@ header:
 
 ---
 
-  I have helped small and large clients across multiple industries:
+I have helped small and large clients across multiple industries:
   - Uncover hidden vulnerabilities before attackers do
   - Ensure apps meet security standards and prevent data leaks
   - Integrate security into the development process
   - Train teams to build and maintain secure software
   
   
-  My experience includes working with pentesting companies, universities, and as a Security Engineer currently for the world’s largest online betting company. 
-  I hold the following certifications:
+My experience includes working with pentesting companies, universities, and as a Security Engineer currently for the world’s largest online betting company. I hold the following certifications:
   - [OffSec Web Expert (OSWE)](https://www.credential.net/e02f57dd-fdcd-447b-9b81-469ea8986a31#acc.oNMAGrXB)
   - [OffSec Experienced Penetration Tester (OSEP)](https://credentials.offsec.com/c69afa77-96ec-4148-9fa5-4bbceb2e2d48#acc.lfcLWpHF)
   - [OffSec Certified Professional (OSCP)](https://www.credential.net/97c43b2b-f03b-4610-a8f4-c53ad8ced9cd#acc.fNOEL2YC)
@@ -39,4 +38,9 @@ header:
   - [AWS Certified Security - Specialty](https://www.credly.com/badges/02e4f002-662e-4480-bcfe-4ac27fd9c84d)
   - [Burp Suite Certified Practitioner](https://portswigger.net/web-security/e/c/0116babe76dd45d3)
 
-  [Email Me](mailto:brunocaseiro2008@gmail.com) or message me on [LinkedIn](https://linkedin.com/in/brunocaseiro) for more details. Full CV available upon request.
+  [Email](mailto:brunocaseiro2008@gmail.com) or message me on [LinkedIn](https://linkedin.com/in/brunocaseiro) for more details. Full CV available upon request.
+  
+  
+<p align="center">
+  <img width="20%" align="center" src="/assets/images/logo.png">
+</p>
