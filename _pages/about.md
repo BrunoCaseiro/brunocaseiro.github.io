@@ -2,7 +2,7 @@
 layout: single
 author_profile: true
 title: About me
-permalink: /about.html
+permalink: /aboutme.html
 header:
   overlay_image: /assets/images/banner.jpg
 ---
