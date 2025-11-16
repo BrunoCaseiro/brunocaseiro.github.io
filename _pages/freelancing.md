@@ -30,7 +30,7 @@ header:
   - Train teams to build and maintain secure software
   
   
-  My experience includes working with pentesting companies, universities, and currently as a Security Engineer for the world’s largest online betting company. 
+  My experience includes working with pentesting companies, universities, and as a Security Engineer currently for the world’s largest online betting company. 
   I hold the following certifications:
   - [OffSec Web Expert (OSWE)](https://www.credential.net/e02f57dd-fdcd-447b-9b81-469ea8986a31#acc.oNMAGrXB)
   - [OffSec Experienced Penetration Tester (OSEP)](https://credentials.offsec.com/c69afa77-96ec-4148-9fa5-4bbceb2e2d48#acc.lfcLWpHF)
