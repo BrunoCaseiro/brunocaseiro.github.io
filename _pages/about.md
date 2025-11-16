@@ -9,7 +9,7 @@ header:
 
 ## $whoami
 
-Hey there, my name is Bruno Caseiro and I am a security engineer. If you are unfamiliar with the term, think about Defence Against the Dark Arts but for computers. I get to legally ⁽ᵐᵒˢᵗ ᵒᶠ ᵗʰᵉ ᵗᶦᵐᵉ⁾ hack things! @fbi just kidding 
+Hey there, my name is Bruno Caseiro and I am a security engineer specialized in offensive security and pentesting. If you are unfamiliar with the term, think about Defence Against the Dark Arts but for computers. I get to legally ⁽ᵐᵒˢᵗ ᵒᶠ ᵗʰᵉ ᵗᶦᵐᵉ⁾ hack things! @fbi just kidding 
 
 
 ## About this blog
