@@ -49,4 +49,4 @@ Besides music, I love podcasts. My favorite is Darknet Diaries, hands down! I al
 
 ### Other boring stuff
 
-You will find this sentence in every blog in the world. I like cars and F1, going out, watching TV shows, going to the movies, reading (I like my Kindle more than my Google Pixel 🤓), traveling, etc... But allow me to add a different twist: traveling alone. It's super liberating and it feels like bringing out the true personality that's inside of you. Go ahead and try it!
+You will find this sentence in every blog in the world. I like cars and F1, going out, watching TV shows, going to the movies, reading (I like my Kindle more than my Google Pixel 🤓), traveling, etc... But I'll add a different twist: traveling alone. It's super liberating and it feels like bringing out the true personality inside of you. Go ahead and try it out sometime!
