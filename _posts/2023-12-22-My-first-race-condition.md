@@ -123,7 +123,7 @@ This is an extremely quick summary of James' entire research, so there is a lot 
 
 Hopefully you enjoyed my first blog post, I'll try to keep an eye out for other possibly interesting stories to share in order to keep this website alive. We already have enough dead blogs on the internet 😅.
 
-Feel free to read more [about me](https://brunocaseiro.github.io/about.html) or get in touch via [LinkedIn](https://linkedin.com/in/brunocaseiro)!
+Feel free to read more [about me](https://brunocaseiro.github.io/aboutme.html) or get in touch via [LinkedIn](https://linkedin.com/in/brunocaseiro)!
 
 Thanks for reading
 
