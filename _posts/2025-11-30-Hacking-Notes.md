@@ -8,7 +8,7 @@ header:
 
 By no means an exhaustive list. Just a list of things I run very often and thought it would be useful to always have handy. Mostly for enumeration
 
-## My go-to notes websites
+## Go-to notes websites
 ```
 https://book.hacktricks.wiki/
 https://www.thehacker.recipes/
