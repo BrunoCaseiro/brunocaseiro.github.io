@@ -47,7 +47,7 @@ nmap -A -p<ports> <ip>
 
 ## masscan
 ```
-# for ultra speed
+# port discovery only but ultra spip eed 
 masscan --max-rate 100000 --ports 0-65535 <ip>
 masscan --max-rate 100000 --ports 0-65535 -iL <ip_file> 
 ```
@@ -81,24 +81,30 @@ https://www.shodan.io/
 
 ## Subdomain Discovery
 ```
-
+# subdomain scraping
+amass enum -d <domain>
+subfinder -v -d <domain>
+github-subdomains -d <domain> -t "<github_token>"
 
 # brute force
+amass enum -brute -d twitch.tv
 wfuzz -H "Host: FUZZ.<domain>" -c -w "/usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-20000.txt" --hl=7 <url>
 
 # spidering, finds more than just subdomains
 Burp Suite (set a keyword in the scope) --> Target --> Right click target --> Scan --> Crawl
+
+# manual permutation attempts
+sub.domain.com --> origin.sub.domain.com
+sub.domain.com --> origin-sub.domain.com
+www.target.com --> ww2.target.com
 ```
 
 ## GitHub
 ```
+# Jason Haddix google dorks (https://gist.github.com/jhaddix/1fb7ab2409ab579178d2a79959909b33)
+./Gdorklinks.sh <company>
 ```
 
 ## S3 Buckets
-
-to organize:
-- https://github.com/aboul3la/Sublist3r
-- https://github.com/jhaddix/domain
-- https://github.com/owasp-amass/amass
-- https://github.com/Findomain/Findomain
-- https://github.com/tomnomnom/assetfinder
+```
+```
