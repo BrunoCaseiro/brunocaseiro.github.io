@@ -1,4 +1,4 @@
----
+https://grayhatwarfare.com/---
 layout: single
 title:  "Hacking Notes"
 header:
@@ -35,6 +35,7 @@ Param Miner
 # good starting points
 https://taksec.github.io/google-dorks-bug-bounty/
 https://dorks.faisalahmed.me/
+
 ```
 
 ## Nmap
@@ -47,8 +48,8 @@ nmap -A -p<ports> <ip>
 ## masscan
 ```
 # for ultra speed
-masscan -p<ports> <ip> --mas-rate 100000
-masscan -p<ports> -iL <ip_file> --mas-rate 100000
+masscan --max-rate 100000 --ports 0-65535 <ip>
+masscan --max-rate 100000 --ports 0-65535 -iL <ip_file> 
 ```
 
 ## Directory Busting
@@ -60,18 +61,40 @@ feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft
 (...) -b 'session=cookie' -k -H "X-Forwarded-For: 127.0.0.1" -a pentester_brunocaseiro
 ```
 
+## Domain Enumeration
+```
+# find acquired companies (if scope allows it)
+Google "<company_name> acquisitions"
+
+# ASN enumeration
+https://bgp.he.net/
+
+# reverse whois
+https://www.whoxy.com/
+
+# ad/analytics relationships
+https://builtwith.com/
+
+# well... shodan
+https://www.shodan.io/
+```
+
 ## Subdomain Discovery
 ```
+
+
 # brute force
 wfuzz -H "Host: FUZZ.<domain>" -c -w "/usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-20000.txt" --hl=7 <url>
 
-
-
 # spidering, finds more than just subdomains
-Burp Suite (define a scope) --> Target --> Right click target --> Scan --> Crawl
-
+Burp Suite (set a keyword in the scope) --> Target --> Right click target --> Scan --> Crawl
 ```
 
+## GitHub
+```
+```
+
+## S3 Buckets
 
 to organize:
 - https://github.com/aboul3la/Sublist3r
