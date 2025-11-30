@@ -47,7 +47,7 @@ nmap -A -p<ports> <ip>
 ## Directory Busting
 ```
 # max speed, but takes a long time - previously merged rafts wordlist and many extensions (adapt to website's stack)
-feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-combined.txt --scan-dir-listings -x asp,aspx,bak,txt,html,json,php,rar,zip,git,env,py,json,conf,yaml -t 50
+feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-combined.txt -x asp,aspx,bak,txt,html,json,php,rar,zip,git,env,py,json,conf,yaml -t 50
 
 # to add a cookie, ignore TLS checks, add a custom header and a custom user agent
 (...) -b 'session=cookie' -k -H "X-Forwarded-For: 127.0.0.1" -a pentester_brunocaseiro
