@@ -39,7 +39,7 @@ https://dorks.faisalahmed.me/
 
 ## Nmap
 ```
-# simple, good for CTFs (no UDP, max speed)
+# simple and fast (no UDP, max speed)
 nmap -p- -T5 <ip>
 nmap -A -p<ports> <ip>
 ```
