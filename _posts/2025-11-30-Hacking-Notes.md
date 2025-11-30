@@ -55,8 +55,7 @@ feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft
 ## Subdomain Discovery
 ```
 # brute force with huge wordlist, ignoring a specific response length (change if needed)
-wfuzz -H "Host: FUZZ.fries.htb" -c -w "/usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt" --hl=7 http://fries.htb
-
+wfuzz -H "Host: FUZZ.<domain>" -c -w "/usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt" --hl=7 <url>
 ```
 
 ## Nmap
