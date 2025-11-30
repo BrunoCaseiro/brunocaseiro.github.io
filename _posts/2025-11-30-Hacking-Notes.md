@@ -6,8 +6,6 @@ header:
   show_overlay_excerpt: false
 ---
 
-By no means an exhaustive list. Just a list of things I run very often and thought it would be useful to always have handy. Mostly for enumeration
-
 ## Go-to notes websites
 ```
 https://book.hacktricks.wiki/
@@ -20,9 +18,22 @@ https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master
 https://www.revshells.com/
 ```
 
+## Burp Extensions
+```
+Active Scan++
+Autorize
+AutoRepeater
+Collaborator Everywhere
+Copy As Python-Rquests # good for writing scripts
+HTTP Request Smuggler
+JS Miner
+Param Miner
+```
+
 ## Google Dorks
 ```
-https://taksec.github.io/google-dorks-bug-bounty/ # quick google dork cheatsheet
+# good enough for a starting point, but you gotta get creative
+https://taksec.github.io/google-dorks-bug-bounty/
 ```
 
 ## Nmap
