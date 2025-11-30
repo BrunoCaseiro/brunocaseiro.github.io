@@ -67,26 +67,15 @@ wfuzz -H "Host: FUZZ.<domain>" -c -w "/usr/share/wordlists/seclists/Discovery/DN
 
 
 
-```
+# spidering, finds more than just subdomains
+Burp Suite (define a scope) --> Target --> Right click target --> Scan --> Crawl
 
-## Nmap
-```
-aaaa
-```
-
-## Nmap
-```
-aaaa
-```
-
-## Nmap
-```
-aaaa
-```
-
-## Nmap
-```
-aaaa
 ```
 
 
+to organize:
+- https://github.com/aboul3la/Sublist3r
+- https://github.com/jhaddix/domain
+- https://github.com/owasp-amass/amass
+- https://github.com/Findomain/Findomain
+- https://github.com/tomnomnom/assetfinder
