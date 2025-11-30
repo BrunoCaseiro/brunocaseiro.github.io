@@ -42,7 +42,10 @@ https://dorks.faisalahmed.me/
 # simple and fast (no UDP, max speed), also works with domains
 nmap -p- -T5 <ip>
 nmap -A -p<ports> <ip>
+```
 
+## masscan
+```
 # for ultra speed
 masscan -p<ports> <ip> --mas-rate 100000
 masscan -p<ports> -iL <ip_file> --mas-rate 100000
