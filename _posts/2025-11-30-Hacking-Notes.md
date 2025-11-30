@@ -24,7 +24,7 @@ Active Scan++
 Autorize
 AutoRepeater
 Collaborator Everywhere
-Copy As Python-Rquests # good for writing scripts
+Copy As Python-Requests
 HTTP Request Smuggler
 JS Miner
 Param Miner
