@@ -39,10 +39,13 @@ https://dorks.faisalahmed.me/
 
 ## Nmap
 ```
-# simple and fast (no UDP, max speed)
-# not just for network pentesting, scanning a domain is also fair game
+# simple and fast (no UDP, max speed), also works with domains
 nmap -p- -T5 <ip>
 nmap -A -p<ports> <ip>
+
+# for ultra speed
+masscan -p<ports> <ip> --mas-rate 100000
+masscan -p<ports> -iL <ip_file> --mas-rate 100000
 ```
 
 ## Directory Busting
@@ -56,8 +59,11 @@ feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft
 
 ## Subdomain Discovery
 ```
-# brute force with huge wordlist, ignoring a specific response length (change if needed)
+# brute force
 wfuzz -H "Host: FUZZ.<domain>" -c -w "/usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-20000.txt" --hl=7 <url>
+
+
+
 ```
 
 ## Nmap
