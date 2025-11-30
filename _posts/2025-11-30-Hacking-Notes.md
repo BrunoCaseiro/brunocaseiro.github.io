@@ -40,6 +40,7 @@ https://dorks.faisalahmed.me/
 ## Nmap
 ```
 # simple and fast (no UDP, max speed)
+# not just for network pentesting, scanning a domain is also fair game
 nmap -p- -T5 <ip>
 nmap -A -p<ports> <ip>
 ```
