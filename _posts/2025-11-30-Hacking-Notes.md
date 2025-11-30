@@ -91,7 +91,7 @@ wfuzz -H "Host: FUZZ.<domain>" -c -w "/usr/share/wordlists/seclists/Discovery/DN
 # spidering, finds more than just subdomains
 Burp Suite (set a keyword in the scope) --> Target --> Right click target --> Scan --> Crawl
 
-# manual permutation attempts
+# manual permutation
 sub.domain.com --> origin.sub.domain.com
 sub.domain.com --> origin-sub.domain.com
 www.target.com --> ww2.target.com
