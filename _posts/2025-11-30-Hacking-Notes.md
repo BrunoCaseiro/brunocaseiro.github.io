@@ -11,10 +11,8 @@ header:
 https://book.hacktricks.wiki/
 https://www.thehacker.recipes/
 https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master
-```
 
-## Reverse Shell generator
-```
+# reverse shell generator
 https://www.revshells.com/
 ```
 
@@ -103,8 +101,13 @@ www.target.com --> ww2.target.com
 ```
 # Jason Haddix google dorks (https://gist.github.com/jhaddix/1fb7ab2409ab579178d2a79959909b33)
 ./Gdorklinks.sh <company>
+
+# manual enumeration
+
 ```
 
-## S3 Buckets
+## Cloud
 ```
+# list of services and how to take them over
+https://github.com/EdOverflow/can-i-take-over-xyz
 ```
