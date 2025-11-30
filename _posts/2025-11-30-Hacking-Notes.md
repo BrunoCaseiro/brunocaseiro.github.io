@@ -32,7 +32,7 @@ Param Miner
 
 ## Google Dorks
 ```
-# good enough for a starting point, but you gotta get creative
+# good starting points
 https://taksec.github.io/google-dorks-bug-bounty/
 https://dorks.faisalahmed.me/
 ```
