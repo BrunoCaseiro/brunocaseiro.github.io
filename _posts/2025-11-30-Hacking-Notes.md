@@ -48,7 +48,7 @@ nmap -A -p<ports> <ip>
 
 ## masscan
 ```
-# port discovery only but ultra spip eed 
+# port discovery only but ultra speed 
 masscan --max-rate 100000 --ports 0-65535 <ip>
 masscan --max-rate 100000 --ports 0-65535 -iL <ip_file> 
 ```
