@@ -1,4 +1,4 @@
----
+ ---
 layout: single
 title:  "Hacking Notes"
 header:
@@ -133,6 +133,9 @@ trufflehog github --org=<github_org_name>
 ```
 # list of services and how to take them over
 https://github.com/EdOverflow/can-i-take-over-xyz
+
+# grep for company name in cloud provider's IP ranges
+https://kaeferjaeger.gay/?dir=sni-ip-ranges
 
 # s3 bucket search engine
 https://grayhatwarfare.com/
