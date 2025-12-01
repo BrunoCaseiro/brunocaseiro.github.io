@@ -1,4 +1,4 @@
-https://grayhatwarfare.com/---
+---
 layout: single
 title:  "Hacking Notes"
 header:
@@ -111,4 +111,7 @@ www.target.com --> ww2.target.com
 ```
 # list of services and how to take them over
 https://github.com/EdOverflow/can-i-take-over-xyz
+
+# s3 bucket search engine
+https://grayhatwarfare.com/
 ```
