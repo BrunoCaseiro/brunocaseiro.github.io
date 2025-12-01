@@ -26,6 +26,7 @@ Copy As Python-Requests
 HTTP Request Smuggler
 JS Miner
 Param Miner
+Retire.js
 ```
 
 ## Google Dorks
@@ -98,6 +99,14 @@ sub.domain.com --> origin-sub.domain.com
 www.target.com --> ww2.target.com
 ```
 
+## Javascript
+```
+# searches for endpoints, including inline js
+xnLinkFinder -i <input>  -v -d 3 -sf <scope>
+
+# unminify or deobfuscate js
+https://beautifier.io/
+```
 ## GitHub
 ```
 # Jason Haddix google dorks (https://gist.github.com/jhaddix/1fb7ab2409ab579178d2a79959909b33)
