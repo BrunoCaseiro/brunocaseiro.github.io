@@ -45,12 +45,13 @@ masscan --max-rate 100000 --ports 0-65535 -iL <ip_file>
 
 ## Domain Enumeration
 ```
-# find acquired companies (if scope allows it)
-Google "<company_name> acquisitions"
-
 # ASN/ip space enumeration, careful with cloud ranges
 https://bgp.he.net/
 https://dnschecker.org/all-dns-records-of-domain.php
+
+# find acquired/related companies
+https://asrank.caida.org/
+Google "<company_name> acquisitions"
 
 # reverse whois
 https://www.whoxy.com/
