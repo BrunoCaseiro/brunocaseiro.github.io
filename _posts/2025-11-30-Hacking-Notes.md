@@ -48,8 +48,9 @@ masscan --max-rate 100000 --ports 0-65535 -iL <ip_file>
 # find acquired companies (if scope allows it)
 Google "<company_name> acquisitions"
 
-# ASN enumeration, find ip ranges owned by the company (not in the cloud)
+# ASN/ip space enumeration, careful with cloud ranges
 https://bgp.he.net/
+https://dnschecker.org/all-dns-records-of-domain.php
 
 # reverse whois
 https://www.whoxy.com/
