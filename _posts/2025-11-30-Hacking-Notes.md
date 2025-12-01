@@ -66,8 +66,8 @@ https://www.shodan.io/
 ## Subdomain Discovery
 ```
 # subdomain scraping
-subfinder -v -d <domain>
-amass enum -d <domain>
+subfinder -v -d <domain> # configure API keys for maximum effectiveness
+bbot -t <domain> -p kitchen-sink --allow-deadly
 github-subdomains -d <domain> -t "<github_token>"
 
 # brute force
