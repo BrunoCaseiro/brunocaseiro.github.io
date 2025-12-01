@@ -33,6 +33,7 @@ Param Miner
 # good starting points
 https://taksec.github.io/google-dorks-bug-bounty/
 https://dorks.faisalahmed.me/
+"<company/domain>" vulnerabilities # fixed vulnerabilities might be bypassable
 ```
 
 ## Nmap
