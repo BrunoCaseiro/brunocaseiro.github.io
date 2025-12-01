@@ -93,7 +93,7 @@ feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft
 (...) -b 'session=cookie' -k -H "X-Forwarded-For: 127.0.0.1" -a pentester_brunocaseiro
 ```
 
-## Javascript
+## JavaScript
 ```
 # searches for endpoints, including inline js
 xnLinkFinder -i <input>  -v -d 3 -sf <scope>
