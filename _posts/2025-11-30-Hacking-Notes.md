@@ -105,7 +105,7 @@ www.target.com --> ww2.target.com
 "<company/domain>" <service> # i.e "google" ftp
 "<company/domain>" <keyword> # i.e password, key, secret, pass, credentials, login, token, ftp, config, pwd, secrutiy_credentials, connectionstring, JDBC, ssh2_auth_password, send_keys, ...
 "<company/domain>" NOT keyword # ignores results with "keyword"
-user:<username> keyword # to search for keywords commited by an employee (previous employees do not show under the github organization, but you can find from old code)
+user:<username> keyword # keyword can be company name, helps find hidden domains. previous employees do not show under the github organization but can be found from old code
 "<company/domain>" language:bash # bash is good to find scripts, but works for other languages
 ```
 
