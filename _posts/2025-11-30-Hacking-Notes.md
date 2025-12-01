@@ -100,10 +100,11 @@ www.target.com --> ww2.target.com
 ## GitHub
 ```
 # Jason Haddix google dorks (https://gist.github.com/jhaddix/1fb7ab2409ab579178d2a79959909b33)
-./Gdorklinks.sh <company>
+./gdorklinks.sh <company>
 
-# manual enumeration
-
+# some other starting points
+"<company/domain>" <service> # i.e "google" ftp
+"<company/domain>" <keyword> # i.e password, key, secret, pass, credentials, login, token, ftp, config, pwd, secrutiy_credentials, connectionstring, JDBC, ssh2_auth_password, send_keys, ...
 ```
 
 ## Cloud
