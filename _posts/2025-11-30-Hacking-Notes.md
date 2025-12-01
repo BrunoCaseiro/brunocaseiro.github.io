@@ -104,6 +104,7 @@ www.target.com --> ww2.target.com
 # some other starting points
 "<company/domain>" <service> # i.e "google" ftp
 "<company/domain>" <keyword> # i.e password, key, secret, pass, credentials, login, token, ftp, config, pwd, secrutiy_credentials, connectionstring, JDBC, ssh2_auth_password, send_keys, ...
+"<company/domain>" NOT keyword # ignores results with "keyword"
 ```
 
 ## Cloud
