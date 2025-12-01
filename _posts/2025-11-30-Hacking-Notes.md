@@ -65,10 +65,12 @@ https://www.shodan.io/
 
 ## Subdomain Discovery
 ```
-# subdomain scraping, setup API keys for maximum effectiveness
-subfinder -v -d <domain>
-bbot -t <domain> -p subdomain-enum cloud-enum code-enum spider web-basic nuclei-budget --allow-deadly
+# subdomain scraping
+subfinder -v -d <domain> # setup api keys for better results
 github-subdomains -d <domain> -t "<github_token>"
+
+# really good, more than just subdomain enum
+bbot -t <domain> -p subdomain-enum cloud-enum code-enum web-basic nuclei-budget --allow-deadly
 
 # brute force
 amass enum -brute -d twitch.tv
