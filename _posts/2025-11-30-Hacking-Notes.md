@@ -51,7 +51,8 @@ masscan --max-rate 100000 --ports 0-65535 -iL <ip_file>
 
 ## Directory Busting
 ```
-# max speed, but takes a long time - previously merged rafts wordlist and many extensions (adapt to website's stack)
+# max speed with previously merged rafts wordlist and many extensions
+# adapt wordlist and extensions to website stack
 feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-combined.txt -x asp,aspx,bak,txt,html,json,php,rar,zip,git,env,py,json,conf,yaml -t 50
 
 # to add a cookie, ignore TLS checks, add a custom header and a custom user agent
