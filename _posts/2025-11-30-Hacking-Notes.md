@@ -107,6 +107,10 @@ www.target.com --> ww2.target.com
 "<company/domain>" NOT keyword # ignores results with "keyword"
 user:<username> keyword # keyword can be company name, helps find hidden domains. previous employees do not show under the github organization but can be found from old code
 "<company/domain>" language:bash # bash is good to find scripts, but works for other languages
+
+# finds secrets, optionally add --results=verified
+trufflehog git <.git_repo_link> # 
+trufflehog github --org=<github_org_name>
 ```
 
 ## Cloud
