@@ -29,16 +29,6 @@ Param Miner
 Retire.js
 ```
 
-## Google Dorks
-```
-# good starting points
-https://taksec.github.io/google-dorks-bug-bounty/
-https://dorks.faisalahmed.me/
-
-# fixed vulnerabilities might be bypassable
-"<company/domain>" vulnerabilities
-```
-
 ## Nmap
 ```
 # simple and fast (no UDP, max speed), also works with domains
@@ -51,16 +41,6 @@ nmap -A -p<ports> <ip>
 # port discovery only but ultra speed 
 masscan --max-rate 100000 --ports 0-65535 <ip>
 masscan --max-rate 100000 --ports 0-65535 -iL <ip_file> 
-```
-
-## Directory Busting
-```
-# max speed with previously merged rafts wordlist and many extensions
-# adapt wordlist and extensions to website stack
-feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-combined.txt -x asp,aspx,bak,txt,html,json,php,rar,zip,git,env,py,json,conf,yaml -t 50
-
-# to add a cookie, ignore TLS checks, add a custom header and a custom user agent
-(...) -b 'session=cookie' -k -H "X-Forwarded-For: 127.0.0.1" -a pentester_brunocaseiro
 ```
 
 ## Domain Enumeration
@@ -101,6 +81,16 @@ sub.domain.com --> origin-sub.domain.com
 www.target.com --> ww2.target.com
 ```
 
+## Directory Busting
+```
+# max speed with previously merged rafts wordlist and many extensions
+# adapt wordlist and extensions to website stack
+feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-combined.txt -x asp,aspx,bak,txt,html,json,php,rar,zip,git,env,py,json,conf,yaml -t 50
+
+# to add a cookie, ignore TLS checks, add a custom header and a custom user agent
+(...) -b 'session=cookie' -k -H "X-Forwarded-For: 127.0.0.1" -a pentester_brunocaseiro
+```
+
 ## Javascript
 ```
 # searches for endpoints, including inline js
@@ -109,6 +99,17 @@ xnLinkFinder -i <input>  -v -d 3 -sf <scope>
 # unminify or deobfuscate js
 https://beautifier.io/
 ```
+
+## Google Dorks
+```
+# good starting points
+https://taksec.github.io/google-dorks-bug-bounty/
+https://dorks.faisalahmed.me/
+
+# fixed vulnerabilities might be bypassable
+"<company/domain>" vulnerabilities
+```
+
 ## GitHub
 ```
 # Jason Haddix google dorks (https://gist.github.com/jhaddix/1fb7ab2409ab579178d2a79959909b33)
