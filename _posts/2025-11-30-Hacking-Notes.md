@@ -66,8 +66,8 @@ https://www.shodan.io/
 ## Subdomain Discovery
 ```
 # subdomain scraping
-amass enum -d <domain>
 subfinder -v -d <domain>
+amass enum -d <domain>
 github-subdomains -d <domain> -t "<github_token>"
 
 # brute force
