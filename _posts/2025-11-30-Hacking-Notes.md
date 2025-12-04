@@ -67,6 +67,7 @@ https://www.shodan.io/
 ```
 # subdomain scraping
 subfinder -v -d <domain> # setup api keys for better results
+subfinder -d <domain> | httpx -title -status-code # check if website is alive
 github-subdomains -d <domain> -t "<github_token>"
 
 # really good, more than just subdomain enum
