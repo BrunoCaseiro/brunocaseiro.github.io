@@ -14,6 +14,9 @@ https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master
 
 # reverse shell generator
 https://www.revshells.com/
+
+# ssrf payload generator
+https://shelltrail.com/tools/ssrf-payload-generator
 ```
 
 ## Burp Extensions
