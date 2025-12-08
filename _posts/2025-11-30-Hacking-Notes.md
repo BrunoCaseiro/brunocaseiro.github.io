@@ -70,7 +70,7 @@ https://www.shodan.io/
 ```
 # subdomain scraping
 subfinder -v -d <domain> # setup api keys for better results
-subfinder -d booking.com -silent | httpx -title -status-code -fc 404,403,401 -location # check if website is alive, filters dead and shows redirect location
+subfinder -d <domain> -silent | httpx -title -status-code -fc 404,403,401 -location # check if website is alive, filters dead and shows redirect location
 github-subdomains -d <domain> -t "<github_token>"
 
 # really good, more than just subdomain enum
