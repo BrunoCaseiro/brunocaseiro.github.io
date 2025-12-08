@@ -73,8 +73,8 @@ subfinder -v -d <domain> # setup api keys for better results
 subfinder -d <domain> -silent | httpx -title -status-code -fc 404,403,401 -location # check if website is alive, filters dead and shows redirect location
 github-subdomains -d <domain> -t "<github_token>"
 
-# really good, more than just subdomain enum
-bbot -t <domain> -p subdomain-enum cloud-enum code-enum web-basic nuclei-budget --allow-deadly
+# really good, can do a lot more with the right options but takes a long time
+bbot -t <domain> -p subdomain-enum
 
 # brute force
 amass enum -brute -d twitch.tv
@@ -83,7 +83,7 @@ wfuzz -H "Host: FUZZ.<domain>" -c -w "/usr/share/wordlists/seclists/Discovery/DN
 # spidering, finds more than just subdomains
 Burp Suite (set a keyword in the scope) --> Target --> Right click target --> Scan --> Crawl
 
-# manual permutation
+# manual permutation guessing
 sub.domain.com --> origin.sub.domain.com
 sub.domain.com --> origin-sub.domain.com
 www.target.com --> ww2.target.com
