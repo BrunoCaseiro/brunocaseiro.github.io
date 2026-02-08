@@ -78,7 +78,7 @@ bbot -t <domain> -p subdomain-enum
 
 # brute force
 amass enum -brute -d twitch.tv
-wfuzz -H "Host: FUZZ.<domain>" -c -w "/usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-20000.txt" --hl=7 <url>
+ffuf -H "Host: FUZZ.<domain>" -ac -w "/usr/share/wordlists/SecLists-master/Discovery/DNS/subdomains-top1million-20000.txt" -u <url>
 
 # spidering, finds more than just subdomains
 Burp Suite (set a keyword in the scope) --> Target --> Right click target --> Scan --> Crawl
