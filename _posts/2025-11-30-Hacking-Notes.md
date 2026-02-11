@@ -102,7 +102,7 @@ feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft
 ## JavaScript
 ```
 # searches for endpoints, including inline js
-xnLinkFinder -i <input>  -v -d 3 -sf <scope>
+xnLinkFinder -i <input> -v -d 3 -sf <scope>
 
 # unminify or deobfuscate js
 https://beautifier.io/
