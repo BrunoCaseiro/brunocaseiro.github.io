@@ -93,6 +93,7 @@ www.target.com --> ww2.target.com
 ```
 # max speed with previously merged rafts wordlist and many extensions
 # adapt wordlist and extensions to website stack
+# don't ignore javascript files, they're good for recon
 feroxbuster -u <url> -w /usr/share/wordlists/seclists/Discovery/Web-Content/raft-combined.txt -x asp,aspx,bak,txt,html,json,php,rar,zip,git,env,py,json,conf,yaml -t 50
 
 # to add a cookie, ignore TLS checks, add a custom header and a custom user agent
