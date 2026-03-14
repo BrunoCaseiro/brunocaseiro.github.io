@@ -28,6 +28,7 @@ Collaborator Everywhere
 Copy As Python-Requests
 HTTP Request Smuggler
 JS Miner
+MCP Server (+ Claude Desktop)
 Param Miner
 Retire.js
 ```
