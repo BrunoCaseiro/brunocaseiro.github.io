@@ -148,3 +148,10 @@ https://kaeferjaeger.gay/?dir=sni-ip-ranges
 # s3 bucket search engine
 https://grayhatwarfare.com/
 ```
+
+
+## Misc
+```
+# Spoof another user within intercom widgets, paste in console
+Intercom('boot', {email:'test@test.com'});
+```
