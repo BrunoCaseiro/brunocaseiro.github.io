@@ -24,6 +24,12 @@ https://shelltrail.com/tools/ssrf-payload-generator
 # Keep a CLAUDE.md file in the root directory for context
 Example - https://aituglo.com/guide/bug-bounty/#setup-and-recon:~:text=The%20program%27s%20CLAUDE.md
 Ask Claude to download all JS files, beautify and output a list with endpoints, routes, secrets and suspicious behaviors
+Delegate recon to Claude (use known tools as usual)
+Use several agents in parallel with different skills
+Keep the context small (summarize and reset)
+Ask for leads instead of bugs
+
+Advanced: write an orchestrator agent that launches agents/tools on its own
 ```
 
 ## Burp Extensions
