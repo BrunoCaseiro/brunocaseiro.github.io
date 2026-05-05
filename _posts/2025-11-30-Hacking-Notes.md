@@ -19,6 +19,13 @@ https://www.revshells.com/
 https://shelltrail.com/tools/ssrf-payload-generator
 ```
 
+## AI Agents
+```
+# Keep a CLAUDE.md file in the root directory for context
+Example - https://aituglo.com/guide/bug-bounty/#setup-and-recon:~:text=The%20program%27s%20CLAUDE.md
+Ask Claude to download all JS files, beautify and output a list with endpoints, routes, secrets and suspicious behaviors
+```
+
 ## Burp Extensions
 ```
 Active Scan++
