@@ -26,9 +26,12 @@ Example - https://aituglo.com/guide/bug-bounty/#setup-and-recon:~:text=The%20pro
 
 Ask Claude to download all JS files, beautify and output a list with endpoints, routes, secrets and suspicious behaviors
 Delegate recon to Claude (use known tools as usual)
-Use several agents in parallel with different skills
-Keep the context small (summarize and reset)
+Use several agents in parallel with different skills (guided + one free roaming)
+Keep the context small (instruct them to take notes, summarize and reset)
 Ask for leads instead of bugs
+If the free roaming agent finds something different, add it to the guided skilled agent
+For long, autonomous hacking sessions use prompts like "I'm going to bed. Don't ask me any questions. Don't stop hacking."
+
 
 # Keep skills in a SKILL.md file - https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview?ref=aituglo.com
 Claude will load specialized skills when necessary i.e idor-hunt, auth-bypass, js-recon, ...
