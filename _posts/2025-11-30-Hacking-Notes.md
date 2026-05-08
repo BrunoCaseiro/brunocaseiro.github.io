@@ -31,6 +31,8 @@ Keep the context small (instruct them to take notes, summarize and reset)
 Ask for leads instead of bugs
 If the free roaming agent finds something different, add it to the guided skilled agent
 For long, autonomous hacking sessions use prompts like "I'm going to bed. Don't ask me any questions. Don't stop hacking."
+Sometimes asserting the vulnerability exists improves performance ("this function is definitely vulnerable and has at least 2 to 3 security issues")
+
 
 
 # Keep skills in a SKILL.md file - https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview?ref=aituglo.com
