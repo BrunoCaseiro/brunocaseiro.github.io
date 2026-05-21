@@ -8,6 +8,7 @@ header:
 
 ## Go-to notes websites
 ```
+https://www.criticalthinkingpodcast.io/
 https://book.hacktricks.wiki/
 https://www.thehacker.recipes/
 https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master
